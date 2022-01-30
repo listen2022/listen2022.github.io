@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta name="referrer" content="never">
+<meta name="keywords" content="">
+<meta name="description" content="欢迎访问[listen]的个人博客">
+<meta name="author" content="kveln">
+<title>5. C语言操作符 | listen</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link
+  href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+  rel='stylesheet' type='text/css'>
+<link rel="alternate" type="application/rss+xml" title="5. C语言操作符 | listen » Feed"
+  href="https://listen2022.github.io/atom.xml">
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/androidstudio.min.css">
+<link href="https://listen2022.github.io/styles/main.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/850552586/ericamcdn@0.1/css/live2d.css">
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+  <meta property="og:description" content="5. C语言操作符" />
+  <meta property="og:url" content="https://listen2022.github.io/5-c-yu-yan-cao-zuo-fu/" />
+  <meta property="og:locale" content="zh-CN" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="listen" />
+  <!-- <script src="../assets/styles/scripts/tocScript.js"></script> -->
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://listen2022.github.io">listen</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/post/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1643535088667"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  <!-- Page Header -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://listen2022.github.io">listen</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/post/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1643535088667"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="masthead" style="background-image: url('https://listen2022.github.io/media/images/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        
+          <!-- 没Title为其他页面Header -->
+          
+            <!-- 没Title并且有headerType为Post：文章Header -->
+            <div class="post-heading">
+              <span class="tags">
+                
+                <a href="https://listen2022.github.io/KBJdndKld/" class="tag">C语言</a>
+                
+              </span>
+              <h1>5. C语言操作符</h1>
+              <span class="meta">
+                Posted on
+                2022-01-30，17 min read
+              </span>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+  <!-- Post Content -->
+  <article id="post-content-article">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto post-content-container">
+          
+          <h1 id="5操作符">5.操作符</h1>
+<h2 id="51-算术操作符">5.1 算术操作符</h2>
+<pre><code class="language-C">+ - * / %
+</code></pre>
+<ul>
+<li>
+<p>除%操作符之外，其他几个操作符可以作用于整数和浮点数。</p>
+</li>
+<li>
+<p>对于/操作符如果两个操作符都为整数，执行整数除法。只要有一个浮点数，则执行浮点数除法。</p>
+<pre><code class="language-C">float num = 1 / 2; // num=0.000000; 
+
+float num = 1 / 2.0; // num=0.500000;
+// 这里的2.0 是double类型 而num为float类型
+// 可以做如下调整
+
+float num = 1f / 2.0f;
+double num = 1 / 2.0;
+
+</code></pre>
+</li>
+<li>
+<p>%操作符两端必须都是整数，可以是负数，但不能为0。</p>
+</li>
+</ul>
+<h2 id="52-移位操作符">5.2 移位操作符</h2>
+<pre><code class="language-C">&gt;&gt; &lt;&lt;
+</code></pre>
+<h4 id="521-非负整数的二进制表示形式">5.2.1 非负整数的二进制表示形式</h4>
+<ul>
+<li>原码：直接根据数值写出二进制</li>
+<li>反码：原码符号位不变，其他位按位取反</li>
+<li>补码：反码加1</li>
+</ul>
+<pre><code class="language-C">// 非负整数在内存中存放的是原码（非负整数的原码、反码、补码相同）
+// 负整数在内存中存放的是补码
+</code></pre>
+<h4 id="522-左移">5.2.2 左移</h4>
+<blockquote>
+<p>算数左移和逻辑左移相同，都是左边抛弃，右边补0。</p>
+</blockquote>
+<h4 id="523-右移">5.2.3 右移</h4>
+<ul>
+<li>
+<p>算术右移（通常采用）</p>
+<blockquote>
+<p>向右移动，首位补原二进制位的第一位</p>
+</blockquote>
+</li>
+<li>
+<p>逻辑右移</p>
+<blockquote>
+<p>向右移动，首位补0</p>
+</blockquote>
+</li>
+</ul>
+<pre><code class="language-C">// 只能移动非负整数位
+
+int main()
+{
+  int ret = -1 &gt;&gt; 1;
+  printf(&quot;%d\n&quot;, ret);
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534828469.png" alt="" loading="lazy"></p>
+<h2 id="53-位操作符">5.3 位操作符</h2>
+<pre><code class="language-C">&amp; | ^ // 操作数必须为整数
+</code></pre>
+<h4 id="531-按位与">5.3.1 按位与</h4>
+<pre><code class="language-C">int main()
+{
+  int ret = 3 &amp; 4; 
+  // 00000000000000000000000000000011 
+  //                                &amp; 
+  // 00000000000000000000000000000100
+  printf(&quot;%d\n&quot;, ret);
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_1.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534835273.png" alt="" loading="lazy"></p>
+<h4 id="532-按位或">5.3.2 按位或</h4>
+<pre><code class="language-C">// 按位或
+int main()
+{
+  int ret = 3 | 4; 
+  // 00000000000000000000000000000011 
+  //                                |
+  // 00000000000000000000000000000100
+  printf(&quot;%d\n&quot;, ret);
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image_2.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534840541.png" alt="" loading="lazy"></p>
+<h4 id="533-按位异或">5.3.3 按位异或</h4>
+<blockquote>
+<p>相同为0，相异为1</p>
+</blockquote>
+<pre><code class="language-C">int main()
+{
+  int ret = 3 ^ 4; 
+  // 00000000000000000000000000000011 
+  //                                ^
+  // 00000000000000000000000000000100
+  printf(&quot;%d\n&quot;, ret);
+  return 0;
+}
+// 奇数^奇数=偶数
+// 奇数^偶数=奇数
+// 偶数^偶数=偶数
+
+</code></pre>
+<p><img src="image/image_3.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534846119.png" alt="" loading="lazy"></p>
+<h4 id="534-题目">5.3.4 题目</h4>
+<blockquote>
+<p>交换两个int变量的值，不使用第三个变量</p>
+</blockquote>
+<ul>
+<li>
+<p>方法一</p>
+<pre><code class="language-C">int main()
+{
+  int a = 3;
+  int b = 4;
+  a = a + b;
+  b = a - b;
+  a = a - b;
+  printf(&quot;a=%d, b=%d\n&quot;, a, b);
+  return 0;
+}
+// 问题：数字过大，内存溢出
+</code></pre>
+<p><img src="image/image_4.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534870079.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>方法二</p>
+<pre><code class="language-C">int main()
+{
+  int a = 3;
+  int b = 4;
+  a = a ^ b;
+  b = a ^ b;
+  a = a ^ b;
+  printf(&quot;a=%d, b=%d\n&quot;, a, b);
+  return 0;
+}
+// 没有进位，不可能发生溢出
+// 异或特点：
+//      1.任何数和他本身异或，结果为0
+//      2.任何数和0异或，结果为他本身
+//  底层逻辑：
+//      b = a ^ b ^ b = a (前两行代码)
+//      a = a ^ b ^ b ^ a ^ b = b (第三行代码)
+</code></pre>
+<p><img src="image/image_5.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534876725.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="535-练习">5.3.5 练习</h4>
+<blockquote>
+<p>编写代码实现：求一个整数存储在内存中的二进制中1的个数</p>
+</blockquote>
+<ul>
+<li>
+<p>方法一</p>
+<pre><code class="language-C">int main()
+{
+  int num = 5;
+  int count = 0;
+  for (int i = 0; i &lt; 32; i++)
+  {
+    if (num % 2 == 1)
+    {
+      count++;
+    }
+    num = num &gt;&gt; 1;
+  }
+  printf(&quot;count=%d\n&quot;, count);
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image_6.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534883107.png" alt="" loading="lazy"></p>
+<blockquote>
+<p><strong>缺点：不能统计负数的二进制中1的个数。</strong></p>
+</blockquote>
+</li>
+<li>
+<p>方法二</p>
+<pre><code class="language-C">int main()
+{
+    int num = -5;
+    int count = 0;
+    for (int i = 0; i &lt; 32; i++)
+    {
+        if ((num &gt;&gt; i) &amp; 1)
+        {
+            count++;
+        }
+    }
+    printf(&quot;count=%d\n&quot;, count);
+    return 0;
+}
+// -5 
+// 原码 10000000000000000000000000000101
+// 补码 11111111111111111111111111111011
+// 右移0位
+// 11111111111111111111111111111011 &amp; 00000000000000000000000000000001
+// 00000000000000000000000000000001 -&gt; 1
+// 右移一位
+// 01111111111111111111111111111101 &amp; 00000000000000000000000000000001
+// 00000000000000000000000000000001 -&gt; 1
+// 右移二位
+// 00111111111111111111111111111110 &amp; 00000000000000000000000000000001
+// 00000000000000000000000000000000 -&gt; 0
+// ...
+// 右移31位
+// 00000000000000000000000000000001 &amp; 00000000000000000000000000000001
+// 00000000000000000000000000000001 -&gt; 1
+
+</code></pre>
+</li>
+<li>
+<p>方法三</p>
+<pre><code class="language-C">int main()
+{
+    int num = -5;
+    int count = 0;
+    while (num)
+    {
+        num = num &amp; (num - 1);
+        count++;
+    }
+    printf(&quot;count=%d\n&quot;, count);
+    return 0;
+}
+// num &amp; (num - 1)
+// 11111111111111111111111111111011 =&gt; num
+// 11111111111111111111111111111011 &amp; (11111111111111111111111111111011 - 1)
+// 11111111111111111111111111111011 &amp; 11111111111111111111111111111010
+// 11111111111111111111111111111010 =&gt; num
+// 11111111111111111111111111111010 &amp; (11111111111111111111111111111010 - 1)
+// 11111111111111111111111111111010 &amp; 11111111111111111111111111111001
+// 11111111111111111111111111111000 =&gt; num
+// ...
+// 每次把num&amp;(num-1)的结果再赋值给num
+// 每num&amp;(num-1)运算一次，就会将num中的1变成0
+// 通过n次num&amp;(num-1)运算使得num=0
+// 此时n为num的二进制中1的个数
+</code></pre>
+<p><img src="image/image_7.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534891048.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h2 id="54-赋值操作符">5.4 赋值操作符</h2>
+<pre><code class="language-C">= += -= *= /= %= &gt;&gt;= &lt;&lt;= &amp;= |= ^=
+
+// 连续赋值：
+int a = 0;
+int b = 0;
+int c = 1;
+a = b = c + 1; // 从由向左赋值（不推荐）
+</code></pre>
+<h2 id="55-单目操作符">5.5 单目操作符</h2>
+<blockquote>
+<p>只有一个操作数</p>
+</blockquote>
+<pre><code class="language-C">!      // 逻辑反操作
+-      // 负
++      // 正
+sizeof // 操作数类型长度
+~      // 按位取反
+--     // 前置 后置
+++     // 前置 后置
+*      // 解引用(间接访问)操作符
+&amp;      // 取址       
+(type) // 强制类型转换
+</code></pre>
+<h4 id="551-sizeof">5.5.1 sizeof</h4>
+<blockquote>
+<p>sizeof是一个操作符，不是函数。单位：字节</p>
+</blockquote>
+<ul>
+<li>
+<p>例1</p>
+<pre><code class="language-C">int main()
+{
+  short s = 5;
+  int a = 10;
+  printf(&quot;%d\n&quot;, sizeof(s = a + 2)); 
+  // sizeof括号中放的表达式，不参与运算
+  // 在编译期间处理sizeof(s = a + 2); 而s = a + 2在程序运行时计算
+  // 大数据放在小空间里被截断
+  printf(&quot;%d\n&quot;, s); // 5
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_8.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534903316.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>例2</p>
+<pre><code class="language-C">int main()
+{
+  int a = 10;
+  printf(&quot;%d\n&quot;, sizeof(a));
+  printf(&quot;%d\n&quot;, sizeof a);
+  printf(&quot;%d\n&quot;, sizeof(int));
+  //printf(&quot;%d\n&quot;, sizeof int);
+
+  char arr[10] = { 0 };
+  printf(&quot;%d\n&quot;, sizeof(arr));
+  printf(&quot;%d\n&quot;, sizeof arr);
+  printf(&quot;%d\n&quot;, sizeof(char [10]));
+}
+</code></pre>
+<p><img src="image/image_9.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534911686.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>例3</p>
+<pre><code class="language-C">void foo1(int arr[10])
+{
+  printf(&quot;%d\n&quot;, sizeof(arr));
+}
+void foo2(char arr[10])
+{
+  printf(&quot;%d\n&quot;, sizeof(arr));
+}
+
+int main()
+{
+  int arr1[10] = { 0 };
+  char arr2[10] = { 0 };
+  printf(&quot;%d\n&quot;, sizeof(arr1)); // 40
+  printf(&quot;%d\n&quot;, sizeof(arr2)); // 10
+  foo1(arr1); // 4或8
+  foo2(arr2); // 4或8
+  return 0;
+}
+// 数组作为函数参数传递时，实际传递的是数组的指针
+</code></pre>
+<p><img src="image/image_10.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534919604.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="552-~">5.5.2 ~</h4>
+<blockquote>
+<p>按位取反</p>
+</blockquote>
+<pre><code class="language-C">int main()
+{
+  int a = 13;
+  // 00000000000000000000000000001101
+  // 将a的二进制位第五位置零
+  // 00000000000000000000000000001101  -&gt;  13的二进制
+  // 00000000000000000000000000010000  -&gt;  1&lt;&lt;4
+  //                                |  -&gt;  按位或
+  // 00000000000000000000000000011101  -&gt;  结果29
+  a = a | (1 &lt;&lt; 4);
+  printf(&quot;%d\n&quot;, a);
+  
+  // 将a的二进制位第五位置一
+  // 00000000000000000000000000011101  -&gt;  29的二进制
+  // 11111111111111111111111111101111  -&gt;  ~(1&lt;&lt;4)
+  //                                &amp;  -&gt;  按位与
+  // 00000000000000000000000000001101  -&gt;  结果13
+  a = a &amp; (~(1 &lt;&lt; 4));
+  printf(&quot;%d\n&quot;, a);
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_11.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534926264.png" alt="" loading="lazy"></p>
+<h4 id="553">5.5.3 ++/—</h4>
+<pre><code class="language-C">// 前置：先++，再使用
+// 后置：先使用，再++
+// (使用包括赋值和函数传参)
+</code></pre>
+<ul>
+<li>
+<p>后++<br>
+<img src="image/image_12.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534936096.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>先++<br>
+<img src="image/image_13.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534941184.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>垃圾代码</p>
+<pre><code class="language-C">int main()
+{
+  int a = 1;
+  int b = (++a) + (++a) + (++a);
+  printf(&quot;%d\n&quot;, b);
+  return 0;
+}
+// 运行结果：vs2019中结果是12
+//         linux中结果是10
+// 垃圾代码，不做过多研究 
+</code></pre>
+<p><img src="image/image_14.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534948743.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="554">5.5.4 &amp; *</h4>
+<pre><code class="language-C">&amp; // 取址
+* // 解引用
+</code></pre>
+<ul>
+<li>
+<p>例</p>
+<pre><code class="language-C">int main()
+{
+  int num = 100; // &amp;获取对象所处的内存地址，取址操作符
+  int* pn = &amp;num; // 此处*不是操作符，仅说明pn是一个指针变量
+  *pn = 200; // 此处*才是解引用操作符，将200赋值给pn所指的对象
+  printf(&quot;pn=%p, num=%d\n&quot;, pn, num);
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_15.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534961757.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="555-type">5.5.5 (type)</h4>
+<pre><code class="language-C">int main()
+{
+  int num = (int)3.1315; // 强制类型转换
+  printf(&quot;%d\n&quot;, num);
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_16.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534968484.png" alt="" loading="lazy"></p>
+<h2 id="56-关系操作符">5.6 关系操作符</h2>
+<pre><code class="language-C">&gt; &gt;= &lt; &lt;= != ==
+
+// = 赋值
+// == 判断是否相等
+
+// 比较两个字符串是否相等不能使用==
+</code></pre>
+<h2 id="57-逻辑操作符">5.7 逻辑操作符</h2>
+<pre><code class="language-C">&amp;&amp; 逻辑与：从前往后找到第一个为假的值返回0，否则返回1
+|| 逻辑或：从前往后找到第一个为真的值返回1，否则返回0
+
+</code></pre>
+<h4 id="571-习题">5.7.1 习题</h4>
+<blockquote>
+<p>如下代码运行结果：</p>
+</blockquote>
+<pre><code class="language-C">int main()
+{
+  int i = 0, a = 0, b = 2, c = 3, d = 4;
+  i = a++ &amp;&amp; ++b &amp;&amp; d++;
+  //i = a++ || ++b || d++;
+  printf(&quot;a=%d, b=%d, c=%d, d=%d\n&quot;, a, b, c, d);
+}
+
+// &amp;&amp;: 左边确定为假，后边不用再进行计算
+// ||: 左边确定为真，后边不用再进行计算
+</code></pre>
+<p><img src="image/image_17.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534978791.png" alt="" loading="lazy"></p>
+<p><img src="image/image_18.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534984094.png" alt="" loading="lazy"></p>
+<h2 id="58-三目操作符">5.8 三目操作符</h2>
+<pre><code class="language-C">exp1 ? exp2 : exp3;
+// 如果exp1为真，则计算exp2，整个表达式的结果为exp2的结果，exp3不计算
+// 如果exp2为假，则计算exp3，整个表达式的结果为exp3的结果，exp2不计算
+</code></pre>
+<ul>
+<li>
+<p>例</p>
+<pre><code class="language-C">int main()
+{
+  int a = 3;
+  int b = 4;
+  int ret = 0;
+  ret = a &gt; b ? a++ : b++;
+  printf(&quot;%d\n&quot;, ret);
+  printf(&quot;a=%d, b=%d\n&quot;, a, b);
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_19.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534997695.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h2 id="58-逗号表达式">5.8 逗号表达式</h2>
+<pre><code class="language-C">exp1, exp2, exp3;
+// 从前往后依次执行，整个表达式的结果为最后一个表达式exp3的计算结果
+</code></pre>
+<h2 id="59-下标引用">5.9 下标引用</h2>
+<blockquote>
+<p>下标引用操作符有两个操作数，数组名和下标。</p>
+</blockquote>
+<pre><code class="language-C">int main()
+{
+  int arr[10] = { 0 }; // 此处[]不是操作符，仅用来指定数组的大小
+  arr[4] = 100; // 此处[]为操作符，指定数组中索引(或下标)为4的值为100
+  printf(&quot;arr[4]=%d\n&quot;, arr[4]);
+  return 0;
+}
+
+</code></pre>
+<h2 id="510-函数调用">5.10 函数调用</h2>
+<blockquote>
+<p>有一个或多个操作数，当没有参数时，只有函数名一个操作数；当有参数时，操作时个数为参数个数+1。</p>
+</blockquote>
+<pre><code class="language-C">// 函数调用
+int Add(int x, int y) // 此处()不是操作符，仅用来说明形参及其类型
+{
+  return x + y;
+}
+
+int main() {
+  int ret = Add(3, 4); // 此处()为函数调用操作符，即使没有参数，也要有() 操作数：Add 3 4共3个
+  printf(&quot;%d\n&quot;, ret);
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image_20.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643535007948.png" alt="" loading="lazy"></p>
+<h2 id="511-结构成员访问操作符">5.11 结构成员访问操作符</h2>
+<pre><code class="language-C">. 
+-&gt; 
+
+// 使用格式：
+结构体变量.结构体成员变量名
+结构体指针变量-&gt;结构体成员变量名
+
+</code></pre>
+<ul>
+<li>
+<p>例</p>
+<pre><code class="language-C">int main()
+{
+  struct Person
+  {
+    char name[10];
+    int age;
+    float height;
+  };
+  printf(&quot;.操作符\n&quot;);
+  struct Person p = { &quot;listen&quot;, 22, 185.0 };
+  printf(&quot;name: %s\n&quot;, p.name);
+  printf(&quot;age: %d\n&quot;, p.age);
+  printf(&quot;height: %f\n&quot;, p.height);
+
+  struct Person* pp = &amp;p;
+  printf(&quot;name: %s\n&quot;, (*pp).name);
+  printf(&quot;age: %d\n&quot;, (*pp).age);
+  printf(&quot;height: %f\n&quot;, (*pp).height);
+
+  printf(&quot;-&gt;操作符\n&quot;);
+  printf(&quot;name: %s\n&quot;, pp-&gt;name);
+  printf(&quot;age: %d\n&quot;, pp-&gt;age);
+  printf(&quot;height: %f\n&quot;, pp-&gt;height);
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image_21.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643535016274.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h2 id="512-表达式求值">5.12 表达式求值</h2>
+<blockquote>
+<p>表达式求值的顺序一般是由操作符的优先级和结合性决定。同样，有些表达式的操作数再求值的过程中可能需要转换为其他类型。</p>
+</blockquote>
+<h4 id="5121-隐式类型转换">5.12.1 隐式类型转换</h4>
+<blockquote>
+<p>C的整形算数运算总是至少以缺省整形类型的精度来进行的。为了获得这个精度，表达式中的字符和短整型操作数在使用之前被转换为普通整形，这种转换称为整形提升。</p>
+</blockquote>
+<p>包括：</p>
+<ul>
+<li>整形提升</li>
+<li>算数转换</li>
+</ul>
+<h4 id="5122-整型提升">5.12.2 整型提升</h4>
+<ul>
+<li>
+<p>概念</p>
+<blockquote>
+<p>在表达式计算时，各种整形（只有比int小的类型才会发生整型提升）首先要提升为int类型，如果int类型不足以表示的话，就需要提升为unsigned int类型，然后再执行表达式的运算。</p>
+</blockquote>
+</li>
+<li>
+<p>意义</p>
+<blockquote>
+<p>虽然机器指令中可能有现两个8比特字节这种字节相加指令，但是一般用途的CPU是难以直接实现这样的字节相加运算的。所以，表达式中各种长度可能小于int长度的整型值，都必须先转换为int或unsigned int，然后才能送入CPU去执行运算。CPU内整型运算器(ALU)的操作数的字节长度一般就是int的字节长度，同时也是CPU的通用寄存器的长度。而表达式的整型运算要在CPU的相应运算器件内执行。因此，两个char类型的数进行相加运算时，是在CPU中执行，自然而然的需要先转换为CPU内整型操作数的标准长度。</p>
+</blockquote>
+</li>
+<li>
+<p>如何提升</p>
+<blockquote>
+<p>按照最高位进行整型提升</p>
+</blockquote>
+<ul>
+<li>正数整型提升：高位补0</li>
+<li>负数整形提升：高位补1</li>
+<li>无符号整数整形提升：高位补0</li>
+</ul>
+</li>
+<li>
+<p>例1</p>
+<pre><code class="language-C">int main()
+{
+  char a = 3;
+  char b = 127;
+  char c = a + b;
+  printf(&quot;%d\n&quot;, c)
+  return 0;
+}
+
+// 原理
+char a = 3; //二进制： 00000011
+char b = 127; //二进制：01111111 
+char c = a + b;
+// + 操作符 整型提升
+//a 提升： 00000000000000000000000000000011
+//b 提升： 00000000000000000000000001111111
+//  相加： 00000000000000000000000010000010
+//c 截断： 10000010
+printf(&quot;c=%d\n&quot;, c);
+// c是char类型，而使用%d打印，c 整形提升(高位补1)
+// 11111111111111111111111110000010 补码
+// 11111111111111111111111110000001 反码（补码-1）
+// 10000000000000000000000001111110 原码（反码符号位不变，其余位取反）
+
+</code></pre>
+<p><img src="image/image_22.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643535031092.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>例2</p>
+<pre><code class="language-C">int main()
+{
+  char a = 0xFF; // a整形提升之后为11111111111111111111111111111111
+  short b = 0xFFFF; // b整形提升之后为11111111111111111111111111111111
+  int c = 0xFFFFFFFF;
+  if (a == 0xFF) {
+    printf(&quot;a\n&quot;);
+  }
+  if (b == 0xFFFF) {
+    printf(&quot;b\n&quot;);
+  }
+  if (c == 0xFFFFFFFF) {
+    printf(&quot;c\n&quot;);
+  }
+  printf(&quot;%d\n&quot;, a == b);
+  return 0;
+}
+// 其中a, b需要进行整形提升，而c不需要整形提升
+// a, b整形提升之后变成了负数，所以a==0xFF和b == 0xFFFF为假
+</code></pre>
+<p><img src="image/image_23.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643535038782.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>例3</p>
+<pre><code class="language-C">int main()
+{
+  char a = 1;
+  printf(&quot;%u\n&quot;, sizeof a);
+  printf(&quot;%u\n&quot;, sizeof -a); // 类型提升为int类型
+  printf(&quot;%u\n&quot;, sizeof +a);
+  printf(&quot;%u\n&quot;, sizeof !a); // vs2022中为1 gcc中为4
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_24.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643535044887.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="5123-算数转换">5.12.3 算数转换</h4>
+<blockquote>
+<p>如果某个操作符的各个操作数属于不同的类型，那么除非其中一个操作数转化为另一个操作数的类型，否则操作就无法进行。下面的层次体系称为寻常算术转换。</p>
+</blockquote>
+<pre><code class="language-C">long double
+double
+float
+unsigned long int
+long int 
+unsigned int 
+int
+</code></pre>
+<blockquote>
+<p>如果某个操作数的类型在上面这个列表中排名较低，那么首先要转化为另一个操作数的类型后执行运算。</p>
+</blockquote>
+<ul>
+<li>
+<p>例</p>
+<pre><code class="language-C">int main()
+{
+  float a = 1.23;
+  int b = 5;
+  float c = 0;
+  c = a + b; 
+  // a为float类型，b为int类型，
+  // float类型值和int类型值相加时，
+  // int类型值被转换为float类型
+  printf(&quot;%f\n&quot;, c);
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_25.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643535051661.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h2 id="513-表达式的属性">5.13 表达式的属性</h2>
+<ul>
+<li>值属性(运行后才能确定)</li>
+<li>类型属性(可推断，编译时确定)</li>
+</ul>
+<h2 id="514-操作符的属性">5.14 操作符的属性</h2>
+<ul>
+<li>复杂表达式的求值有三个影响的因素：
+<ul>
+<li>操作符的优先级</li>
+<li>操作符的结合性</li>
+<li>是否控制求值顺序（例如<code>&amp;&amp;</code> <code>||</code> <code>,</code>）</li>
+</ul>
+</li>
+</ul>
+<h4 id="5141-优先级">5.14.1 优先级</h4>
+<blockquote>
+<p>运算符的优先级确定表达式中项的组合。如果优先级相同，则根据结合性确定计算顺序。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>运算符</th>
+<th>结合性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>后缀</td>
+<td>() [] -&gt; . ++ - -</td>
+<td>从左到右</td>
+</tr>
+<tr>
+<td>一元</td>
+<td>+ - ! ~ ++ - - (type)* &amp; sizeof</td>
+<td>从右到左</td>
+</tr>
+<tr>
+<td>乘除</td>
+<td>* / %</td>
+<td>从左到右</td>
+</tr>
+<tr>
+<td>加减</td>
+<td>+ -</td>
+<td>从左到右</td>
+</tr>
+<tr>
+<td>移位</td>
+<td>&lt;&lt; &gt;&gt;</td>
+<td>从左到右</td>
+</tr>
+<tr>
+<td>关系</td>
+<td>&lt; &lt;= &gt; &gt;=</td>
+<td>从左到右</td>
+</tr>
+<tr>
+<td>相等</td>
+<td>== !=</td>
+<td>从左到右</td>
+</tr>
+<tr>
+<td>位与 AND</td>
+<td>&amp;</td>
+<td>从左到右</td>
+</tr>
+<tr>
+<td>位异或 XOR</td>
+<td>^</td>
+<td>从左到右</td>
+</tr>
+<tr>
+<td>位或 OR</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>逻辑与 AND</td>
+<td>&amp;&amp;</td>
+<td>从左到右</td>
+</tr>
+<tr>
+<td>逻辑或 OR</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>条件</td>
+<td>?:</td>
+<td>从右到左</td>
+</tr>
+<tr>
+<td>赋值</td>
+<td>= += -= *= /= %=&gt;&gt;= &lt;&lt;= &amp;= ^=</td>
+<td>=</td>
+</tr>
+<tr>
+<td>逗号</td>
+<td>,</td>
+<td>从左到右</td>
+</tr>
+</tbody>
+</table>
+<h4 id="5142-一些问题表达式">5.14.2 一些问题表达式</h4>
+<ul>
+<li>
+<p>表达式1</p>
+<pre><code class="language-C">a * b + c * d + e * f;
+// 计算原理：
+// 方法1：
+a * b;
+c * d;
+e * f;
+a * b + c * d + e * f
+// 方法2：
+a * b;
+c * d;
+a * b + c * d;
+e * f;
+a * b + c * d + e * f;
+
+</code></pre>
+</li>
+<li>
+<p>表达式2</p>
+<pre><code class="language-C">c + --c;
+// 无法确定左操作数是在--c之前还是--c之后确定
+// 计算原理：
+// 方法1：
+--c;
+c;
+c + --c;
+
+// 方法2：
+c;
+--c;
+c + --c;
+</code></pre>
+</li>
+<li>
+<p>代码3-错误代码</p>
+<pre><code class="language-C">int main()
+{
+  int i = 10;
+  i = i-- - --i * (i = -3) * i++ + ++i;
+  printf(&quot;i = %d\n&quot;, i);
+  return 0;
+}
+// 输出结果在不同的编译器中结果不同
+</code></pre>
+</li>
+<li>
+<p>代码4- 错误代码</p>
+<pre><code class="language-C">int fun()
+{
+  static int count = 1;
+  return ++count;
+}
+
+int main()
+{
+  int answer;
+  answer = fun() - fun() * fun(); // 2 - 3 * 4 (vs2022中)
+  printf(&quot;%d\n&quot;, answer); // -10(vs2022中)
+  return 0;
+}
+// 结果不可控，fun()函数的调用顺序不同，结果不同
+</code></pre>
+</li>
+<li>
+<p>代码5-错误代码</p>
+<pre><code class="language-C">int main()
+{
+  int i = 1;
+  int ret = (++i) + (++i) + (++i);
+  printf(&quot;%d\n&quot;, ret);
+}
+// VS -&gt; 12
+// 执行原理
+++i;
+++i;
+++i;
+i = 4
+4 + 4 + 4;
+
+// gcc -&gt; 10
+++i;
+++i;
+i = 3;
+3 + 3;
+++i;
+i = 4;
+3 + 3 + 4;
+
+</code></pre>
+<p><img src="image/image_26.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643535067711.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="5143-总结">5.14.3 总结</h4>
+<blockquote>
+<p>对于同一个表达式或一段代码，即使有确定的优先级和结合性，仍然有不确定的计算或运行方式，且不同方式计算出来的结果不同，则该表达式或代码是存在问题的，不应该使用这样的表达式和代码。</p>
+</blockquote>
+
+          <div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#5%E6%93%8D%E4%BD%9C%E7%AC%A6">5.操作符</a>
+<ul>
+<li><a href="#51-%E7%AE%97%E6%9C%AF%E6%93%8D%E4%BD%9C%E7%AC%A6">5.1 算术操作符</a></li>
+<li><a href="#52-%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6">5.2 移位操作符</a><br>
+*
+<ul>
+<li><a href="#521-%E9%9D%9E%E8%B4%9F%E6%95%B4%E6%95%B0%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F">5.2.1 非负整数的二进制表示形式</a></li>
+<li><a href="#522-%E5%B7%A6%E7%A7%BB">5.2.2 左移</a></li>
+<li><a href="#523-%E5%8F%B3%E7%A7%BB">5.2.3 右移</a></li>
+</ul>
+</li>
+<li><a href="#53-%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6">5.3 位操作符</a><br>
+*
+<ul>
+<li><a href="#531-%E6%8C%89%E4%BD%8D%E4%B8%8E">5.3.1 按位与</a></li>
+<li><a href="#532-%E6%8C%89%E4%BD%8D%E6%88%96">5.3.2 按位或</a></li>
+<li><a href="#533-%E6%8C%89%E4%BD%8D%E5%BC%82%E6%88%96">5.3.3 按位异或</a></li>
+<li><a href="#534-%E9%A2%98%E7%9B%AE">5.3.4 题目</a></li>
+<li><a href="#535-%E7%BB%83%E4%B9%A0">5.3.5 练习</a></li>
+</ul>
+</li>
+<li><a href="#54-%E8%B5%8B%E5%80%BC%E6%93%8D%E4%BD%9C%E7%AC%A6">5.4 赋值操作符</a></li>
+<li><a href="#55-%E5%8D%95%E7%9B%AE%E6%93%8D%E4%BD%9C%E7%AC%A6">5.5 单目操作符</a><br>
+*
+<ul>
+<li><a href="#551-sizeof">5.5.1 sizeof</a></li>
+<li><a href="#552-~">5.5.2 ~</a></li>
+<li><a href="#553">5.5.3 ++/—</a></li>
+<li><a href="#554">5.5.4 &amp; *</a></li>
+<li><a href="#555-type">5.5.5 (type)</a></li>
+</ul>
+</li>
+<li><a href="#56-%E5%85%B3%E7%B3%BB%E6%93%8D%E4%BD%9C%E7%AC%A6">5.6 关系操作符</a></li>
+<li><a href="#57-%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C%E7%AC%A6">5.7 逻辑操作符</a><br>
+*
+<ul>
+<li><a href="#571-%E4%B9%A0%E9%A2%98">5.7.1 习题</a></li>
+</ul>
+</li>
+<li><a href="#58-%E4%B8%89%E7%9B%AE%E6%93%8D%E4%BD%9C%E7%AC%A6">5.8 三目操作符</a></li>
+<li><a href="#58-%E9%80%97%E5%8F%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F">5.8 逗号表达式</a></li>
+<li><a href="#59-%E4%B8%8B%E6%A0%87%E5%BC%95%E7%94%A8">5.9 下标引用</a></li>
+<li><a href="#510-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8">5.10 函数调用</a></li>
+<li><a href="#511-%E7%BB%93%E6%9E%84%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E6%93%8D%E4%BD%9C%E7%AC%A6">5.11 结构成员访问操作符</a></li>
+<li><a href="#512-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC">5.12 表达式求值</a><br>
+*
+<ul>
+<li><a href="#5121-%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">5.12.1 隐式类型转换</a></li>
+<li><a href="#5122-%E6%95%B4%E5%9E%8B%E6%8F%90%E5%8D%87">5.12.2 整型提升</a></li>
+<li><a href="#5123-%E7%AE%97%E6%95%B0%E8%BD%AC%E6%8D%A2">5.12.3 算数转换</a></li>
+</ul>
+</li>
+<li><a href="#513-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%B1%9E%E6%80%A7">5.13 表达式的属性</a></li>
+<li><a href="#514-%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%9A%84%E5%B1%9E%E6%80%A7">5.14 操作符的属性</a><br>
+*
+<ul>
+<li><a href="#5141-%E4%BC%98%E5%85%88%E7%BA%A7">5.14.1 优先级</a></li>
+<li><a href="#5142-%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E8%A1%A8%E8%BE%BE%E5%BC%8F">5.14.2 一些问题表达式</a></li>
+<li><a href="#5143-%E6%80%BB%E7%BB%93">5.14.3 总结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+          
+          <hr />
+          <p class="next-post">下一篇：
+            <a href="https://listen2022.github.io/4-shu-zu/">
+              <span class="post-title">
+                4. 数组&rarr;
+              </span>
+            </a>
+          </p>
+          
+          <div class="comment" style="text-align: center;">
+            
+
+            
+            
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '3f95c9079ef35c0e7742',
+    clientSecret: '43f525cf5aa44ca3dd1cb661a5406e508d2cb58c',
+    repo: 'listen2022.github.io',
+    owner: 'listen2022',
+    admin: ['listen2022'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+</script>
+
+            
+            
+            
+            
+          </div>
+        </div>
+      </div>
+  </article>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            
+            
+            <li class="list-inline-item">
+              <a href="https://github.com/listen2022" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+              <!-- <li class="list-inline-item">
+              <a href="https://listen2022.github.io/atom.xml" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+              </li> -->
+          </ul>
+          <p class="copyright text-muted">Copyright &copy;<span>listen</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo">Powered by Gridea</a></p>
+        </div>
+      </div>
+    </div>
+   </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://listen2022.github.io/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.jsdelivr.net/gh/Alanrk/clean-cdn@1.0/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://listen2022.github.io/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  
+  <script src="https://listen2022.github.io/media/scripts/tocScript.js"></script>
+</body>
+
+</html>
