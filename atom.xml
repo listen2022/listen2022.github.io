@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://listen2022.github.io</id>
     <title>listen</title>
-    <updated>2022-01-30T06:54:19.790Z</updated>
+    <updated>2022-01-30T09:17:08.044Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://listen2022.github.io"/>
     <link rel="self" href="https://listen2022.github.io/atom.xml"/>
@@ -10,6 +10,510 @@
     <logo>https://listen2022.github.io/images/avatar.png</logo>
     <icon>https://listen2022.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, listen</rights>
+    <entry>
+        <title type="html"><![CDATA[2.分支和循环语句]]></title>
+        <id>https://listen2022.github.io/2fen-zhi-he-xun-huan-yu-ju/</id>
+        <link href="https://listen2022.github.io/2fen-zhi-he-xun-huan-yu-ju/">
+        </link>
+        <updated>2022-01-30T09:15:18.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="2分支和循环语句">2.分支和循环语句</h1>
+<h2 id="21-分支语句">2.1 分支语句</h2>
+<blockquote>
+<p>C语言把任何非零和非空的值假定为 true，把零或 null 假定为 false</p>
+</blockquote>
+<h4 id="211-if-else">2.1.1 if else</h4>
+<ul>
+<li>
+<p>if语句</p>
+<pre><code class="language-C">if(boolean_expression)
+{
+   /* 如果布尔表达式为真将执行的语句 */
+}
+</code></pre>
+</li>
+<li>
+<p>if...else...</p>
+<pre><code class="language-C">if(boolean_expression)
+{
+   /* 如果布尔表达式为真将执行的语句 */
+}
+else
+{
+   /* 如果布尔表达式为假将执行的语句 */
+}
+</code></pre>
+</li>
+<li>
+<p>if...else if...else...</p>
+<ul>
+<li>一个if后可跟一个或零个else语句，else必须在所有else if之后</li>
+<li>一个if后可跟多个或零个else if语句，else if必须在else之前</li>
+<li>一旦某个else if匹配成功，其他的else if或else将不会被测试</li>
+</ul>
+<pre><code class="language-C">if(boolean_expression1)
+{
+   /* 当布尔表达式1为真时执行 */
+}
+else if(boolean_expression2)
+{
+   /* 当布尔表达式2为真时执行 */
+}
+else if(boolean_expression3)
+{
+   /*当布尔表达式3为真时执行*/
+}
+else 
+{
+   /* 当上面条件都不为真时执行 */
+}
+</code></pre>
+</li>
+<li>
+<p>嵌套if语句</p>
+<pre><code class="language-C">if( boolean_expression1)
+{
+   /* 当布尔表达式1为真时执行 */
+   if(boolean_expression2)
+   {
+      /* 当布尔表达式2为真时执行 */
+   }
+}
+// 可以在一个if...else...或if...else if...else..语句中
+// 嵌套一个if...else...或if...else if...else..语句
+</code></pre>
+</li>
+</ul>
+<h4 id="212-switch">2.1.2 switch</h4>
+<ul>
+<li>
+<p>switch</p>
+<pre><code class="language-C">switch(expression){
+    case constant-expression  :
+       statement(s);
+       break; /* 可选 */
+    case constant-expression  :
+       statement(s);
+       break; /* 可选 */
+    default : /* 可选 */
+       statement(s);
+}
+</code></pre>
+<ul>
+<li>expression为常量表达式，必须是一个整形或枚举类型</li>
+<li>constant-expression必须和expression的数据类型相同，且为一个常量或字面量</li>
+<li>当被测试的变量等于case中的常量时，case后面的语句执行，直到遇到break语句</li>
+<li>default case中的break语句不是必须的</li>
+<li>default语句可以放在任意位置</li>
+</ul>
+</li>
+<li>
+<p>嵌套switch</p>
+<blockquote>
+<p>一个switch语句种包含另一个switch语句</p>
+</blockquote>
+<pre><code class="language-C">switch(expression1) {
+    case constant-expression: 
+        switch(expression2) {
+            case constant-expression:
+                ...
+                break;
+            case constant-expression:
+                ...
+        }
+        break;
+    case constant-expression: 
+        ...
+}
+</code></pre>
+</li>
+</ul>
+<h4 id="213-运算符三目运算符">2.1.3 :?运算符(三目运算符)</h4>
+<pre><code class="language-C">Exp1 ? Exp2 : Exp3;
+// ? 表达式的值是由 Exp1 决定的。
+// 如果 Exp1 为真，则计算 Exp2 的值，结果即为整个表达式的值
+// 如果 Exp1 为假，则计算 Exp3 的值，结果即为整个表达式的值
+</code></pre>
+<h2 id="22-循环语句">2.2 循环语句</h2>
+<h4 id="221-for">2.2.1 for</h4>
+<pre><code class="language-C">for ( init; condition; increment )
+{
+   statement(s);
+}
+// init: 首先执行，声明并初始化循环控制变量，可留空
+// condition: 判断，如果为真，执行statement(s)，否则结束循环
+// increment: 执行完for循环主体statement(s);之后，执行increment语句。该语句一般是更新循环控制变量，可留空
+</code></pre>
+<h4 id="222-while">2.2.2 while</h4>
+<pre><code class="language-C">while(condition)
+{
+   statement(s); // 一条语句或语句块
+}
+
+</code></pre>
+<h4 id="223-do-while">2.2.3 do while</h4>
+<blockquote>
+<p>for和while循环在循环开始时测试循环条件，而do...while...在每次循环中执行statement(s)语句之后，测试循环条件。</p>
+</blockquote>
+<pre><code class="language-C">do
+{
+   statement(s);
+}while( condition )
+// statement(s);至少被执行一次
+</code></pre>
+<h4 id="224-嵌套循环">2.2.4 嵌套循环</h4>
+<ul>
+<li>
+<p>嵌套for循环</p>
+<pre><code class="language-C">for (initialization; condition; increment/decrement)
+{
+    statement(s);
+    for (initialization; condition; increment/decrement)
+    {
+        statement(s);
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>嵌套while循环</p>
+<pre><code class="language-C">while (condition1)
+{
+    statement(s);
+    while (condition2)
+    {
+        statement(s);
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>嵌套 do while 循环</p>
+<pre><code class="language-C">do
+{
+    statement(s);
+    do
+    {
+        statement(s);
+    }while (condition2);
+}while (condition1)
+</code></pre>
+</li>
+<li>
+<p>混合嵌套</p>
+</li>
+</ul>
+<h2 id="23-循环控制语句">2.3 循环控制语句</h2>
+<h4 id="231-break">2.3.1 break</h4>
+<blockquote>
+<p>终止循环或switch语句。在嵌套语句中，终止break所在的最内层的循环或switch语句。</p>
+</blockquote>
+<h4 id="232-continue">2.3.2 continue</h4>
+<blockquote>
+<p>结束本次循环，进行下一次迭代。</p>
+</blockquote>
+<h4 id="233-goto">2.3.3 goto</h4>
+<blockquote>
+<p>控制转移到被标记的语句。但是不建议在程序中使用goto语句（使得程序的控制流难以跟踪，使程序难以理解和难以修改）。</p>
+</blockquote>
+<pre><code class="language-C">goto label;
+...
+...
+label: statement;
+
+// goto语句只能在一个函数范围内跳转，不能跨函数
+// 一般不使用，跳出多层嵌套时使用
+</code></pre>
+<h2 id="24-无限循环">2.4 无限循环</h2>
+<pre><code class="language-C">for( ; ; )
+    {
+        ...
+    }
+// 倾向于使用该语句实现无限循环
+</code></pre>
+<h2 id="23-习题">2.3 习题</h2>
+<h4 id="231-最大公约数">2.3.1 最大公约数</h4>
+<blockquote>
+<p>最大公因数，也称最大公约数、最大公因子，指两个或多个整数共有约数中最大的一个。</p>
+</blockquote>
+<ul>
+<li>
+<p>一般方法</p>
+<pre><code class="language-C">int main()
+{  
+  int a = 12;
+  int b = 16;
+  int max = a; // 为a、b中较小的一个赋值给最大公约数
+  if (max &gt; b)
+  {
+    max = b;
+  }
+  for (; max &gt;= 1 ; max--)
+  {  
+    if (a % max == 0 &amp;&amp; b % max == 0)
+    {
+      printf(&quot;%d\n&quot;, max);
+      break;
+    }
+  }
+  return 0;
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="image/image.png" alt="" loading="lazy"></figure>
+</li>
+<li>
+<p>辗转相除法</p>
+<blockquote>
+<p>欧几里得算法：gcd(a, b) = gcd(b, a mod b)</p>
+</blockquote>
+<pre><code class="language-C">int main()
+{  
+  int a = 12;
+  int b = 16;
+  int t = 0;
+  while (t = a % b)
+  {
+    a = b;
+    b = t;
+  }
+  printf(&quot;%d&quot;, b);
+  return 0;
+}
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="image/image_1.png" alt="" loading="lazy"></figure>
+</li>
+</ul>
+<h4 id="232-最小公倍数">2.3.2 最小公倍数</h4>
+<blockquote>
+<p>两个或多个整数公有的倍数叫做它们的公倍数，其中除0以外最小的一个公倍数就叫做这几个整数的最小公倍数。</p>
+</blockquote>
+<ul>
+<li>
+<p>一般方法</p>
+<pre><code class="language-C">int main()
+{
+  int a = 12;
+  int b = 16;
+  int min = a; // 存放a、b中较大值
+  if (min&lt;b)
+  {
+    min = b;
+  }
+  for ( ; ; min++)
+  {
+    if (min % a == 0 &amp;&amp; min % b == 0)
+    {
+      printf(&quot;%d&quot;, min);
+      break;
+    }
+  }
+  return 0;
+}
+
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="image/image_2.png" alt="" loading="lazy"></figure>
+</li>
+<li>
+<p>公式法</p>
+<blockquote>
+<p>最小公倍数 × 最大公约数 = a × b</p>
+</blockquote>
+<pre><code class="language-C">int main()
+{  
+  int a = 12;
+  int b = 16;
+  int mul = a * b; // a和b的乘积
+  int t = 0;
+  while (t = a % b)
+  {
+    a = b;
+    b = t;
+  }
+  printf(&quot;%d&quot;, mul / b);
+  return 0;
+}
+
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="image/image_3.png" alt="" loading="lazy"></figure>
+</li>
+</ul>
+<h4 id="233-排序">2.3.3 排序</h4>
+<blockquote>
+<p>问题描述：给定三个数，从大到小输出</p>
+</blockquote>
+<pre><code class="language-C">int main()
+{
+  int a = 3;
+  int b = 8;
+  int c = 5;
+  if (a &lt; b)
+  {
+    int t = a;
+    a = b;
+    b = t;
+  }  
+  if (a &lt; c)
+  {
+    int t = a;
+    a = c;
+    c = t;
+  }  
+  if (b &lt; c)
+  {
+    int t = b;
+    b = c;
+    c = t;
+  }
+  printf(&quot;%d %d %d&quot;, a, b, c);
+  return 0;
+}
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="image/image_4.png" alt="" loading="lazy"></figure>
+<h4 id="234-闰年">2.3.4 闰年</h4>
+<blockquote>
+<p>闰年（Leap Year）是为了弥补因人为历法规定造成的年度天数与地球实际公转周期的时间差而设立的。补上时间差的年份为闰年。闰年共有366天（1月~12月分别为31天、29天、31天、30天、31天、30天、31天、31天、30天、31天、30天、31天）。</p>
+</blockquote>
+<ul>
+<li>
+<p>规则：四年一闰，百年不闰，四百年再闰。</p>
+</li>
+<li>
+<p>方法一：</p>
+<pre><code class="language-C">int main()
+{
+  int sum = 0;
+  for (int i = 0; i &lt;= 2050; i++)
+  {
+    if ( 0 == i % 4)
+    {
+      if (0 == i % 100)
+      {
+        if (0 == i % 400)
+        {
+          printf(&quot;%d\n&quot;, i);
+        }
+      }
+      else
+      {
+        printf(&quot;%d\n&quot;, i);
+      }
+    }
+  }
+  return 0;
+}
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="image/image_5.png" alt="" loading="lazy"></figure>
+</li>
+<li>
+<p>方法二：</p>
+<pre><code class="language-C">int main() {
+  int sum = 0;
+  for (int i = 0; i &lt;= 2050; i++)
+  {
+    if ((i % 4 == 0 &amp;&amp; i % 100 != 0) || (i % 400 == 0 ))
+    { 
+      printf(&quot;%d是闰年\n&quot;, i);
+      sum++;
+    }
+  }
+  printf(&quot;sum = %d\n&quot;, sum);
+}
+
+</code></pre>
+<figure data-type="image" tabindex="7"><img src="image/image_6.png" alt="" loading="lazy"></figure>
+</li>
+</ul>
+<h4 id="235-素数质数">2.3.5 素数(质数)</h4>
+<blockquote>
+<p>在大于1的自然数中，除了1和它本身以外不再有其他因数的自然数。</p>
+</blockquote>
+<pre><code class="language-C">int main()
+{
+  for (int i = 2; i &lt;= 100; i++)
+  {
+    int j = i - 1;
+    for ( ; j&gt;=1; j-- )
+    {
+      if (0 == i % j)
+      {
+        break;
+      }
+    }
+    if (j == 1)
+    {
+      printf(&quot;%d\n&quot;, i);
+    }
+  }
+}
+
+</code></pre>
+<figure data-type="image" tabindex="8"><img src="image/image_7.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>优化：</p>
+<pre><code class="language-C">int main()
+{
+  for (int i = 2; i &lt;= 100; i++)
+  {
+    int flag = 1; // flag=1时为素数
+    int j = 2;
+    for ( ; j*j &lt;= i ; j++)
+    {
+      if (0 == i % j)
+      {
+        flag = 0; // flag为0时不为素数
+        break;
+      }
+    }
+    if (flag)
+    {
+      printf(&quot;%d\n&quot;, i);
+    }
+  }
+}
+</code></pre>
+<figure data-type="image" tabindex="9"><img src="image/image_8.png" alt="" loading="lazy"></figure>
+</li>
+</ul>
+<h4 id="236-goto使用">2.3.6 goto使用</h4>
+<pre><code class="language-PowerShell"># Windows关机命令
+shutdown -s -t 60      # 设置关机 
+shutdown -a            # 取消关机
+</code></pre>
+<pre><code class="language-C">// C语言中使用system(&quot;&quot;)执行系统命令
+// system()函数在&lt;stdlib.h&gt;头文件中
+
+// C语言中两个字符串不能使用`==`比较大小
+// 可使用strcmp(str1, str2)函数
+// 字符串相等函数返回0，该函数在&lt;string.h&gt;头文件中
+</code></pre>
+<pre><code class="language-C">#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+int main() 
+{
+  char input[20] = { 0 };
+  Lable:
+  system(&quot;shutdown -s -t 60&quot;);
+  printf(&quot;电脑将在1min之后关机，请输入密码进行取消：&quot;);
+  scanf(&quot;%s&quot;, input);
+  if (0 == strcmp(input, &quot;123&quot;))
+  {
+    system(&quot;shutdown -a&quot;);
+  }
+  else {
+    goto Lable;
+  }
+  return 0;
+}
+
+</code></pre>
+<ul>
+<li>小问题</li>
+</ul>
+<figure data-type="image" tabindex="10"><img src="image/image_9.png" alt="" loading="lazy"></figure>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS // 源文件第一行（忽略VS的安全检测）
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1.初始C语言]]></title>
         <id>https://listen2022.github.io/1chu-shi-c-yu-yan/</id>
