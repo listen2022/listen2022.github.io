@@ -2,11 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://listen2022.github.io</id>
     <title>listen</title>
-    <updated>2022-01-30T11:48:13.797Z</updated>
+    <updated>2022-01-30T12:17:26.863Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://listen2022.github.io"/>
     <link rel="self" href="https://listen2022.github.io/atom.xml"/>
-    <subtitle>Opportunities are for those who are prepared! </subtitle>
     <logo>https://listen2022.github.io/images/avatar.png</logo>
     <icon>https://listen2022.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, listen</rights>
