@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://listen2022.github.io</id>
     <title>listen</title>
-    <updated>2022-01-30T06:39:00.087Z</updated>
+    <updated>2022-01-30T06:54:19.790Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://listen2022.github.io"/>
     <link rel="self" href="https://listen2022.github.io/atom.xml"/>
@@ -42,14 +42,19 @@
 <ul>
 <li>
 <p>创建项目<br>
-<img src="image/image.png" alt="" loading="lazy"></p>
+<img src="image/image.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525335573.png" alt="" loading="lazy"></p>
 </li>
 <li>
 <p>创建源文件<br>
 <img src="image/image_1.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525353924.png" alt="" loading="lazy"><br>
 <img src="image/image_2.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525361628.png" alt="" loading="lazy"><br>
 <img src="image/image_3.png" alt="" loading="lazy"><br>
-<img src="image/image_4.png" alt="" loading="lazy"></p>
+<img src="https://listen2022.github.io/post-images/1643525367497.png" alt="" loading="lazy"><br>
+<img src="image/image_4.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525373449.png" alt="" loading="lazy"></p>
 </li>
 <li>
 <p>编写代码</p>
@@ -64,12 +69,15 @@ int main()
   return 0;
 }
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="image/image_5.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_5.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525403966.png" alt="" loading="lazy"></p>
 </li>
 <li>
 <p>编译、链接、运行代码<br>
 <img src="image/image_6.png" alt="" loading="lazy"><br>
-<img src="image/image_7.png" alt="" loading="lazy"></p>
+<img src="https://listen2022.github.io/post-images/1643525411791.png" alt="" loading="lazy"><br>
+<img src="image/image_7.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525417572.png" alt="" loading="lazy"></p>
 </li>
 </ul>
 <h4 id="125-补充">1.2.5 补充</h4>
@@ -96,7 +104,8 @@ double // 双精度浮点型
 <h4 id="133-字符型">1.3.3 字符型</h4>
 <pre><code class="language-C">char // 可以当作整数类型处理
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="image/image_8.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_8.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525426958.png" alt="" loading="lazy"></p>
 <h4 id="134-sizeof运算符">1.3.4 sizeof运算符</h4>
 <pre><code class="language-C">// sizeof(type) 得到对象或类型的存储字节大小
 // 使用sizeof查看数据类型大小
@@ -112,7 +121,8 @@ int main()
 }
 
 </code></pre>
-<figure data-type="image" tabindex="3"><img src="image/image_9.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_9.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525434925.png" alt="" loading="lazy"></p>
 <h2 id="14-常量变量">1.4 常量变量</h2>
 <h4 id="141-变量">1.4.1 变量</h4>
 <blockquote>
@@ -184,7 +194,8 @@ int x = 3, y = 4;
 </blockquote>
 <pre><code class="language-C">// C++注释风格，最后引入C语言中/*C语言注释风格不支持嵌套注释*/
 </code></pre>
-<figure data-type="image" tabindex="4"><img src="image/image_10.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_10.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525451984.png" alt="" loading="lazy"></p>
 <h2 id="17-选择语句">1.7 选择语句</h2>
 <pre><code class="language-C">/*分支语句*/
 int main() {
@@ -200,29 +211,34 @@ int main() {
   return 0;
 }
 </code></pre>
-<figure data-type="image" tabindex="5"><img src="image/image_11.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_11.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525459799.png" alt="" loading="lazy"></p>
 <blockquote>
 <p>当if或else内只有一条语句时可省略大括号</p>
 </blockquote>
-<figure data-type="image" tabindex="6"><img src="image/image_12.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="image/image_12.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://listen2022.github.io/post-images/1643525467217.png" alt="" loading="lazy"></figure>
 <h2 id="18-循环语句">1.8 循环语句</h2>
 <pre><code class="language-C">/* 循环语句 */int main() {  int line = 0;  while (line &lt; 30000)  {    printf(&quot;coding: %d\n&quot;, line);    line++;  }  if (line==30000)  {    printf(&quot;进大厂 拿高薪\n&quot;);  }  return 0;}
 </code></pre>
-<figure data-type="image" tabindex="7"><img src="image/image_13.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_13.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525475697.png" alt="" loading="lazy"></p>
 <blockquote>
 <p>while循环内只有一条语句时可省略大括号</p>
 </blockquote>
 <h2 id="19-函数">1.9 函数</h2>
 <pre><code class="language-C">/* 函数 */int main(){  int a = 3;  int b = 4;  int result = 0;  result = Add(a, b);  printf(&quot;result =&gt; %d\n&quot;, result);  return 0;}int Add(int x, int y){  int result = 0;  result = x + y;  return result;}
 </code></pre>
-<figure data-type="image" tabindex="8"><img src="image/image_14.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_14.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525482852.png" alt="" loading="lazy"></p>
 <h2 id="110-数组">1.10 数组</h2>
 <blockquote>
 <p>一组相同类型的元素的集合</p>
 </blockquote>
 <pre><code class="language-C">// 数组int main(){  // 创建  int arr[10] = { 0,1,2,3,4,5,6,7,8,9 };  // 其中arr为数组名 int为数组中每个元素的类型 10为数组中元素的个数  char ch[10] = { 'a', 'b', 'c', 'd', 'e' }; // 不完全初始化，其余值默认为0  // 访问(利用每个元素的下标 索引从零开始依次往后)  int i = 0;  while (i&lt;10)  {    printf(&quot;arr[%d] =&gt; %d\n&quot;, i, arr[i]);    i++;  }  return 0;}
 </code></pre>
-<figure data-type="image" tabindex="9"><img src="image/image_15.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_15.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525490094.png" alt="" loading="lazy"></p>
 <h2 id="111-操作符">1.11 操作符</h2>
 <h4 id="1111-算数操作符">1.11.1 算数操作符</h4>
 <pre><code class="language-C">+ - * / %
@@ -272,10 +288,12 @@ eg: (2, 2+1, 2+2, 2+3);
 <p>自增/自减</p>
 <pre><code class="language-C">// 前置++： 先++后使用int main(){  int a = 6;  int b = ++a;  printf(&quot;%d\n&quot;, a); // 7  printf(&quot;%d\n&quot;, b); // 7  return 0;}
 </code></pre>
-<figure data-type="image" tabindex="10"><img src="image/image_16.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_16.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525506704.png" alt="" loading="lazy"></p>
 <pre><code class="language-C">// 后置++： 先使用后++int main(){  int a = 6;  int b = a++;  printf(&quot;%d\n&quot;, a); // 7  printf(&quot;%d\n&quot;, b); // 7  return 0;}
 </code></pre>
-<figure data-type="image" tabindex="11"><img src="image/image_17.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_17.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525515337.png" alt="" loading="lazy"></p>
 </li>
 <li>
 <p>强制类型转换</p>
@@ -334,7 +352,8 @@ return   子程序返回语句（可以带参数，也可不带参数）循环�
 <p>typedef</p>
 <pre><code class="language-C">// 类型别名 类型重命名 用来简化代码
 </code></pre>
-<figure data-type="image" tabindex="12"><img src="image/image_18.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_18.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525525157.png" alt="" loading="lazy"></p>
 </li>
 <li>
 <p>static</p>
@@ -343,11 +362,14 @@ return   子程序返回语句（可以带参数，也可不带参数）循环�
 <p><strong>示例</strong></p>
 <ol>
 <li>static修饰局部变量<br>
-<img src="image/image_19.png" alt="" loading="lazy"></li>
+<img src="image/image_19.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525540111.png" alt="" loading="lazy"></li>
 <li>static修饰全局变量<br>
-<img src="image/image_20.png" alt="" loading="lazy"></li>
+<img src="image/image_20.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525548670.png" alt="" loading="lazy"></li>
 <li>static修饰函数<br>
-<img src="image/image_21.png" alt="" loading="lazy"></li>
+<img src="image/image_21.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525587921.png" alt="" loading="lazy"></li>
 </ol>
 </li>
 </ul>
@@ -358,12 +380,15 @@ return   子程序返回语句（可以带参数，也可不带参数）循环�
 <pre><code class="language-C">/*作用：  1. 定义常量  2. 定义宏（宏用来完成替换）*/
 </code></pre>
 <h4 id="1131-定义变量">1.13.1 定义变量</h4>
-<figure data-type="image" tabindex="13"><img src="image/image_22.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_22.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525597325.png" alt="" loading="lazy"></p>
 <h4 id="1132-定义宏">1.13.2 定义宏</h4>
-<figure data-type="image" tabindex="14"><img src="image/image_23.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_23.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525605286.png" alt="" loading="lazy"></p>
 <pre><code class="language-C">// 宏只完成替换// 为保证正常运行，应使用小括号将函数体括起来
 </code></pre>
-<figure data-type="image" tabindex="15"><img src="image/image_24.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_24.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525614422.png" alt="" loading="lazy"></p>
 <h2 id="114-指针">1.14 指针</h2>
 <blockquote>
 <p>指针描述了数据在内存中的位置（内存地址），标示了一个占据存储空间的实体。 C/C++语言中，指针一般被认为是指针变量，指针变量的内容存储的是其指向的对象的首地址，指向的对象可以是变量（指针变量也是变量），数组，函数等占据存储空间的实体。</p>
@@ -374,7 +399,8 @@ return   子程序返回语句（可以带参数，也可不带参数）循环�
 <h4 id="1142-指针变量的大小">1.14.2 指针变量的大小</h4>
 <pre><code class="language-C">// 在32位系统种，指针变量大小为4byte// 在64位系统种，指针变量大小位8byte// 指针变量大小与指针指向的数据类型无关// 下图为64位系统种，指针大小演示：
 </code></pre>
-<figure data-type="image" tabindex="16"><img src="image/image_25.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_25.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525625321.png" alt="" loading="lazy"></p>
 <h4 id="1142-访问数据地址">1.14.2 访问数据地址</h4>
 <pre><code class="language-C">// 格式：
 &amp;var_name
@@ -389,12 +415,14 @@ int main()
 }
 
 </code></pre>
-<figure data-type="image" tabindex="17"><img src="image/image_26.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_26.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525634547.png" alt="" loading="lazy"></p>
 <h4 id="1143-null指针">1.14.3 NULL指针</h4>
 <pre><code class="language-C">// NULL指针：空指针，是一个定义在标准库中的值为零的常量。
 
 </code></pre>
-<figure data-type="image" tabindex="18"><img src="image/image_27.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_27.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525642059.png" alt="" loading="lazy"></p>
 <blockquote>
 <p>在大多数的操作系统上，程序不允许访问地址为 0 的内存，因为该内存是操作系统保留的。然而，内存地址 0 有特别重要的意义，它表明该指针不指向一个可访问的内存位置。</p>
 </blockquote>
@@ -458,7 +486,8 @@ printf(&quot;name: %s, age: %d, height: %lf\n&quot;, ps-&gt;name, ps-&gt;age, ps
 </code></pre>
 </li>
 </ul>
-<figure data-type="image" tabindex="19"><img src="image/image_28.png" alt="" loading="lazy"></figure>
+<p><img src="image/image_28.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525654342.png" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>
