@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta name="referrer" content="never">
+<meta name="keywords" content="">
+<meta name="description" content="欢迎访问[listen]的个人博客">
+<meta name="author" content="kveln">
+<title>3. 函数 | listen</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link
+  href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+  rel='stylesheet' type='text/css'>
+<link rel="alternate" type="application/rss+xml" title="3. 函数 | listen » Feed"
+  href="https://listen2022.github.io/atom.xml">
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/androidstudio.min.css">
+<link href="https://listen2022.github.io/styles/main.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/850552586/ericamcdn@0.1/css/live2d.css">
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+  <meta property="og:description" content="3. 函数" />
+  <meta property="og:url" content="https://listen2022.github.io/3-han-shu/" />
+  <meta property="og:locale" content="zh-CN" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="listen" />
+  <!-- <script src="../assets/styles/scripts/tocScript.js"></script> -->
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://listen2022.github.io">listen</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/post/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1643534501058"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  <!-- Page Header -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://listen2022.github.io">listen</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/post/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1643534501058"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="masthead" style="background-image: url('https://listen2022.github.io/media/images/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        
+          <!-- 没Title为其他页面Header -->
+          
+            <!-- 没Title并且有headerType为Post：文章Header -->
+            <div class="post-heading">
+              <span class="tags">
+                
+              </span>
+              <h1>3. 函数</h1>
+              <span class="meta">
+                Posted on
+                2022-01-30，6 min read
+              </span>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+  <!-- Post Content -->
+  <article id="post-content-article">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto post-content-container">
+          
+          <h1 id="3函数">3.函数</h1>
+<h2 id="31-函数是什么">3.1 函数是什么</h2>
+<blockquote>
+<p>函数是指一段可以直接被另一段程序或代码引用的程序或代码。也叫做子程序、（OOP中）方法。一个较大的程序一般应分为若干个程序块，每一个模块用来实现一个特定的功能。所有的高级语言中都有子程序这个概念，用子程序实现模块的功能。在C语言中，子程序是由一个主函数和若干个函数构成的。由主函数调用其他函数，其他函数也可以互相调用。同一个函数可以被一个或多个函数调用任意多次。</p>
+</blockquote>
+<h4 id="311-函数分类">3.1.1 函数分类</h4>
+<ul>
+<li>自定义函数</li>
+<li>库函数</li>
+</ul>
+<h2 id="32-库函数">3.2 库函数</h2>
+<blockquote>
+<p>一般是指编译器提供的可在C源程序中调用的函数。分为两类，C语言标准规定的库函数和编译器特定的库函数。</p>
+</blockquote>
+<h4 id="321-网站">3.2.1 网站</h4>
+<p><a href="https://www.cprogramming.com/">Learn C and C++ Programming - Cprogramming.com</a></p>
+<p><a href="https://zh.cppreference.com/w/c/header">C 标准库头文件 - cppreference.com</a></p>
+<p><a href="https://docs.microsoft.com/en-us/cpp/c-runtime-library/c-run-time-library-reference?view=msvc-170">https://docs.microsoft.com/en-us/cpp/c-runtime-library/c-run-time-library-reference?view=msvc-170</a></p>
+<h4 id="322-strcp">3.2.2 <a href="https://www.runoob.com/cprogramming/c-function-strcpy.html">strcp</a></h4>
+<h4 id="323-memset">3.2.3 <a href="https://www.runoob.com/cprogramming/c-function-memset.html">memset</a></h4>
+<h2 id="33-自定义函数">3.3 自定义函数</h2>
+<pre><code class="language-C">// 格式：
+ret_type func_name( parameter list )
+{
+   body of the function
+}
+// return_type 函数的返回类型
+// function_name 函数名称
+// parameter list 参数列表
+// body of the function 函数体
+// 当函数不返回任何类型，ret_type为关键字void
+</code></pre>
+<ul>
+<li>
+<p>实例</p>
+<pre><code class="language-C">void Swap(int* pa, int* pb)
+{
+  int z = 0;
+  z = *pa;
+  *pa = *pb;
+  *pb = z;
+}
+
+int main() 
+{
+  int a = 10;
+  int b = 20;
+  printf(&quot;交换前 a=%d, b=%d\n&quot;, a, b);
+  Swap(&amp;a, &amp;b);
+  printf(&quot;交换后 a=%d, b=%d\n&quot;, a, b);
+}
+</code></pre>
+<p><img src="image/image.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534473083.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>重点</p>
+<pre><code class="language-C">void Swap(int* pa, int* pb)
+{
+  int* z = NULL;
+  printf(&quot;%p %p %p\n&quot;, pa, pb, z);
+  z = pa;
+  pa = pb;
+  pb = z;
+  printf(&quot;%p %p %p\n&quot;, pa, pb, z);
+}
+
+// 不能通过交换a、b的地址交换a、b的数据
+
+int main() 
+{
+  int a = 10;
+  int b = 20;
+  printf(&quot;交换前 a=%d, b=%d\n&quot;, a, b);
+  Swap(&amp;a, &amp;b);
+  printf(&quot;交换后 a=%d, b=%d\n&quot;, a, b);
+}
+
+</code></pre>
+<p><img src="image/image_1.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534479607.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h2 id="34-函数参数">3.4 函数参数</h2>
+<h4 id="341-实际参数argument">3.4.1 实际参数(argument)</h4>
+<blockquote>
+<p>真实传递给函数的参数，叫实参。实参可以是：常量、变量、表达式、函数等。无论实参是何种类型的量，在进行调用时，它们都必须有确定的值，以便把这些值传送给形参。</p>
+</blockquote>
+<h4 id="342-形式参数parameter">3.4.2 形式参数(parameter)</h4>
+<blockquote>
+<p>形式参数是指函数名后括号中的变量，因为形参只有在函数被调用的过程中才实例化（分配内存单元），所以叫形式参数。形式参数当函数调用完成后就自动销毁。因此形式参数只在函数中有效。</p>
+</blockquote>
+<h4 id="343-形参实例化之后其实相当于实参的一份临时拷贝">3.4.3 形参实例化之后其实相当于实参的一份临时拷贝。</h4>
+<h2 id="35-函数调用">3.5 函数调用</h2>
+<h4 id="351-传值调用">3.5.1 传值调用</h4>
+<blockquote>
+<p>该方法把参数的实际值复制给函数的形式参数。在这种情况下，修改函数内的形式参数不会影响实际参数。</p>
+</blockquote>
+<h4 id="352-引用调用">3.5.2 引用调用</h4>
+<blockquote>
+<p>通过指针传递方式，形参为指向实参地址的指针，当对形参的指向操作时，就相当于对实参本身进行的操作。</p>
+</blockquote>
+<h2 id="36-函数的嵌套调用和链式访问">3.6 函数的嵌套调用和链式访问</h2>
+<h4 id="361-嵌套调用">3.6.1 嵌套调用</h4>
+<blockquote>
+<p>在函数A()中调用函数B()</p>
+</blockquote>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+int main() {
+  printf(&quot;Hello World!\n&quot;);
+  return 0;
+}
+
+// 最简单的嵌套调用，在main函数中调用prinf函数
+</code></pre>
+<p><img src="image/image_2.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534488639.png" alt="" loading="lazy"></p>
+<h4 id="362-链式访问">3.6.2 链式访问</h4>
+<blockquote>
+<p>把一个函数的返回值作为另一个函数的参数。</p>
+</blockquote>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+int add(int x, int y)
+{
+  return x + y;
+}
+
+int main() 
+{
+  printf(&quot;输出：%d\n&quot;, add(3, 4));
+}
+
+
+// 将add(3, 4)的返回值作为参数，传递给printf函数
+</code></pre>
+<p><img src="image/image_3.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643534494500.png" alt="" loading="lazy"></p>
+<h2 id="37-函数的声明和定义">3.7 函数的声明和定义</h2>
+<h4 id="371-声明">3.7.1 声明</h4>
+<blockquote>
+<p>告诉编译器函数名称及如何调用函数。</p>
+</blockquote>
+<pre><code class="language-C">return_type function_name( parameter list );
+// 在函数声明中
+// 参数的名称并不重要
+// 只有参数的类型是必需的
+// 因此可省略声明中形参的名称
+</code></pre>
+<h4 id="372-定义">3.7.2 定义</h4>
+<pre><code class="language-C">return_type function_name( parameter list )
+{
+   body of the function
+}
+</code></pre>
+<h2 id="38-函数递归">3.8 函数递归</h2>
+<blockquote>
+<p>函数对自身的调用。</p>
+</blockquote>
+<ul>
+<li>递归的必要条件
+<ul>
+<li>递归调用的过程</li>
+<li>递归终止的条件</li>
+</ul>
+</li>
+</ul>
+<h2 id="39-小知识">3.9 小知识</h2>
+<blockquote>
+<p>#include &quot; &quot; 与 &lt;&gt;有什么区别？</p>
+</blockquote>
+<pre><code class="language-C"> // 若 #include &quot;&quot; 查找成功，则遮蔽 #include &lt;&gt; 所能找到的同名文件
+ // 否则再按照 #include &lt;&gt; 的方式查找文件
+ 
+ // #include &lt;&gt; 的查找位置是标准库头文件所在目录
+ // #include &quot;&quot; 的查找位置是当前源文件所在目录
+ 
+ // &lt;&gt;先去系统目录中找头文件，如果没有在到当前目录下找
+ // &quot;&quot;首先在当前目录下寻找，如果找不到，再到系统目录中寻找
+</code></pre>
+<blockquote>
+<p>C语言函数默认返回类型</p>
+</blockquote>
+<pre><code class="language-C">// C语言中函数如果没有定义返回值类型，则默认返回类型是int
+
+</code></pre>
+
+          <div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#3%E5%87%BD%E6%95%B0">3.函数</a>
+<ul>
+<li><a href="#31-%E5%87%BD%E6%95%B0%E6%98%AF%E4%BB%80%E4%B9%88">3.1 函数是什么</a><br>
+*
+<ul>
+<li><a href="#311-%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB">3.1.1 函数分类</a></li>
+</ul>
+</li>
+<li><a href="#32-%E5%BA%93%E5%87%BD%E6%95%B0">3.2 库函数</a><br>
+*
+<ul>
+<li><a href="#321-%E7%BD%91%E7%AB%99">3.2.1 网站</a></li>
+<li><a href="#322-strcp">3.2.2 strcp</a></li>
+<li><a href="#323-memset">3.2.3 memset</a></li>
+</ul>
+</li>
+<li><a href="#33-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0">3.3 自定义函数</a></li>
+<li><a href="#34-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0">3.4 函数参数</a><br>
+*
+<ul>
+<li><a href="#341-%E5%AE%9E%E9%99%85%E5%8F%82%E6%95%B0argument">3.4.1 实际参数(argument)</a></li>
+<li><a href="#342-%E5%BD%A2%E5%BC%8F%E5%8F%82%E6%95%B0parameter">3.4.2 形式参数(parameter)</a></li>
+<li><a href="#343-%E5%BD%A2%E5%8F%82%E5%AE%9E%E4%BE%8B%E5%8C%96%E4%B9%8B%E5%90%8E%E5%85%B6%E5%AE%9E%E7%9B%B8%E5%BD%93%E4%BA%8E%E5%AE%9E%E5%8F%82%E7%9A%84%E4%B8%80%E4%BB%BD%E4%B8%B4%E6%97%B6%E6%8B%B7%E8%B4%9D">3.4.3 形参实例化之后其实相当于实参的一份临时拷贝。</a></li>
+</ul>
+</li>
+<li><a href="#35-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8">3.5 函数调用</a><br>
+*
+<ul>
+<li><a href="#351-%E4%BC%A0%E5%80%BC%E8%B0%83%E7%94%A8">3.5.1 传值调用</a></li>
+<li><a href="#352-%E5%BC%95%E7%94%A8%E8%B0%83%E7%94%A8">3.5.2 引用调用</a></li>
+</ul>
+</li>
+<li><a href="#36-%E5%87%BD%E6%95%B0%E7%9A%84%E5%B5%8C%E5%A5%97%E8%B0%83%E7%94%A8%E5%92%8C%E9%93%BE%E5%BC%8F%E8%AE%BF%E9%97%AE">3.6 函数的嵌套调用和链式访问</a><br>
+*
+<ul>
+<li><a href="#361-%E5%B5%8C%E5%A5%97%E8%B0%83%E7%94%A8">3.6.1 嵌套调用</a></li>
+<li><a href="#362-%E9%93%BE%E5%BC%8F%E8%AE%BF%E9%97%AE">3.6.2 链式访问</a></li>
+</ul>
+</li>
+<li><a href="#37-%E5%87%BD%E6%95%B0%E7%9A%84%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89">3.7 函数的声明和定义</a><br>
+*
+<ul>
+<li><a href="#371-%E5%A3%B0%E6%98%8E">3.7.1 声明</a></li>
+<li><a href="#372-%E5%AE%9A%E4%B9%89">3.7.2 定义</a></li>
+</ul>
+</li>
+<li><a href="#38-%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92">3.8 函数递归</a></li>
+<li><a href="#39-%E5%B0%8F%E7%9F%A5%E8%AF%86">3.9 小知识</a></li>
+</ul>
+</li>
+</ul>
+</div>
+          
+          <hr />
+          <p class="next-post">下一篇：
+            <a href="https://listen2022.github.io/2fen-zhi-he-xun-huan-yu-ju/">
+              <span class="post-title">
+                2.分支和循环语句&rarr;
+              </span>
+            </a>
+          </p>
+          
+          <div class="comment" style="text-align: center;">
+            
+
+            
+            
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '3f95c9079ef35c0e7742',
+    clientSecret: '43f525cf5aa44ca3dd1cb661a5406e508d2cb58c',
+    repo: 'listen2022.github.io',
+    owner: 'listen2022',
+    admin: ['listen2022'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+</script>
+
+            
+            
+            
+            
+          </div>
+        </div>
+      </div>
+  </article>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            
+            
+            <li class="list-inline-item">
+              <a href="https://github.com/listen2022" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+              <!-- <li class="list-inline-item">
+              <a href="https://listen2022.github.io/atom.xml" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+              </li> -->
+          </ul>
+          <p class="copyright text-muted">Copyright &copy;<span>listen</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo">Powered by Gridea</a></p>
+        </div>
+      </div>
+    </div>
+   </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://listen2022.github.io/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.jsdelivr.net/gh/Alanrk/clean-cdn@1.0/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://listen2022.github.io/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  
+  <script src="https://listen2022.github.io/media/scripts/tocScript.js"></script>
+</body>
+
+</html>
