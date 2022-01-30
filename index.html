@@ -71,7 +71,7 @@
         
         <li class="nav-item">
           <div class="gridea-search-container">
-            <form id="gridea-search-form" style="position: relative" data-update="1643552488993"
+            <form id="gridea-search-form" style="position: relative" data-update="1643554040768"
               action="/search/index.html">
               <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
               <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
@@ -92,7 +92,14 @@
           <div class="site-heading">
             <img class="user-avatar" src="/images/avatar.png" alt="头像">
             <h1>listen</h1>
-            <span class="subheading"></span>
+            <span class="subheading"><script>
+// 一言调用
+$(function () {
+    $.getJSON("https://sslapi.hitokoto.cn/", function(e){
+        $('.subheading').html(e.hitokoto+" —— <strong>"+e.from+"</strong>")
+    });
+});
+<script></span>
           </div>
         
       </div>
