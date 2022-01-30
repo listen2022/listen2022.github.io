@@ -2,13 +2,208 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://listen2022.github.io</id>
     <title>listen</title>
-    <updated>2022-01-30T15:20:45.773Z</updated>
+    <updated>2022-01-30T15:21:27.266Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://listen2022.github.io"/>
     <link rel="self" href="https://listen2022.github.io/atom.xml"/>
     <logo>https://listen2022.github.io/images/avatar.png</logo>
     <icon>https://listen2022.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, listen</rights>
+    <entry>
+        <title type="html"><![CDATA[7. C语言--结构体]]></title>
+        <id>https://listen2022.github.io/bDOIBKF8Z/</id>
+        <link href="https://listen2022.github.io/bDOIBKF8Z/">
+        </link>
+        <updated>2022-01-30T15:09:54.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="7结构体">7.结构体</h1>
+<h2 id="71-结构体">7.1 结构体</h2>
+<p>类型的声明</p>
+<h4 id="711-介绍">7.1.1 介绍</h4>
+<blockquote>
+<p>结构体是由一批数据组合而成的结构型数据。组成结构型数据的每个数据称为结构型数据的“成员”，其描述了一块内存区间的大小及解释意义。</p>
+</blockquote>
+<ul>
+<li>结构体是一种数据类型，地位同等于int、float等</li>
+<li>结构体类型不是系统定义好的，由程序员自己定义</li>
+<li>使用struct关键字来标识定义的结构体类型</li>
+<li>结构体通常用来表示类型不同但又相关的若干数据</li>
+<li>关键字struct和结构体名组成类型标识符</li>
+<li>成员又称为成员变量，是结构体所包含的若干个基本的结构类型</li>
+<li>结构体的成员可以包含其他结构体，也可以包含指向自己结构体类型的指针</li>
+</ul>
+<h4 id="712-声明">7.1.2 声明</h4>
+<pre><code class="language-C">// 格式：
+struct tag { 
+    member-list
+    member-list 
+    member-list  
+    ...
+} variable-list;
+
+// tag: 结构体标签
+// member-list: 变量定义
+// variable-list: 结构体变量
+// 一般情况下：tag、member-list、variable-list 3部分至少出现两个
+
+// 使用typedef创建新类型
+typedef struct
+{
+    int a;
+    char b;
+    double c; 
+} Simple;
+// 可以用Simple作为类型声明新的结构体变量
+// eg:
+Simple s;
+</code></pre>
+<h4 id="713-例">7.1.3 例</h4>
+<pre><code class="language-C">int main()
+{
+  struct Person
+  {
+    char name[10];
+    short age;
+  };
+
+  struct Student
+  {
+    char id[20];
+    struct Person p;
+  };
+  return 0;
+}
+</code></pre>
+<h2 id="72-结构体初始化">7.2 结构体初始化</h2>
+<h4 id="721-定义时初始化">7.2.1 定义时初始化</h4>
+<pre><code class="language-C">int main()
+{
+  struct Person
+  {
+    char name[10];
+    short age;
+  };
+
+  struct Student
+  {
+    char id[20];
+    struct Person p;
+  } s = {&quot;1914121006&quot;, {&quot;listen&quot;, 25}};
+  return 0;
+}
+</code></pre>
+<h4 id="722-定义后初始化">7.2.2 定义后初始化</h4>
+<pre><code class="language-C">struct Person
+{
+  char name[10];
+  short age;
+};
+
+struct Student
+{
+  char id[20];
+  struct Person p;
+};
+
+int main()
+{
+  struct Student s = { &quot;1914121006&quot;, {&quot;listen&quot;, 25} };
+  return 0;
+}
+</code></pre>
+<h2 id="73-结构体成员访问">7.3 结构体成员访问</h2>
+<h4 id="731">7.3.1 <code>.</code></h4>
+<pre><code class="language-C">struct Person
+{
+  char name[10];
+  short age;
+};
+
+struct Student
+{
+  char id[20];
+  struct Person p;
+};
+
+int main()
+{
+  struct Student s = { &quot;1914121006&quot;, {&quot;listen&quot;, 25} };
+  printf(&quot;id: %s\nname: %s\nage: %d\n&quot;, s.id, s.p.name, s.p.age);
+  return 0;
+}
+</code></pre>
+<p><img src="file://C:%5CUsers%5CTurbo%5CDesktop%5C7.%E7%BB%93%E6%9E%84%E4%BD%93%5Cimage%5Cimage.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643555465680.png" alt="" loading="lazy"></p>
+<h4 id="732">7.3.2 <code>→</code></h4>
+<pre><code class="language-C">struct Person
+{
+  char name[10];
+  short age;
+};
+
+struct Student
+{
+  char id[20];
+  struct Person p;
+};
+
+int main()
+{
+  struct Student s = { &quot;1914121006&quot;, {&quot;listen&quot;, 25} };
+  struct Student* ps = &amp;s;
+  printf(&quot;id: %s\nname: %s\nage: %d\n&quot;, (*ps).id, (*ps).p.name, (*ps).p.age);
+  printf(&quot;id: %s\nname: %s\nage: %d\n&quot;, ps-&gt;id, ps-&gt;p.name, ps-&gt;p.age);
+  return 0;
+}
+</code></pre>
+<p><img src="file://C:%5CUsers%5CTurbo%5CDesktop%5C7.%E7%BB%93%E6%9E%84%E4%BD%93%5Cimage%5Cimage_1.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643555475043.png" alt="" loading="lazy"></p>
+<h2 id="74-结构体传参">7.4 结构体传参</h2>
+<pre><code class="language-C">struct Person
+{
+  char name[10];
+  short age;
+};
+
+struct Student
+{
+  char id[20];
+  struct Person p;
+};
+
+void print1(struct Student s)
+{
+  printf(&quot;id: %s\nname: %s\nage: %d\n&quot;, s.id, s.p.name, s.p.age);
+}
+
+void print2(struct Student* ps)
+{
+  printf(&quot;id: %s\nname: %s\nage: %d\n&quot;, ps-&gt;id, ps-&gt;p.name, ps-&gt;p.age);
+}
+
+int main()
+{
+  struct Student s = { &quot;1914121006&quot;, {&quot;listen&quot;, 25} };
+  print1(s); // 值传递
+  print2(&amp;s); // 址传递
+  return 0;
+}
+</code></pre>
+<p><img src="file://C:%5CUsers%5CTurbo%5CDesktop%5C7.%E7%BB%93%E6%9E%84%E4%BD%93%5Cimage%5Cimage_2.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643555480966.png" alt="" loading="lazy"></p>
+<ul>
+<li>print1和pirnt2对比：
+<ul>
+<li>print1: 值传递，更安全。传参时，需要开辟一块与结构体变量s同等大小的区域用于将s复制一份到print1函数中，相比于print2消耗更多的内存资源。此外，print1函数中不可以修改结构体变量s中的值。</li>
+<li>print2: 址传递。传参时，在32位平台使用4字节内存资源，在64位平台使用8字节。相比于print1，消耗更少的内存资源。此外，print2可以修改结构体变量s中成员变量的值。但print2相对于print1不安全。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>函数传参的时候，参数是需要压栈的，并且按照参数列表的顺序，从右向左压栈。如果传递一个结构体对象的时候，结构体过大，参数压栈的系统开销比较大，所以会导致性能的下降。</p>
+</blockquote>
+<p><strong>结论</strong>：结构体传参时，要传结构体的指针。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[5. C语言--操作符]]></title>
         <id>https://listen2022.github.io/5-c-yu-yan-cao-zuo-fu/</id>
