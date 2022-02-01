@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://listen2022.github.io</id>
     <title>listen</title>
-    <updated>2022-02-01T01:03:54.491Z</updated>
+    <updated>2022-02-01T14:37:21.206Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://listen2022.github.io"/>
     <link rel="self" href="https://listen2022.github.io/atom.xml"/>
@@ -10,6 +10,65 @@
     <logo>https://listen2022.github.io/images/avatar.png</logo>
     <icon>https://listen2022.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, listen</rights>
+    <entry>
+        <title type="html"><![CDATA[2022]]></title>
+        <id>https://listen2022.github.io/6Tad6moOG/</id>
+        <link href="https://listen2022.github.io/6Tad6moOG/">
+        </link>
+        <updated>2022-02-01T14:32:44.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="2022年度规划">2022年度规划</h1>
+<h2 id="22年目标">22年目标</h2>
+<ul>
+<li><strong>考研成功</strong></li>
+<li><strong>学会自律</strong></li>
+<li><strong>感情顺利</strong></li>
+<li><strong>坚持运动</strong></li>
+</ul>
+<h2 id="考研目标深圳大学">考研目标：深圳大学</h2>
+<h2 id="自律-自律-自律"><strong>自律 自律 自律</strong></h2>
+<h2 id="做自己"><strong>做自己</strong></h2>
+<ul>
+<li>
+<p><strong>日安排</strong><br>
+<img src="image/image.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643726211640.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p><strong>周安排</strong><br>
+<img src="image/image_1.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643726216769.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p><strong>月安排</strong><br>
+<img src="image/image_2.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643726221179.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>寒假（2月1号周二—2月17号周四 共16天）</p>
+<ul>
+<li>
+<p>安排<br>
+| <strong>日期</strong> | <strong>安排</strong> |<br>
+| ------ | ------ |<br>
+| 1-2号   | 心态调整   |<br>
+| 3-10号  |        |<br>
+| 10-17号 |        |<br>
+| 17-20号 | 开学准备   |</p>
+</li>
+<li>
+<p>目标：</p>
+<ul>
+<li>结束C语言、操作系统、计算机组成原理</li>
+<li>每天25min跑步（天晴）</li>
+<li>gitee上每天一个绿点</li>
+<li>牛客网C语言：5道选择和1道编程题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[10. C语言进阶--指针进阶]]></title>
         <id>https://listen2022.github.io/fR1IhsCmE/</id>
@@ -4824,486 +4883,6 @@ int main()
 <img src="https://listen2022.github.io/post-images/1643534369082.png" alt="" loading="lazy"></p>
 <pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS // 源文件第一行（忽略VS的安全检测）
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1. C语言--初始C语言]]></title>
-        <id>https://listen2022.github.io/1chu-shi-c-yu-yan/</id>
-        <link href="https://listen2022.github.io/1chu-shi-c-yu-yan/">
-        </link>
-        <updated>2022-01-30T06:15:32.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="1-初始c语言">1. 初始C语言</h1>
-<h2 id="11-介绍">1.1 介绍</h2>
-<blockquote>
-<p>广泛应用于底层开发（如：驱动）。有完整的美国国家标准语法，称为ANDI C。C语言是一门面向过程的的计算机语言。主要的编译器有Clang、GCC、WIN-TC、Turbo C等。</p>
-</blockquote>
-<blockquote>
-<p>国际标准：C89、C90、C99、C11（C90之后的标准没有火起来）</p>
-</blockquote>
-<h2 id="12-第一个c程序">1.2 第一个C程序</h2>
-<h4 id="121-编译器">1.2.1 编译器</h4>
-<blockquote>
-<p>Visual Studio、Dev C++、Visual C++ 6.0、GCC、Clang、Pelles C、Watcom C/C++、Tiny C Compiler、Code::Blocks、Turbo C、C-Free等</p>
-</blockquote>
-<h4 id="122-继承开发环境ide">1.2.2 继承开发环境（IDE）</h4>
-<blockquote>
-<p>VS2013/VS2019：集成开发环境，集成了windows下的C语言编译器</p>
-</blockquote>
-<h4 id="123-文件">1.2.3 文件</h4>
-<ul>
-<li>xxx.c 源文件</li>
-<li>xxx.h 头文件</li>
-</ul>
-<h4 id="124-步骤">1.2.4 步骤</h4>
-<ul>
-<li>
-<p>创建项目<br>
-<img src="image/image.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525335573.png" alt="" loading="lazy"></p>
-</li>
-<li>
-<p>创建源文件<br>
-<img src="image/image_1.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525353924.png" alt="" loading="lazy"><br>
-<img src="image/image_2.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525361628.png" alt="" loading="lazy"><br>
-<img src="image/image_3.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525367497.png" alt="" loading="lazy"><br>
-<img src="image/image_4.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525373449.png" alt="" loading="lazy"></p>
-</li>
-<li>
-<p>编写代码</p>
-<ul>
-<li>主函数（main函数）</li>
-</ul>
-<pre><code class="language-C">#include &lt;stdio.h&gt;
-
-int main()
-{
-  printf(&quot;Hello World!&quot;);
-  return 0;
-}
-</code></pre>
-<p><img src="image/image_5.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525403966.png" alt="" loading="lazy"></p>
-</li>
-<li>
-<p>编译、链接、运行代码<br>
-<img src="image/image_6.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525411791.png" alt="" loading="lazy"><br>
-<img src="image/image_7.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525417572.png" alt="" loading="lazy"></p>
-</li>
-</ul>
-<h4 id="125-补充">1.2.5 补充</h4>
-<ul>
-<li>一个项目中可以有多个.c文件</li>
-<li>多个.c文件中有且仅有一个main函数</li>
-</ul>
-<h2 id="13-基本数据类型">1.3 基本数据类型</h2>
-<blockquote>
-<p>在 C 语言中，数据类型指的是用于声明不同类型的变量或函数的一个广泛的系统。变量的类型决定了变量存储占用的空间，以及如何解释存储的位模式。</p>
-</blockquote>
-<h4 id="131-整数类型">1.3.1 整数类型</h4>
-<pre><code class="language-C">short (int)
-int
-long (int)
-long long (int)
-// 不同数据类型的大小因不同的计算机系统而异
-// 编译器可以决定数据类型的大小但必须保证：short &lt;= int &lt;= long &lt;= long long
-</code></pre>
-<h4 id="132-浮点类型">1.3.2 浮点类型</h4>
-<pre><code class="language-C">float // 单精度浮点型
-double // 双精度浮点型
-</code></pre>
-<h4 id="133-字符型">1.3.3 字符型</h4>
-<pre><code class="language-C">char // 可以当作整数类型处理
-</code></pre>
-<p><img src="image/image_8.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525426958.png" alt="" loading="lazy"></p>
-<h4 id="134-sizeof运算符">1.3.4 sizeof运算符</h4>
-<pre><code class="language-C">// sizeof(type) 得到对象或类型的存储字节大小
-// 使用sizeof查看数据类型大小
-int main()
-{
-  printf(&quot;size of short %d\n&quot;, sizeof(short));
-  printf(&quot;size of short %d\n&quot;, sizeof(int));
-  printf(&quot;size of short %d\n&quot;, sizeof(long));
-  printf(&quot;size of short %d\n&quot;, sizeof(long long));
-  printf(&quot;size of short %d\n&quot;, sizeof(float));
-  printf(&quot;size of short %d\n&quot;, sizeof(double));
-  return 0;
-}
-
-</code></pre>
-<p><img src="image/image_9.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525434925.png" alt="" loading="lazy"></p>
-<h2 id="14-常量变量">1.4 常量变量</h2>
-<h4 id="141-变量">1.4.1 变量</h4>
-<blockquote>
-<p>程序可操作的存储区的名称。C 中每个变量都有特定的类型，类型决定了变量存储的大小和布局，该范围内的值都可以存储在内存中，运算符可应用于变量上。</p>
-</blockquote>
-<ul>
-<li>
-<p>变量定义<br>
-告诉编译器在何处创建变量的存储，以及如何创建变量的存储。变量定义指定一个数据类型，并包含了该类型的一个或多个变量的列表。</p>
-<pre><code class="language-C">type var_list;
-// type为C数据类型或自定义的对象
-// var_list由一个或多个标识符组成，多个标识符之间使用逗号隔开
-// eg:
-int a, b;
-char c;
-
-// 初始化：变量可以在声明时初始化（指定一个初始值）
-// eg:
-int a = 666;
-int x = 3, y = 4;
-</code></pre>
-</li>
-<li>
-<p>变量声明<br>
-向编译器保证变量以指定的类型和名称存在，这样编译器在不需要知道变量完整细节的情况下也能继续进一步的编译。变量声明只在编译时有它的意义，在程序连接时编译器需要实际的变量声明。</p>
-<pre><code class="language-C">变量声明的两种情况：
-  1.需要建立存储空间。int a; 在声明时建立了存储空间
-  2.不需要建立存储空间。extern关键字声明变量而不定义 extern int a 其中变量a可以在其他c文件中定义
-    除非有extern关键字，其余都是变量的定义
-
-</code></pre>
-</li>
-<li>
-<p>左值和右值</p>
-<ul>
-<li>左值（lvalue）：指向内存位置的表达式。左值可以出现在赋值号的左边或右边。变量时左值。</li>
-<li>右值（rvalue）：存储在内存中某些地址的数值。右值是不能对其进行赋值的表达式，也就是说，右值可以出现在赋值号的右边，但不能出现在赋值号的左边。数值型字面量是右值。</li>
-</ul>
-</li>
-</ul>
-<h4 id="142-常量">1.4.2 常量</h4>
-<blockquote>
-<p>固定值。程序执行期间不会改变。又称为字面量。</p>
-</blockquote>
-<ul>
-<li>可以是任何数据类型。比如：整数常量、浮点常量、字符常量、字符串字面值、枚举常量。</li>
-<li>可认为是常规的变量，只不过在定义后不能修改。</li>
-<li>转义字符：特定字符前有反斜杠，具有特殊含义。</li>
-</ul>
-<pre><code class="language-C">/*
-常量定义的方式：
-  1. #define预处理器
-     格式：#define identifier value
-  2. const关键字（const声明常量要在一条语句内完成）
-     格式：const type variable = value;
-  3. 枚举常量（本质：数字由字符来表达）
-     格式：enum 枚举类型名称 {符号变量a, 符号变量b, 符号变量c}; a、b、c的值从零开始递增
-          指定值：enum COLOR {red=1,yellow,green=5}; 则red=1,yellow=2,green=5(默认递增)
-     重点：枚举类型只能是int
-*/
-</code></pre>
-<h2 id="15-字符串">1.5 字符串</h2>
-<blockquote>
-<p>本质：使用null字符<code>\0</code>终止的一维字符数组</p>
-</blockquote>
-<h2 id="16-注释">1.6 注释</h2>
-<blockquote>
-<p>解释代码</p>
-</blockquote>
-<pre><code class="language-C">// C++注释风格，最后引入C语言中/*C语言注释风格不支持嵌套注释*/
-</code></pre>
-<p><img src="image/image_10.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525451984.png" alt="" loading="lazy"></p>
-<h2 id="17-选择语句">1.7 选择语句</h2>
-<pre><code class="language-C">/*分支语句*/
-int main() {
-  int a = 1;
-  if (a==1)
-  {
-    printf(&quot;a = 1&quot;);
-  }
-  else
-  {
-    printf(&quot;a != 1&quot;);
-  }
-  return 0;
-}
-</code></pre>
-<p><img src="image/image_11.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525459799.png" alt="" loading="lazy"></p>
-<blockquote>
-<p>当if或else内只有一条语句时可省略大括号</p>
-</blockquote>
-<figure data-type="image" tabindex="1"><img src="image/image_12.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="2"><img src="https://listen2022.github.io/post-images/1643525467217.png" alt="" loading="lazy"></figure>
-<h2 id="18-循环语句">1.8 循环语句</h2>
-<pre><code class="language-C">/* 循环语句 */int main() {  int line = 0;  while (line &lt; 30000)  {    printf(&quot;coding: %d\n&quot;, line);    line++;  }  if (line==30000)  {    printf(&quot;进大厂 拿高薪\n&quot;);  }  return 0;}
-</code></pre>
-<p><img src="image/image_13.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525475697.png" alt="" loading="lazy"></p>
-<blockquote>
-<p>while循环内只有一条语句时可省略大括号</p>
-</blockquote>
-<h2 id="19-函数">1.9 函数</h2>
-<pre><code class="language-C">/* 函数 */int main(){  int a = 3;  int b = 4;  int result = 0;  result = Add(a, b);  printf(&quot;result =&gt; %d\n&quot;, result);  return 0;}int Add(int x, int y){  int result = 0;  result = x + y;  return result;}
-</code></pre>
-<p><img src="image/image_14.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525482852.png" alt="" loading="lazy"></p>
-<h2 id="110-数组">1.10 数组</h2>
-<blockquote>
-<p>一组相同类型的元素的集合</p>
-</blockquote>
-<pre><code class="language-C">// 数组int main(){  // 创建  int arr[10] = { 0,1,2,3,4,5,6,7,8,9 };  // 其中arr为数组名 int为数组中每个元素的类型 10为数组中元素的个数  char ch[10] = { 'a', 'b', 'c', 'd', 'e' }; // 不完全初始化，其余值默认为0  // 访问(利用每个元素的下标 索引从零开始依次往后)  int i = 0;  while (i&lt;10)  {    printf(&quot;arr[%d] =&gt; %d\n&quot;, i, arr[i]);    i++;  }  return 0;}
-</code></pre>
-<p><img src="image/image_15.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525490094.png" alt="" loading="lazy"></p>
-<h2 id="111-操作符">1.11 操作符</h2>
-<h4 id="1111-算数操作符">1.11.1 算数操作符</h4>
-<pre><code class="language-C">+ - * / %
-</code></pre>
-<h4 id="1112-移位操作符">1.11.2 移位操作符</h4>
-<pre><code class="language-C">&gt;&gt; &lt;&lt;
-</code></pre>
-<h4 id="1113-位操作符">1.11.3 位操作符</h4>
-<pre><code class="language-C">&amp; 按位与| 按位或^ 按位异或
-</code></pre>
-<h4 id="1114-赋值操作符">1.11.4 赋值操作符</h4>
-<pre><code class="language-C">= += -= *= /= &gt;&gt;= &lt;&lt;=
-</code></pre>
-<h4 id="1115-单目操作符">1.11.5 单目操作符</h4>
-<pre><code class="language-C">！ // 逻辑非运算符~ // 按位取反运算符++ -- // 自增自减运算符- // 负号运算符(type) // 类型转换运算符*和&amp; // 指针运算符和取地址运算符sizeof // 长度运算符 sizeof求变量时后面的括号可以省略 求类型时不可以省略       // sizeof(int) sizeof(a)       // 可以计算数组，单位是字节
-</code></pre>
-<h4 id="1116-关系操作符">1.11.6 关系操作符</h4>
-<pre><code class="language-C">==
-!=
-&gt;
-&gt;=
-&lt;
-&lt;=
-</code></pre>
-<h4 id="1117-逻辑运算符">1.11.7 逻辑运算符</h4>
-<pre><code class="language-C">&amp;&amp; // 逻辑与
-|| // 逻辑或
-!  // 逻辑非
-</code></pre>
-<h4 id="1118-条件操作符">1.11.8 条件操作符</h4>
-<pre><code class="language-C">// 三目操作符
-exp1 ? exp2 : exp3;
-// exp1成立，exp2执行，整个表达式的结果为exp2的结果
-// exp1不成立，exp3执行，整个表达式结果为exp3的结果
-</code></pre>
-<h4 id="1119-逗号表达式">1.11.9 逗号表达式</h4>
-<pre><code class="language-C">// 逗号隔开的一串表达式
-exp1, exp2, exp3;
-eg: (2, 2+1, 2+2, 2+3);
-// 从前往后计算，整个表达式的结果是最后一个表达式的结果
-</code></pre>
-<h4 id="11110-其他">1.11.10 其他</h4>
-<pre><code class="language-C">[] // 下标引用操作符() // 函数调用操作符.-&gt;
-</code></pre>
-<ul>
-<li>
-<p>自增/自减</p>
-<pre><code class="language-C">// 前置++： 先++后使用int main(){  int a = 6;  int b = ++a;  printf(&quot;%d\n&quot;, a); // 7  printf(&quot;%d\n&quot;, b); // 7  return 0;}
-</code></pre>
-<p><img src="image/image_16.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525506704.png" alt="" loading="lazy"></p>
-<pre><code class="language-C">// 后置++： 先使用后++int main(){  int a = 6;  int b = a++;  printf(&quot;%d\n&quot;, a); // 7  printf(&quot;%d\n&quot;, b); // 7  return 0;}
-</code></pre>
-<p><img src="image/image_17.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525515337.png" alt="" loading="lazy"></p>
-</li>
-<li>
-<p>强制类型转换</p>
-<pre><code class="language-C">int main() 
-{
-  int pi = (int)3.1415926;
-  return 0;
-}
-
-</code></pre>
-</li>
-</ul>
-<h2 id="112-关键字32个">1.12 关键字(32个)</h2>
-<blockquote>
-<p>C语言保留的一些有特殊作用词语。变量名不能是关键字。</p>
-</blockquote>
-<pre><code class="language-C">auto     声明自动变量。自动创建、自动销毁。修饰局部变量，可省略。
-double   声明双精度变量或函数
-typedef  用以给数据类型取别名
-register 声明寄存器变量
-short    声明短整型变量或函数
-char     声明字符型变量或函数
-const    声明只读变量
-static   声明静态变量
-int      声明整型变量或函数
-struct   声明结构体变量或函数
-unsigned 声明无符号类型变量或函数
-volatile 说明变量在程序执行中可被隐含地改变
-long     声明长整型变量或函数
-union    声明共用数据类型，共用体
-signed   声明有符号类型变量或函数
-void     声明函数无返回值或无参数，声明无类型指针
-float    声明浮点型变量或函数
-enum     声明枚举类型
-extern   声明变量是在其他文件正声明
-if       条件语句
-else     条件语句否定分支（与 if 连用）
-switch   用于开关语句
-case     开关语句分支
-for      一种循环语句
-do       循环语句的循环体
-while    循环语句的循环条件
-goto     无条件跳转语句
-continue 结束当前循环，开始下一轮循环
-break    跳出当前循环
-default  开关语句中的&quot;其他&quot;分支
-sizeof   计算数据类型长度
-return   子程序返回语句（可以带参数，也可不带参数）循环条件
-
-</code></pre>
-<h4 id="其他">其他</h4>
-<pre><code class="language-C">define、include不是关键字，是预处理指令 
-</code></pre>
-<ul>
-<li>
-<p>typedef</p>
-<pre><code class="language-C">// 类型别名 类型重命名 用来简化代码
-</code></pre>
-<p><img src="image/image_18.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525525157.png" alt="" loading="lazy"></p>
-</li>
-<li>
-<p>static</p>
-<pre><code class="language-C">/*三种用法：  1.修饰局部变量：局部变量生命周期延长（本质：改变了数据类型，从栈区-&gt;静态区）  2.修饰全局变量：使全局变量只能在自己所在的源文件.c内部使用，即使在其他源文件种声明也不能使用改全局变量  3.修饰函数：使函数只能在自己的内部源文件.c种使用，项目中其他源文件不能使用*/ 
-</code></pre>
-<p><strong>示例</strong></p>
-<ol>
-<li>static修饰局部变量<br>
-<img src="image/image_19.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525540111.png" alt="" loading="lazy"></li>
-<li>static修饰全局变量<br>
-<img src="image/image_20.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525548670.png" alt="" loading="lazy"></li>
-<li>static修饰函数<br>
-<img src="image/image_21.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525587921.png" alt="" loading="lazy"></li>
-</ol>
-</li>
-</ul>
-<h2 id="113-define">1.13 define</h2>
-<blockquote>
-<p>define使预处理指令</p>
-</blockquote>
-<pre><code class="language-C">/*作用：  1. 定义常量  2. 定义宏（宏用来完成替换）*/
-</code></pre>
-<h4 id="1131-定义变量">1.13.1 定义变量</h4>
-<p><img src="image/image_22.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525597325.png" alt="" loading="lazy"></p>
-<h4 id="1132-定义宏">1.13.2 定义宏</h4>
-<p><img src="image/image_23.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525605286.png" alt="" loading="lazy"></p>
-<pre><code class="language-C">// 宏只完成替换// 为保证正常运行，应使用小括号将函数体括起来
-</code></pre>
-<p><img src="image/image_24.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525614422.png" alt="" loading="lazy"></p>
-<h2 id="114-指针">1.14 指针</h2>
-<blockquote>
-<p>指针描述了数据在内存中的位置（内存地址），标示了一个占据存储空间的实体。 C/C++语言中，指针一般被认为是指针变量，指针变量的内容存储的是其指向的对象的首地址，指向的对象可以是变量（指针变量也是变量），数组，函数等占据存储空间的实体。</p>
-</blockquote>
-<h4 id="1141-指针变量的声明">1.14.1 指针变量的声明</h4>
-<pre><code class="language-C">// 格式；type *var_name;// type使指针的基类型，*表示该变量是一个指针变量，var_name使变量名// eg:int* pi;double* pd;
-</code></pre>
-<h4 id="1142-指针变量的大小">1.14.2 指针变量的大小</h4>
-<pre><code class="language-C">// 在32位系统种，指针变量大小为4byte// 在64位系统种，指针变量大小位8byte// 指针变量大小与指针指向的数据类型无关// 下图为64位系统种，指针大小演示：
-</code></pre>
-<p><img src="image/image_25.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525625321.png" alt="" loading="lazy"></p>
-<h4 id="1142-访问数据地址">1.14.2 访问数据地址</h4>
-<pre><code class="language-C">// 格式：
-&amp;var_name
-// 通过&amp;获取var_name所在的内存地址
-// eg:
-int main() 
-{
-  int a = 666;
-  int* pa = &amp;a; // 去除变量a的地址并赋值给指针变量pa
-  printf(&quot;%p\n&quot;, pa);
-  return 0;
-}
-
-</code></pre>
-<p><img src="image/image_26.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525634547.png" alt="" loading="lazy"></p>
-<h4 id="1143-null指针">1.14.3 NULL指针</h4>
-<pre><code class="language-C">// NULL指针：空指针，是一个定义在标准库中的值为零的常量。
-
-</code></pre>
-<p><img src="image/image_27.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525642059.png" alt="" loading="lazy"></p>
-<blockquote>
-<p>在大多数的操作系统上，程序不允许访问地址为 0 的内存，因为该内存是操作系统保留的。然而，内存地址 0 有特别重要的意义，它表明该指针不指向一个可访问的内存位置。</p>
-</blockquote>
-<h2 id="115-结构体">1.15 结构体</h2>
-<blockquote>
-<p><strong>结构</strong>是 C 编程中另一种用户自定义的可用的数据类型，它允许您存储不同类型的数据项。结构用于表示一条记录。</p>
-</blockquote>
-<h4 id="1151-定义">1.15.1 定义</h4>
-<pre><code class="language-C">// 格式：struct 结构体名 {     结构体所包含的变量};// eg:struct Student{  char name[16]; // 姓名  int age;       // 年龄  double height; // 身高};
-</code></pre>
-<h4 id="1152-结构体变量">1.15.2 结构体变量</h4>
-<ul>
-<li>
-<p>定义结构体时定义结构体变量</p>
-<pre><code class="language-C">struct Student
-{
-  char name[16]; // 姓名
-  int age;       // 年龄
-  double height; // 身高
-} s1, s2;
-// 将变量放在结构体的最后
-</code></pre>
-</li>
-<li>
-<p>如果只需要是使用s1和s2，此后不再使用结构体，则可省略结构体名称</p>
-<pre><code class="language-C">struct{
-  char name[16]; // 姓名
-  int age;       // 年龄
-  double height; // 身高
-} s1, s2;
-</code></pre>
-</li>
-</ul>
-<h4 id="1153-成员获取和赋值">1.15.3 成员获取和赋值</h4>
-<ul>
-<li>
-<p>获取</p>
-<pre><code class="language-C">// 1).结构体变量名.成员名
-printf(&quot;name: %s, age: %d, height: %lf\n&quot;, s.name, s.age, s.height);
-// 2).结构体指针变量名-&gt;成员名
-struct Student* ps = &amp;s;
-printf(&quot;name: %s, age: %d, height: %lf\n&quot;, (*ps).name, (*ps).age, (*ps).height);
-printf(&quot;name: %s, age: %d, height: %lf\n&quot;, ps-&gt;name, ps-&gt;age, ps-&gt;height);
-</code></pre>
-</li>
-<li>
-<p>赋值</p>
-<pre><code class="language-C">// 1).单个赋值：结构体变量名.成员名 = &quot;Value&quot;;
-// 2).整体赋值，eg：
-//    a.定义结构体时整体赋值：
-      struct{
-        char name[16]; // 姓名
-        int age;       // 年龄
-        double height; // 身高
-      } s = {&quot;listen&quot;, 20, 180.5};
-//    b.定义结构体后整体赋值：
-      struct Student s = {&quot;listen&quot;, 20, 185};
-
-// 结构体是创建变量的模板，不占用内存空间
-// -&gt; 先找到指针指向的对象，再找到他的成员
-</code></pre>
-</li>
-</ul>
-<p><img src="image/image_28.png" alt="" loading="lazy"><br>
-<img src="https://listen2022.github.io/post-images/1643525654342.png" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>
