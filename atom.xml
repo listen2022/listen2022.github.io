@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://listen2022.github.io</id>
     <title>listen</title>
-    <updated>2022-02-01T14:47:37.034Z</updated>
+    <updated>2022-02-02T00:29:19.068Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://listen2022.github.io"/>
     <link rel="self" href="https://listen2022.github.io/atom.xml"/>
@@ -68,1807 +68,6 @@
 </ul>
 </li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[10. C语言进阶--指针进阶]]></title>
-        <id>https://listen2022.github.io/fR1IhsCmE/</id>
-        <link href="https://listen2022.github.io/fR1IhsCmE/">
-        </link>
-        <updated>2022-02-01T00:50:50.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="2-指针进阶">2. 指针进阶</h1>
-<h2 id="21-字符指针">2.1 字符指针</h2>
-<h4 id="211-介绍">2.1.1 介绍</h4>
-<pre><code class="language-C">char c = 'h';
-char* pc = &amp;c;
-// 访问权限为1bbyte
-// ++/--为1byte
-</code></pre>
-<h4 id="212-例">2.1.2 例</h4>
-<pre><code class="language-C">int main()
-{
-  char str1[] = &quot;Hello World!&quot;;
-  char str2[] = &quot;Hello World!&quot;;
-  char* str3 = &quot;Hello World!&quot;;
-  char* str4 = &quot;Hello World!&quot;;
-  // 将常量字符串的首字母H存放到指针变量str中
-  // 常量是不可修改的
-  // 在内存中只需要存在一份
-  // 所以str3和str4指向的是同一块内存区域
-  // 则str3和str4的指针值相等
-  if (str1 == str2)
-  {
-    printf(&quot;same\n&quot;);
-  }else {
-    printf(&quot;not same\n&quot;);
-  }
-
-  if (str3== str4)
-  {
-    printf(&quot;same\n&quot;);
-  }
-  else {
-    printf(&quot;not same\n&quot;);
-  }
-  return 0;
-}
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676779010.png" alt="" loading="lazy"></p>
-<h2 id="22-数组指针">2.2 数组指针</h2>
-<blockquote>
-<p>指向数组的指针。</p>
-</blockquote>
-<h4 id="221-格式">2.2.1 格式</h4>
-<pre><code class="language-C">int arr[10] = { 0 };
-int (*p)[10] = &amp;arr;
-// p 变量名
-// *表示p是一个指针
-// [10]表示该指针指向一个数组
-// int 表示该指针指向的数组每个元素的类型为int
-
-
- // 注意 int (*p)[10] 与 int *p[10] 区分
- // 如果没有小括号 p先于[]结合 成数组
- // 若有小括号p先于*结合 成指针
-</code></pre>
-<h4 id="222-数组名">2.2.2 数组名</h4>
-<pre><code class="language-C">// 数组名是数组首元素的地址
-// 但是有2个例外
-// 1. sizeof(arr) 数组名表示整个数组，计算的是整个数组大小，单位是字节
-// 2. &amp;arr 数组名表示整个数组，取出的是整个数组的地址
-</code></pre>
-<h4 id="223-arr和arr">2.2.3 arr和&amp;arr</h4>
-<pre><code class="language-C">int main()
-{
-  int arr[10] = { 0 };
-  printf(&quot;arr:   %p\n&quot;, arr);
-  printf(&quot;arr+1: %p\n&quot;, arr + 1);
-  printf(&quot;&amp;arr:  %p\n&quot;, &amp;arr);
-  printf(&quot;&amp;arr+1:%p\n&quot;, &amp;arr + 1);
-  return 0;
-}
-
-// arr是数组首元素的地址
-// &amp;arr是数组指针
-// 指针值相同，但含义完全不同
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_1.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676788094.png" alt="" loading="lazy"></p>
-<h4 id="224-应用">2.2.4 应用</h4>
-<pre><code class="language-C">// 数组指针一般用于二维数组中，在一维数组中体现不出优势
-
-// 普通方法
-void print1(int arr[3][4], int r, int c)
-{
-  int i = 0;
-  int j = 0;
-  for ( i = 0; i &lt; r; i++)
-  {
-    for (j = 0; j &lt; c; j++)
-    {
-      printf(&quot;%d &quot;, arr[i][j]);
-    }
-    printf(&quot;\n&quot;);
-  }
-}
-
-// 数组指针
-void print2(int(*p)[4], int r, int c)
-{
-  int i = 0;
-  int j = 0;
-  for (i = 0; i &lt; r; i++)
-  {
-    for (j = 0; j &lt; c; j++)
-    {
-      printf(&quot;%d &quot;, *(*(p+i) + j));
-    }
-    printf(&quot;\n&quot;);
-  }
-}
-
-int main()
-{
-  int arr[3][4] = { 
-    { 1, 2, 3, 4 }, 
-    { 11, 22, 33, 44 },
-    { 111, 222, 333, 444} 
-  };
-  print1(arr, 3, 4);
-  print2(arr, 3, 4); 
-  // arr数组名，传递的是数组首元素的地址
-  // 对于二维数组，则首元素就是第一行的一维数组
-  // 则arr为一维数组指针
-  // print2函数的需要使用数组指针接收
-  return 0;
-}
-</code></pre>
-<h4 id="225-类型判断">2.2.5 类型判断</h4>
-<pre><code class="language-C">int (*parr1)[10];
-// parr1是数组指针变量
-// 该指针指向元素个数为10、每个元素为int类型的数组
-
-int (*parr2[10])[5];
-// parr2先和[10]结合 所以parr2是一个数组
-// 数组的类型为 int (*)[5]; 是数组指针
-// 则parr2是一个存储10个数组指针的数组
-// 且每个数组指针指向元素类型为int、元素个数为5的数组
-</code></pre>
-<h2 id="23-指针数组">2.3 指针数组</h2>
-<h4 id="231-介绍">2.3.1 介绍</h4>
-<pre><code class="language-C">int* arr1[10]; // 整形指针的数组
-char *arr2[4]; // 一级字符指针的数组
-char **arr3[5]; // 二级字符指针的数组
-</code></pre>
-<h4 id="232-例">2.3.2 例</h4>
-<pre><code class="language-C">int main()
-{
-  int a[] = {1, 2, 3, 4, 5};
-  int b[] = {11, 22 ,33, 44, 55};
-  int c[] = {111, 222 ,333, 444, 555};
-  int* arr[] = { a, b, c };
-  for (int i = 0; i &lt; 3; i++)
-  {
-    for (int j = 0; j &lt; 5; j++) {
-      printf(&quot;%d &quot;, arr[i][j]);
-      printf(&quot;%d &quot;, *(arr[i] + j));
-    }
-    printf(&quot;\n&quot;);
-  }
-  return 0;
-}
-// 模拟二维指针
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_2.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676797057.png" alt="" loading="lazy"></p>
-<h2 id="24-数组传参和指针传参">2.4 数组传参和指针传参</h2>
-<h4 id="241-一维数组传参">2.4.1 一维数组传参</h4>
-<pre><code class="language-C">void test1(int arr[]) {} // 数组(省略大小)
-// √
-
-void test1(int arr[10]) {} // 数组(未省略大小)
-// √
-
-void test1(int *arr) {} // int指针
-// √
-
-void test2(int *arr[]) {} // 指针数组(省略大小)
-// √
-
-void test2(int **arr) {} // 二级指针
-// √
-
-int main()
-{
-  int arr1[5] = { 0 }; // 一维整形数组
-  int* arr2[35] = { 0 }; // 一维整形指针数组
-  test1(arr1);
-  test2(arr2);
-}
-</code></pre>
-<h4 id="242-二维数组传参">2.4.2 二维数组传参</h4>
-<pre><code class="language-C">void test(int arr[3][4]) {} // 二维数组（未省略）
-// √
-
-void test(int arr[][]) {} // 二维数组（行列都省略）
-// ×
-
-void test(int arr[][4]) {} // 二维数组（行省略）
-// √
-// 总结：二维数组传参，函数形参的设计只能省略第一个[]的数组
-//      因为对一个二维数组，可以不知道有多少行，但必须一行有多少个元素
-//      方便运算
-
-void test(int *arr) {} // int指针（传递过来的是第一行数组的指针）
-// ×
-
-void test(int *arr[4]) {} // 指针数组
-// ×
-
-void test(int (*arr)[4]) {} // 数组指针
-// √
-
-void test(int **arr) {} // 二级指针
-// ×
-
-int main()
-{
-  int arr[3][4] = { 0 };
-  test(arr);
-  return 0;
-}
-</code></pre>
-<h4 id="243-一级指针传参">2.4.3 一级指针传参</h4>
-<pre><code class="language-C">// eg:
-void print(int* ptr, int sz)
-{
-  int i = 0;
-  for (i = 0; i &lt; sz; i++)
-  {
-    printf(&quot;%d &quot;, *(ptr + i));
-  }
-}
-
-int main()
-{
-  int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
-  int* p = arr;
-  int sz = sizeof(arr) / sizeof(arr[0]);
-  print(p, sz);
-  return 0;
-}
-
-// 当函数的形参为指针时
-// 实参可以是对应类型变量的地址 &amp;var
-//    也可以是一级指针变量 ptr
-</code></pre>
-<h4 id="244-二级指针传参">2.4.4 二级指针传参</h4>
-<pre><code class="language-C">void print(int** ptr)
-{
-  // ...
-}
-
-int main()
-{
-  // 指针数组首元素
-  int* arr[10] = { 0 };
-  int** p = arr;
-  print(p);
-
-  // 二级指针变量
-  int a = 7;
-  int* pa = &amp;a;
-  int** ppa = &amp;pa;
-  print(ppa);
-  print(&amp;pa);
-  return 0;
-}
-
-// 当函数的形参是二级指针时
-// 实参可以是指针数组首元素
-//    也可以是二级指针变量
-</code></pre>
-<h2 id="25-函数指针">2.5 函数指针</h2>
-<h4 id="251-介绍">2.5.1 介绍</h4>
-<blockquote>
-<p>指向函数的指针。存放函数地址的指针。</p>
-</blockquote>
-<pre><code class="language-C">int Add(int x, int y)
-{
-  return x + y;
-}
-
-int main()
-{
-  printf(&quot;%p\n&quot;, &amp;Add);
-  printf(&quot;%p\n&quot;, Add);
-  // 两种打印方式打印结果相同
-  // 都是函数的地址
-  // Add和&amp;Add完全等价
-  // 函数名本质上就是地址
-  return 0;
-}
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_3.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676808136.png" alt="" loading="lazy"></p>
-<h4 id="252-格式">2.5.2 格式</h4>
-<pre><code class="language-C">返回值类型 (*函数指针变量)(参数类型);
-
-// eg:
-int (*pf)(int, int) = &amp;Add;
-int (*pf)(int, int) = Add;
-// * 表示pf是一个指针变量
-// () 表示该指针指向一个函数
-// (int, int) 表示指针指向的函数的参数类型
-// int (*pf) 前面的int表示指针指向的函数的返回值类型
-</code></pre>
-<h4 id="253-调用">2.5.3 调用</h4>
-<pre><code class="language-C">int Add(int x, int y)
-{
-  return x + y;
-}
-
-int main()
-{
-  int (*pf)(int, int) = Add; // Add === pf
-  int ret1 = (*pf)(1, 2); 
-  // 其中pf前的*只是摆设 可以省略 也可以有多个
-  int ret2 = pf(2, 3);
-  int ret3 = Add(3, 4);
-  return 0;
-}
-</code></pre>
-<h4 id="254-应用">2.5.4 应用</h4>
-<ul>
-<li>
-<p>代码一</p>
-<pre><code class="language-C">(*(void (*)())0)();
-// 调用0地址处的函数
-// 该函数无参，返回值类型为void
-// 1. void(*)() - 函数指针类型
-// 2. (void(*)())0 - 将0强制类型转换为函数指针类型 即函数地址
-// 3. *(void (*)())0 - 将该函数地址进行指针解引用
-// 4. (*(void (*)())0)() - 调用0地址处的函数
-</code></pre>
-</li>
-<li>
-<p>代码二</p>
-<pre><code class="language-C">void (* signal(int, void(*)(int)))(int);
-// 1. signal和()先结合 说明signal是一个函数名
-// 2. signal函数的参数是一个int和函数指针
-//    该函数指针类型 void(*)(int) 指向参数为int 返回值类型为void的函数
-// 3. signal函数的返回类型为函数指针
-//    将void (* signal(int, void(*)(int)))(int); 中的 signal(int, void(*)(int)) 剔除
-//    结果为void (*)(int) 即为函数的返回类型
-//    该函数指针类型 void(*)(int) 指向参数为int 返回值类型为void的函数
-// 总结：signal是一个 参数为int和函数指针 返回类型为函数指针 的函数声明
-
-// 简化如下（含义相同 表达更清晰）
-typedef void(*func_ptr)(int);
-func_ptr signal(int, func_ptr);
-</code></pre>
-<p>![代码片段来源：C陷阱和缺陷（15页）](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_4.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676821857.png" alt="代码片段来源：C陷阱和缺陷（15页）" loading="lazy"></p>
-</li>
-</ul>
-<h2 id="26-函数指针数组">2.6 函数指针数组</h2>
-<h4 id="261-介绍">2.6.1 介绍</h4>
-<blockquote>
-<p>存放函数指针的数组。</p>
-</blockquote>
-<pre><code class="language-C">// 定义：
-// 函数指针
-int (*fp)(int, int);
-// fp为指针变量，*表示该变量为指针，其余 int (int, int) 为函数指针指向的函数类型
-
-// 函数指针数组
-int (*arr[5])(int, int);
-// arr3为数组名，其余 int (* [5])(int, int) 为数组类型，int (* )(int, int) 为数组元素类型
-</code></pre>
-<h4 id="262-应用">2.6.2 应用</h4>
-<blockquote>
-<p>计算器实现</p>
-</blockquote>
-<ul>
-<li>
-<p>基本实现</p>
-<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
-#include &lt;stdio.h&gt;
-
-void menu()
-{
-  // 打印菜单
-  printf(&quot;*************************\n&quot;);
-  printf(&quot;**** 两位数加减乘除 *****\n&quot;);
-  printf(&quot;*************************\n&quot;);
-  printf(&quot;**** 1.add    2.sub *****\n&quot;);
-  printf(&quot;**** 3.mul    4.div *****\n&quot;);
-  printf(&quot;****     0.exit     *****\n&quot;);
-  printf(&quot;*************************\n&quot;);
-}
-
-int Add(int x, int y)
-{
-  return x + y;
-}
-
-int Sub(int x, int y)
-{
-  return x - y;
-}
-
-int Mul(int x, int y)
-{
-  return x * y;
-}
-
-int Div(int x, int y)
-{
-  return x / y;
-}
-
-int main() 
-{
-  int input = 0;
-  do
-  {
-    menu(); // 打印菜单
-    printf(&quot;请输入:&gt; &quot;); // 提示
-    scanf(&quot;%d&quot;, &amp;input); // 获取用户输入 
-    int x = 0;
-    int y = 0;
-    int ret = 0;
-    switch (input) // 确定计算规则
-    {
-    case 1:
-      scanf(&quot;%d %d&quot;, &amp;x, &amp;y); // 获取用户需要计算的数据
-      ret = Add(x, y); // 相加
-      printf(&quot;结果是：%d\n&quot;, ret);
-      break;
-    case 2:
-      scanf(&quot;%d %d&quot;, &amp;x, &amp;y); // 获取用户需要计算的数据
-      ret = Sub(x, y); // 相减
-      printf(&quot;结果是：%d\n&quot;, ret);
-      break;
-    case 3:
-      scanf(&quot;%d %d&quot;, &amp;x, &amp;y); // 获取用户需要计算的数据
-      ret = Mul(x, y); // 相乘
-      printf(&quot;结果是：%d\n&quot;, ret);
-      break;
-    case 4:
-      scanf(&quot;%d %d&quot;, &amp;x, &amp;y); // 获取用户需要计算的数据
-      ret = Div(x, y); // 相除
-      printf(&quot;结果是：%d\n&quot;, ret);
-      break;
-    case 0:
-      break;
-    default:
-      printf(&quot;输入错误，请重新输入！\n&quot;);
-      break;
-    }
-
-  } while (input);
-}
-</code></pre>
-</li>
-<li>
-<p>函数指针数组实现</p>
-<blockquote>
-<p>在上面代码的switch语句中发现有大量的代码冗余，接下来通过函数指针数组对main函数进行重写。</p>
-</blockquote>
-<pre><code class="language-C">int main()
-{
-  int input = 0;
-  do
-  {
-    menu(); // 打印菜单
-    printf(&quot;请输入:&gt; &quot;); // 提示
-    scanf(&quot;%d&quot;, &amp;input); // 获取用户输入 
-    // 创建函数指针数组
-    int (*pfarr[5])(int, int) = { NULL, Add, Sub, Mul, Div };
-    // 数组首元素使用NULL补位，使得input值为数组下标 恰好对应相应的函数
-    if (input == 1 || input == 2 || input == 3 || input == 4)
-    {
-      int x = 0;
-      int y = 0;
-      int ret = 0;
-      scanf(&quot;%d %d&quot;, &amp;x, &amp;y);
-      ret = pfarr[input](x, y);
-      printf(&quot;结果是：%d\n&quot;, ret);
-    }
-    else if (input == 0)
-    {
-      break;
-    }
-    else
-    {
-      printf(&quot;输入错误，重新输入！\n&quot;);
-    }
-  } while (input);
-}
-</code></pre>
-</li>
-</ul>
-<p><strong>转移表 -</strong>- 函数指针数组。</p>
-<h2 id="27-指向函数指针数组的指针了解">2.7 指向函数指针数组的指针(了解)</h2>
-<blockquote>
-<p>指向函数指针数组的指针 指针指向一个数组 数组的每个元素是函数指针</p>
-</blockquote>
-<h4 id="271-指向整形数组的指针">2.7.1 指向整形数组的指针</h4>
-<pre><code class="language-C">// 1.整形数组
-int arr1[5];
-// arr1为数组名，其余 int [5] 为数组类型，int为数组元素类型
-
-// 2.整形数组的指针
-int(*parr1)[5] = &amp;arr1;
-// parr1为指针变量，*表示该变量为指针，其余 int [5] 为指针指向的对象的类型
-</code></pre>
-<h4 id="272-指向整形指针数组的指针">2.7.2 指向整形指针数组的指针</h4>
-<pre><code class="language-C">// 1.整形指针数组
-int* arr2[5];
-// arr2为数组名，其余int* [5] 为数组类型，int*为数组元素的类型
-
-// 2.整形指针数组的指针
-int* (*parr2)[5] = &amp;arr2;
-// parr2为指针变量，*表示该变量为指针，其余 int* [5] 为指针指向的对象的类型
-</code></pre>
-<h4 id="273-指向函数指针数组的指针">2.7.3 指向函数指针数组的指针</h4>
-<pre><code class="language-C">// 1.函数指针
-int (*fp)(int, int);
-// fp为指针变量，*表示该变量为指针，其余 int (int, int) 为函数指针指向的函数类型
-
-// 2.函数指针数组
-int (*arr3[5])(int, int);
-// arr3为数组名，其余 int (* [5])(int, int) 为数组类型，int (* )(int, int) 为数组元素类型
-
-// 3.函数指针数组的指针
-int (*(*parr3)[5])(int, int) = &amp;arr3;
-// parr3为指针变量，*表示该变量为指针，其余 int (* [5])(int, int) 为指针指向对象的类型
-</code></pre>
-<h2 id="28-回调函数">2.8 回调函数</h2>
-<blockquote>
-<p>回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，这就是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。</p>
-</blockquote>
-<h4 id="281-再次重写计算器">2.8.1 再次重写计算器</h4>
-<blockquote>
-<p>根据回调函数再次重写计算器实例的main函数</p>
-</blockquote>
-<pre><code class="language-C">int Cal(int (*fp)(int, int)) // 形参为函数指针类型int (* )(int, int)
-{
-  int x = 0;
-  int y = 0;
-  scanf(&quot;%d %d&quot;, &amp;x, &amp;y);
-  return fp(x, y);
-}
-
-int main()
-{
-  int input = 0;
-  do
-  {
-    menu(); // 打印菜单
-    printf(&quot;请输入:&gt; &quot;); // 提示
-    scanf(&quot;%d&quot;, &amp;input); // 获取用户输入 
-    int (*pfarr[5])(int, int) = { NULL, Add, Sub, Mul, Div };  // 数组指针
-    if (input == 1 || input == 2 || input == 3 || input == 4)
-    {
-      int ret = Cal(pfarr[input]); // 将函数指针作为参数进行传递
-      printf(&quot;结果是：%d\n&quot;, ret);
-    }
-    else if (input == 0)
-    {
-      break;
-    }
-    else
-    {
-      printf(&quot;输入错误，重新输入！\n&quot;);
-    }
-  } while (input);
-}
-</code></pre>
-<h4 id="282-模拟实现qsort库函数">2.8.2 模拟实现qsort库函数</h4>
-<blockquote>
-<p>qsort底层是快速排序。此处只需关注如何使用，即qsort函数的参数和返回值。所以使用冒泡排序实现相同使用方法的该函数。</p>
-</blockquote>
-<ul>
-<li>
-<p><strong>介绍</strong></p>
-<ul>
-<li>
-<p>头文件&lt;stdlib.h&gt;</p>
-</li>
-<li>
-<p>语法</p>
-<pre><code class="language-C">void qsort(
-   void *base,
-   size_t number,
-   size_t width,
-   int (__cdecl *compare )(const void *, const void *)
-);
-</code></pre>
-</li>
-<li>
-<p>参数</p>
-<ul>
-<li>base：数组的起始地址</li>
-<li>number：数组中元素的个数</li>
-<li>width：数组中元素的大小（单位：byte）</li>
-<li>compare：一个指向用户提供的函数的指针，该函数比较数组两个元素并返回一个值，改值表示他们之间的关系</li>
-</ul>
-</li>
-<li>
-<p>compare</p>
-<pre><code class="language-C">compare( (void *) &amp; elem1, (void *) &amp; elem2 );
-</code></pre>
-<table>
-<thead>
-<tr>
-<th>比较返回值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>&lt;0</td>
-<td>elem1&lt;elem2</td>
-</tr>
-<tr>
-<td>=0</td>
-<td>elem1=elem2</td>
-</tr>
-<tr>
-<td>&gt;0</td>
-<td>elem1&gt;elem2</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>    &gt; 数组按递增排序，如果要对数组进行递减排序，反转 比较返回值 中的`&gt;`和`&lt;`
-</code></pre>
-<ul>
-<li>
-<p>使用实例</p>
-<ul>
-<li>
-<p>比较整形</p>
-<pre><code class="language-C">#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-
-int compare_int(const void* e1, const void* e2)
-{
-  return *(int*)e1 - *(int*)e2;
-}
-
-int main()
-{
-  int arr[] = {5,3,1,2,4,6};
-  int num = 0;
-  num = sizeof(arr) / sizeof(arr[0]);
-  qsort(arr, num, 4, compare_int);
-  for (int i = 0; i &lt; 6; i++)
-  {
-    printf(&quot;%d &quot;, arr[i]);
-  }
-  return 0;
-}
-
-// void*类型可以存放任意类型地址
-// 但是不能解引用和计算（解引用时，并不清楚访问几个字节）
-// 使用时需要强制类型转换为需求的类型指针
-</code></pre>
-</li>
-<li>
-<p>比较字符串</p>
-<pre><code class="language-C">// 字符串比较大小时，按位比较字符的ASCII码
-// 如果字符串长度不相等，如&quot;ab&quot;和&quot;abc&quot;比较
-// 'a'和'a'比较 相等 右移
-// 'b'和'b'比较 相等 右移
-// '\0'和'c'比较 '\0'&lt;'c' &quot;ab&quot;&lt;&quot;abc&quot;
-#define _CRT_NONSTDC_NO_DEPRECATE
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdio.h&gt;
-
-int compare_string(const void* e1, const void* e2)
-{
-  return stricmp(*(char**)e1, *(char**)e2);
-}
-int main()
-{
-  char* arr[] = { &quot;afd&quot;,&quot;fasf&quot;,&quot;fadew&quot;,&quot;fdfa&quot;,&quot;rqewr&quot;,&quot;fdasf&quot; };
-  int num = 0;
-  num = sizeof(arr) / sizeof(arr[0]);
-  qsort(arr, num, 4, compare_string);
-  for (int i = 0; i &lt; 6; i++)
-  {
-    printf(&quot;%s &quot;, arr[i]);
-  }
-  return 0;
-}
-</code></pre>
-</li>
-<li>
-<p>比较结构体</p>
-<pre><code class="language-C">#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdio.h&gt;
-
-struct Student {
-  char name[20];
-  int age;
-};
-
-int compare_by_name(const void* e1, const void* e2)
-{
-  return strcmp(((struct Student*)e1)-&gt;name, ((struct Student*)e2)-&gt;name);
-}
-
-int compare_by_age(const void* e1, const void* e2)
-{
-  return (*((struct Student*)e1)).age - (*((struct Student*)e2)).age;
-}
-
-print_struct_arr(struct Student arr[], int num)
-{
-  for (int i = 0; i &lt; 4; i++)
-  {
-    printf(&quot;name: %s, age: %d\n&quot;, (arr[i]).name, (arr[i]).age);
-  }
-}
-
-int main()
-{
-  struct Student arr[4] = { {&quot;listen&quot;, 20},{&quot;turbo&quot;, 34},{&quot;dummy&quot;, 24},{&quot;free&quot;, 19}};
-  int num = 0;
-  num = sizeof(arr) / sizeof(arr[0]);
-  qsort(arr, num, sizeof(arr[0]), compare_by_name);
-  printf(&quot;按照姓名排序如下：\n&quot;);
-  print_struct_arr(arr, num); // 打印结构体数组
-  qsort(arr, num, sizeof(arr[0]), compare_by_age);
-  printf(&quot;按照年龄排序如下：\n&quot;);
-  print_struct_arr(arr, num); // 打印结构体数组
-  return 0;
-}
-</code></pre>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>冒泡排序实现</strong>（升序为例）</p>
-<ul>
-<li>
-<p>原理图</p>
-<blockquote>
-<p>描述：当前元素和下一个元素进行比较。如果小于下一个元素，则保持不变；如果大于下一个元素，则交换位置。然后下标+1，再比较，再下标+1，直到比较完倒数第二个元素和最后一个元素，这个过程称为一趟。接着再从头开始进行比较，如下图所示：</p>
-</blockquote>
-<p>![](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_5.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676871102.png" alt="" loading="lazy"></p>
-<blockquote>
-<p>容易得出：5个数进行排序需要4趟。</p>
-</blockquote>
-</li>
-<li>
-<p>代码</p>
-<pre><code class="language-C">void bubble_sort(int* p, int num)
-{
-  for (int i = 0; i &lt; num-1; i++)
-  {
-    for (int j = 0; j &lt; num-1; j++)
-    {
-      if (p[j] &gt; p[j+1])
-      {
-        int tmp = p[j];
-        p[j] = p[j + 1];
-        p[j + 1] = tmp;
-      }
-    }
-  }
-}
-
-int main()
-{
-  int arr[] = {5,3,1,2,4,6};
-  int num = sizeof(arr) / sizeof(arr[0]);
-  bubble_sort(arr, num);
-  for (int i = 0; i &lt; num; i++)
-  {
-    printf(&quot;%d &quot;, arr[i]);
-  }
-  return 0;
-}
-</code></pre>
-</li>
-<li>
-<p>优化</p>
-<blockquote>
-<p>第二趟6和8比较 与 前面的6和8比较 重复</p>
-</blockquote>
-<pre><code>  第三趟4和6比较、6和8比较 与 前面的4和6比较、6和8比较 重复
-  第四趟2和4比较、4和6比较、6和8比较 与 前面的2和4比较、4和6比较、6和8比较 重复
-  所以：在第二趟中一次重复的比较；在第三趟中二次重复的比较；在第四趟中三次重复的比较。优化的原理就是让每两个数比较只出现一次。
-  如图中，圈中的是重复进行比较的两元素。
-  ![](image/image_6.png)
-  ![](https://listen2022.github.io/post-images/1643676911293.png)
-</code></pre>
-<pre><code class="language-C">void bubble_sort(int* p, int num)
-{
-  for (int i = 0; i &lt; num-1; i++)
-  {
-    for (int j = 0; j &lt; num-i-1; j++)
-    {
-      if (p[j] &gt; p[j+1])
-      {
-        int tmp = p[j];
-        p[j] = p[j + 1];
-        p[j + 1] = tmp;
-      }
-    }
-  }
-}
-
-int main()
-{
-  int arr[] = {5,3,1,2,4,6};
-  int num = sizeof(arr) / sizeof(arr[0]);
-  bubble_sort(arr, num);
-  for (int i = 0; i &lt; num; i++)
-  {
-    printf(&quot;%d &quot;, arr[i]);
-  }
-  return 0;
-}
-</code></pre>
-</li>
-<li>
-<p>增强</p>
-<blockquote>
-<p>前面的冒泡排序算法只能比较两个整形，现在将冒泡排序功能进行扩展，使其可以比较任何数据类型（参考sqort库函数）。</p>
-</blockquote>
-<pre><code class="language-C">void bubble_sort(void* p, int num, int width, int (*compare)(const void*, const void*))
-{
-  for (int i = 0; i &lt; num - 1; i++)
-  {
-    for (int j = 0; j &lt; num - i - 1; j++)
-    {
-      // 比较大小，前者&gt;后者返回整数
-      if (compare((char*)p + j * width, (char*)p + (j+1) * width) &gt; 0)
-      {
-        // 交换值
-        // 确定大小，但不知道类型 
-        // 按字节交换 char类型刚好代表一个字节，总共交换width次
-        for (int k = 0; k &lt; width; k++)
-        {
-          char tmp = *((char*)p + j * width + k);
-          *((char*)p + j * width + k) = *((char*)p + (j + 1) * width + k);
-          *((char*)p + (j + 1) * width + k) = tmp;
-        }
-      }
-    }
-  }
-}
-</code></pre>
-</li>
-<li>
-<p>测试</p>
-<pre><code class="language-C">// bubble_sort测试
-int compare_int(const void* e1, const void* e2)
-{
-  return *(int*)e1 - *(int*)e2;
-}
-
-int main()
-{
-  int arr[] = {5,3,1,2,4,6};
-  int num = sizeof(arr) / sizeof(arr[0]);
-   bubble_sort(arr, num, sizeof(arr[0]), compare_int);
-  for (int i = 0; i &lt; num; i++)
-  {
-    printf(&quot;%d &quot;, arr[i]);
-  }
-  return 0;
-}
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="29-习题">2.9 习题</h2>
-<h4 id="291-指针">2.9.1 指针</h4>
-<ul>
-<li>
-<p>int a[] = { 1,2,3,4 };</p>
-<pre><code class="language-C">int main()
-{
-  int a[] = { 1,2,3,4 };
-  printf(&quot;%d\n&quot;, sizeof(a)); // 16  
-  // 解释：a 单独放在 sizeof() 中时，a 表示整个数组，
-  //      计算的是整个数组的大小，整个数组 4 个元素，且数组元素为 int 类型
-  //      所以数组大小为 4 × 4 = 16byte
-
-  printf(&quot;%d\n&quot;, sizeof(a + 0)); // 4/8 
-  // 解释：a 表示数组首元素的地址，+0 之后依然是数组是首元素的地址，
-  //      作为地址在32位计算机中为 4byte，64位系统中为 8byte
-
-  printf(&quot;%d\n&quot;, sizeof(*a)); // 4
-  // 解释：a 表示数组首元素的地址，*a 对 a 解引用，得到的是数组首元素 1，
-  //      数组元素的类型为 int，所以 *a 的大小为 4byte
-
-  printf(&quot;%d\n&quot;, sizeof(a+1)); // 4/8
-  // 解释：a 表示数组首元素的地址，a+1 表示数组第二个元素的地址，
-  //      作为地址，其大小为 4byte(32位系统) 或 8byte(64位系统)
-
-  printf(&quot;%d\n&quot;, sizeof(a[1])); // 4
-  // 解释：a[1] 表示数组首元素，数组元素的类型为 int，其大小为 4byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;a)); // 4/8
-  // 解释：&amp;a 中 a 表示的是整个数组，获取的是整个数组的指针
-  //     作为地址，其大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, sizeof(*&amp;a)); // 16
-  // 解释：&amp;a 获取的是整个数组的地址，再解引用得到的是整个数组
-  //      整个数组的大小为 4 × 4 = 16byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;a + 1)); // 4/8
-  // 解释：&amp;a 获取的是整个数组的指针，&amp;a+1 跳过一个 int [4] 类型的数组
-  //      &amp;a+1 指向数组 arr 之后第一个位置的地址
-  //      作为指针，其大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;a[0])); // 4/8
-  // 解释：a[0] 获取数组首元素，&amp;a[0] 对数组首元素取地址，即数组首元素的地址
-  //      作为指针，其大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;a[0] + 1)); // 4/8
-  // 解释：易得 &amp;a[0] 为数组首元素的地址，&amp;a[0]+1 跳过一个元素，
-  //      即数组第二个元素的地址，作为指针，其大小为 4/8byte
-}
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_7.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676925910.png" alt="" loading="lazy"></p>
-</li>
-<li>
-<p>char arr[] = { 'a', 'b', 'c', 'd', 'e', 'f' };</p>
-<pre><code class="language-C">#include &lt;string.h&gt;
-int main()
-{
-  char arr[] = { 'a', 'b', 'c', 'd', 'e', 'f' };
-  printf(&quot;%d\n&quot;, sizeof(arr)); // 6
-  // 解释：arr 表示整个数组，数组共6个元素，且元素类型为 char
-  //      所以，数组的大小为 6byte
-
-  printf(&quot;%d\n&quot;, sizeof(arr + 0)); // 4/8
-  // 解释：arr 表示数组首元素的地址，arr+0 表示跳过 0byte，
-  //      同样是数组首元素的地址，作为指针，其大小为 4 / 8byte
-</code></pre>
-</li>
-</ul>
-<pre><code>  printf(&quot;%d\n&quot;, sizeof(*arr)); // 1
-  // 解释：arr 表示数组首元素的地址，*arr 对数组首元素的地址解引用
-  //      *arr 表示数组首元素，数组元素为char类型，则数组首元素的大小为 1byte
-
-   printf(&quot;%d\n&quot;, sizeof(arr[1])); // 1
-  // 解释：arr[1] 表示数组第二个元素，数组元素为char类型，
-  //      则数组第二个元素的大小为 1byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;arr)); //  4/8
-  // 解释：arr 表示整个数组，&amp;arr 对整个数组取地址，
-  //      作为地址，其大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;arr + 1)); // 4/8
-  // 解释：arr 表示真个数组，&amp;arr 对整个数组取地址，
-  //      &amp;arr+1 表示跳过一个 char [6] 类型数组的大小，
-  //      则指向数组后第一个位置的地址，
-  //      作为地址，其大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;arr[0] + 1)); // 4/8
-  // 解释：arr[0] 表示数组首元素，&amp;arr[0] 获取数组首元素的地址
-  //      &amp;arr[0]+1 跳过一个char类型元素的大小，
-  //      则表示数组第二元素的地址，作为地址，其大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, strlen(arr)); // 随机值
-  // 解释：arr表示数组首元素的地址，从arr开始向后找 \0 ，
-  //      所以，结果为随机值
-
-  printf(&quot;%d\n&quot;, strlen(arr + 1)); // 随机值
-  // 解释：arr表示数组首元素的地址，则 arr+1 表示数组第二个元素的地址
-  //      从数组第二个元素开始向后查找 \0 ，所以结果为随机值
-  //      但相对于上一个随机值，相差1
-
-  //printf(&quot;%d\n&quot;, strlen(*arr)); // error
-  //// 解释：arr表示数组首元素的地址，*arr 表示对首元素地址解引用，则得到首元素 'a'
-  ////      而 strlen 函数的参数是指针类型，所以 error
-
-  //printf(&quot;%d\n&quot;, strlen(arr[1])); // error
-  //// 解释：arr[1] 表示数组第二个元素 'b' ，同样参数类型不否，error
-
-  printf(&quot;%d\n&quot;, strlen(&amp;arr)); // 随机值
-  // 解释：&amp;arr 取真个数组的地址，但是其值与数组首元素地址相等
-  //      所以，从数组首元素开始向后找 '\0' ，结果为随机值
-
-  printf(&quot;%d\n&quot;, strlen(&amp;arr + 1)); // 随机值
-  // 解释：&amp;arr 取整个数组的地址，&amp;arr+1 指向数组后第一个位置的地址
-  //     从该位置开始向后找 '\0' 结果为随机值
-  //     但相对于上一个随机值，相差6
-
-  printf(&quot;%d\n&quot;, strlen(&amp;arr[0] + 1)); // 随机值
-  // 解释：arr[0] 表示数组第一个元素，&amp;arr[0] 对数组第一个元素取地址
-  //      &amp;arr[0]+1 跳过一个元素的大小，指向数组第二个元素，
-  //      从数组第二个元素开始向后查找 '\0'，结果为随机值
-
-  return 0;
-}
-```
-</code></pre>
-<ul>
-<li>
-<p>char arr[] = &quot;abcdef&quot;;</p>
-<pre><code class="language-C">#include &lt;string.h&gt;
-int main()
-{
-  char arr[] = &quot;abcdef&quot;;
-  // 等价于 
-  //char arr[] = { 'a','b','c','d','e','f','\0' };
-  printf(&quot;%d\n&quot;, sizeof(arr)); // 7
-  // arr表示真个数组 数组大小为 6×1=7byte
-
-  printf(&quot;%d\n&quot;, sizeof(arr + 0)); // 4/8
-  // arr+0=arr 表示数组首元素地址
-  // 作为地址 大小为 4/8 byte
-
-  printf(&quot;%d\n&quot;, sizeof(*arr)); // 1
-  // arr表示数组首元素地址
-  // *arr 表示数组首元素'a' 大小为1byte
-   printf(&quot;%d\n&quot;, sizeof(arr[1])); // 1
-  // arr[1] 表示数组第二个元素'b' 大小为1byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;arr)); // 4/8
-  // &amp;arr 获取真个数组arr的地址
-  // 作为地址 大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;arr + 1)); // 4/8
-  // &amp;arr 获取真个数组arr的地址
-  // &amp;arr+1 跳过一个 char [7] 数组
-  // 数组arr后面第一个位置的地址
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;arr[0] + 1)); // 4/8
-  // arr[0] 数组首元素
-  // &amp;arr[0] 数组首元素地址
-  // &amp;arr[0]+1 数组第二个元素地址
-  // 作为地址 大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, strlen(arr)); // 6
-  // arr数组首元素'a'地址
-  // 从该地址开始向后找'\0'
-  // strlen 获取从'a'到'\0'的字符串长度6
-
-  printf(&quot;%d\n&quot;, strlen(arr + 1)); // 5
-  // arr数组首元素'a'地址
-  // arr+1 数组第二个元素'b'地址
-  // strlen 获取从'b'到'\0'的字符串长度5
-
-  //printf(&quot;%d\n&quot;, strlen(*arr)); // error
-  // arr 数组首元素地址
-  // *arr 数组首元素
-  // strlen 参数为地址
-
-  //printf(&quot;%d\n&quot;, strlen(arr[1])); // error
-  // arr[1] 数组第二个元素
-  // strlen 参数为地址
-
-  printf(&quot;%d\n&quot;, strlen(&amp;arr)); // 6
-  // &amp;arr 获取整个数组地址 等于数组首元素'a'地址
-  // 从该地址开始向后找'\0'
-  // strlen函数 从'a'到'\0'的字符串长度6
-
-  printf(&quot;%d\n&quot;, strlen(&amp;arr + 1)); // 随机值
-  // &amp;arr 获取整个数组地址 类型为数组指针
-  // &amp;arr+1 跳过一个 char [7] 数组 --&gt; 数组arr后第一个位置地址
-  // strlen函数 从该位置开始向后找'\0' 而后面的区域未知
-  // 所以结果为随机值
-
-  printf(&quot;%d\n&quot;, strlen(&amp;arr[0] + 1)); // 5
-  // &amp;arr[0] 等价于 &amp;*(arr+0) 等价于 arr
-  // arr+1 表示数组第二个元素'b'地址
-  // strlen 从'b'到'\0'的字符串长度5
-  return 0;
-}
-</code></pre>
-</li>
-<li>
-<p>char* p = &quot;abcdef&quot;;</p>
-<pre><code class="language-C">#include &lt;string.h&gt;
-int main()
-{
-  char* p = &quot;abcdef&quot;;
-  printf(&quot;%d\n&quot;, sizeof(p)); // 4/8
-  // p 字符指针 字符串首字符 'a' 的地址
-  // 大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, sizeof(p + 1)); // 4/8 
-  // p 字符指针 字符串首字符 'a' 的地址
-  // p+1 跳过一个字符 字符串第二个字符 'b' 的地址
-  // 大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, sizeof(*p)); // 1
-  // p 字符指针 字符串首字符 'a' 的地址
-  // 解引用得到字符'a' 大小为 1byte
-
-  printf(&quot;%d\n&quot;, sizeof(p[0])); // 1 
-  // p[0] 等价于 *(p+0)
-  // p+0 字符串第1个字符'a'的地址
-  // *(p+0) 字符串第1个字符'a' 大小为1byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;p)); //  4/8
-  // p 字符指针 字符串首字符 'a' 的地址
-  // &amp;p 获取字符指针的地址 二级指针
-  // 大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;p + 1)); //  4/8
-    // &amp;p 获取字符指针的地址 二级指针
-  // &amp;p+1 作为指针 大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;p[0] + 1)); // 4/8
-  // p[0] 字符串第1个字符'a'
-  // &amp;p[0] 字符串第1个字符 'a' 的地址
-  // &amp;p[0]+1 跳过1个字符 --&gt; 字符串第2个字符'b'地址
-
-  printf(&quot;%d\n&quot;, strlen(p)); // 6
-  // p 字符指针 字符串第1个字符'a'地址
-  // strlen 获取从'a'到'\0'字符串长度
-
-  printf(&quot;%d\n&quot;, strlen(p + 1)); // 5 
-  // p+1 字符串第2个字符'b'地址
-  // strlen 获取从'b'到'\0'字符串长度
-
-  //printf(&quot;%d\n&quot;, strlen(*p)); // error
-  // *p 字符'a' strlen函数的参数为指针
-
-  //printf(&quot;%d\n&quot;, strlen(p[0])); // error
-  // p[0] 字符'a' strlen函数的参数为指针
-
-  printf(&quot;%d\n&quot;, strlen(&amp;p)); // 随机值
-  // &amp;p 字符指针p的地址 从p的地址开始向后查找'\0'
-  // '\0' 可能再字符指针p中，也可能在其后面
-  // 所以 strlen(&amp;p) 为随机值
-
-  printf(&quot;%d\n&quot;, strlen(&amp;p + 1)); // 随机值
-  // &amp;p+1 字符指针p后面一个位置的地址
-  // 从该位置向后查找 '\0' 后面的区域是未知的
-  // 所以 strlen(&amp;p+1) 为随机值
-
-  printf(&quot;%d\n&quot;, strlen(&amp;p[0] + 1)); // 5 
-  // &amp;p[0] 相当于 &amp;*(p+0) = p
-  // p+1 字符串第2个字符'b'地址
-  // 从该地址向后找 '\0' 
-  // strlen 获取从'b'到'\0'字符串长度
-
-  return 0;
-}
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_8.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676940341.png" alt="" loading="lazy"></p>
-</li>
-<li>
-<p>int a[3][4] = { 0 };</p>
-</li>
-</ul>
-<pre><code class="language-C"> #include &lt;stdio.h&gt;
- int main()
- {
-  int a[3][4] = { 0 };
-  printf(&quot;%d\n&quot;, sizeof(a)); // 48
-  // a表示整个数组 大小为 3×4×4=48(byte)
-
-  printf(&quot;%d\n&quot;, sizeof(a[0][0])); // 4
-  // a[0][0] 表述数组第一行第一列的元素 int类型 大小为4byte
-
-  printf(&quot;%d\n&quot;, sizeof(a[0])); // 16
-  // a[0]表示二维数组a的第一行，大小为4×4=16(byte)
-
-  printf(&quot;%d\n&quot;, sizeof(a[0] + 1)); // 4/8
-  // a[0]表示二维数组a的第一行
-  // a[0]+1 a[0]为二维数组第一行数组首元素地址
-  // +1 跳过1字节 --&gt; 二维数组第一行数组第二个元素地址
-  // 地址大小为 4/8byte
-
-  printf(&quot;%d\n&quot;, sizeof(*(a[0] + 1))); // 4
-  // *(a[0] + 1) 等价于a[0][1]
-  // 表示为二维数组a第一行第二列的元素
-  // int类型 大小为 4byte
-
-  printf(&quot;%d\n&quot;, sizeof(a + 1)); // 4/8
-  // a 表示数组首元素地址，二维数组的第一行数组的地址
-  // a+1 跳过 1个int [4] 类型一维数组 --&gt; 二维数组的第二行地址 
-  // 大小为 4/8(byte)
-
-  printf(&quot;%d\n&quot;, sizeof(*(a + 1))); // 16
-  // a 表示二维数组第一行地址
-  // a+1 跳过 1个int [4] 类型一维数组 --&gt; 二维数组第二行地址
-  // *(a+1) 解引用得到二维数组第二行
-  // 大小为 4×4=16(byte)
-
-  printf(&quot;%d\n&quot;, sizeof(&amp;a[0] + 1)); // 4/8
-  // a[0] 二维数组第一行 
-  // &amp;a[0] 二维数组第一行地址
-  // &amp;a[0]+1 跳过一个 int [4] 类型一维数组 --&gt; 二维数组第二行地址
-  // 大小为 4/8(byte)
-
-  printf(&quot;%d\n&quot;, sizeof(*(&amp;a[0] + 1))); // 16
-  // &amp;a[0]+1 二维数组第二行地址
-  // *(&amp;a[0]+1) 解引用得到二维数组第二行
-  // 大小为 4×4=16(byte)
-
-  printf(&quot;%d\n&quot;, sizeof(*a)); // 16
-  // a 二维数组第一行地址
-  // *a 二维数组第一行
-  // 大小为 4×4=16(byte)
-
-  printf(&quot;%d\n&quot;, sizeof(a[3])); // 16
-  // a[3] 类型为int [4]
-  // 大小为 4×4=16(byte)
-  // sizeof并不会计算括号内的表达式，而是通过类型来确定大小
-  // 所以a[3]并不会越界访问
-
-  return 0;
-}
-</code></pre>
-<h4 id="292-练习1">2.9.2 练习1</h4>
-<pre><code class="language-C">struct Test
-{
-  int Num;
-  char* pcName;
-  short sDate;
-  char cha[2];
-  short sBa[4];
-}*p;
-
-// 假设p的值位0x100000 
-// 已知结构体Test的大小位20字节
-
-int main()
-{
-  printf(&quot;%p\n&quot;, p + 0x1); // 0x100014 结构体指针+1
-  printf(&quot;%p\n&quot;, (unsigned long)p + 0x1); // 0x100001 整形+1
-  printf(&quot;%p\n&quot;, (unsigned int*)p + 0x1); // 0x100004 整形指针+1 
-}
-</code></pre>
-<h4 id="293-练习2">2.9.3 练习2</h4>
-<pre><code class="language-C">int main()
-{
-  int a[5] = { 1,2,3,4,5 };
-  int* ptr = (int*)(&amp;a + 1);
-  // &amp;a 获取真个数组的地址
-  // &amp;a+1 跳过 int [5] 数组 --&gt; 数组后第一个位置的地址
-  // (int*)(&amp;a + 1) 强制类型转换为整形指针 赋值给ptr
-  printf(&quot;%d %d\n&quot;, *(a + 1), *(ptr - 1)); // 2 5
-  // *(a+1) 等价于 a[1] 等于2
-  // ptr-1 向前跳过 int 整形 --&gt; 数组a最后一个元素地址
-  // *(ptr-1) 数组a最后一个元素
-}
-</code></pre>
-<h4 id="294-练习3">2.9.4 练习3</h4>
-<pre><code class="language-C">int main()
-{
-  int a[4] = { 1,2,3,4 };
-  int* ptr1 = (int*)(&amp;a + 1);
-  // ptr1 整形指针
-  // 其中 a 表示整个数组，&amp;a 获取整个数组的地址
-  // &amp;a+1 是数组a之后第一个位置的地址
-  // (int*)(&amp;a+1) 将数组指针强制类型转换为整形指针，并赋值给ptr1
-  // ptr1[-1] 等价于 *(ptr1-1)，
-  // ptr1-1 将指针向前移动一个int类型的大小(4byte)
-  // 即，*(ptr-1) 的值为a[3] = 4;
-
-  int* ptr2 = (int*)((int)a + 1);
-  // ptr2 整形指针
-  // 其中 a 表示数组首元素的地址，(int)a 将地址强制类型转换为int
-  // (int)a+1 则地址数值加1，而内存中每个地址代表1byte
-  // 比如：地址是0xFF9A8C11 地址数值 +1 后变为 0xFF9A8C12
-  // 即，指向原来指向的地址的后一个字节的地址
-  // 所以 (int)a+1 指向如图所示的位置
-  // (int*)((int)a+1) 将int型数值强制类型转换为整形指针，并赋值给ptr2
-  // 所以 对ptr2解引用 *ptr2 值为 (int*)((int)a+1) 开始向后四个字节的内容
-
-  printf(&quot;%x, %x\n&quot;, ptr1[-1], *ptr2);
-  // 输出结果(输出时将数字前无用的零去除)：4，2000000
-  return 0;
-}
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_9.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676955658.png" alt="" loading="lazy"></p>
-<h4 id="295-练习4">2.9.5 练习4</h4>
-<pre><code class="language-C">int main()
-{
-  int a[3][2] = { (0,1), (2,3),(4,5) };
-  // 注意：{}中是()，所以是逗号表达式
-  // 赋值语句相当于 int a[3][2]={ 1,3,5 };
-
-  int* p; 
-  // 声明整形指针
-
-  p = a[0]; 
-  // 将数组a首元素赋值给p
-  // 数组a为二维数组，其首元素为第一行的数组
-  // 并赋值给整形指针p，则p的值为第一行数组的首元素的地址
-
-  printf(&quot;%d\n&quot;, p[0]); // 1
-  // p[0] 等价于 *(p+0) 对第一行数组首元素地址解引用
-  // 值为第一行数组的首元素
-
-  return 0;
-}
-</code></pre>
-<h4 id="296-练习5">2.9.6 练习5</h4>
-<pre><code class="language-C">int main()
-{
-  int a[5][5];
-  int(*p)[4];
-  // 定义数组指针 指向对象类型为 int [4]
-  p = a;
-  // 将数组 a 首元素地址赋值给 p
-  printf(&quot;%p, %d\n&quot;, &amp;p[4][2] - &amp;a[4][2], &amp;p[4][2] - &amp;a[4][2]);
-  // &amp;p[4][2] 等价于 *(p+4)+2
-  // p+4 跳过 4×4=16 个元素
-  // *(p+4) 对数组指针解引用得到一维数组 p[4]
-  // *(p+4)+2 跳过2个整形型元素，即第18个元素的地址
-  // 
-  // &amp;a[4][2] 等价于 *(a+4)+2
-  // a+4 跳过 4×5=20 个元素
-  // *(a+4) 解引用得到一维数组 a[4]
-  // *(a+4)+2 跳过2个整形元素，即第22个元素的地址
-  // 
-  // &amp;p[4][2] - &amp;a[4][2] 地址相减是两个地址间元素的个数
-  // &amp;p[4][2] 第18个元素的地址
-  // &amp;a[4][2] 第22个元素的地址
-  // 相减结果为 -4 
-  // 在内存中十六进制表示为 FFFFFFFC
-  // %p 指针形式打印为 FFFFFFFC 
-  // %d 将内存中二进制再转换为整形 打印为 -4
-  // FFFFFFFC, -4
-  return 0;
-}
-
-
-// 另外：运行时警告 “int (*)[4]”和“int (*)[5]”数组的下标不同
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_10.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676976452.png" alt="" loading="lazy"></p>
-<h4 id="297-练习6">2.9.7 练习6</h4>
-<pre><code class="language-C">int main()
-{
-  int aa[2][5] = { 1,2,3,4,5,6,7,8,9,10 };
-  int* ptr1 = (int*)(&amp;aa + 1);
-  // &amp;aa 其中 aa 表示二维数组 获取二维数组的地址
-  // &amp;aa+1 跳过整个二维数组 指向二维数组之后第一个位置
-  // (int*)(&amp;aa+1)强制类型转换为整形指针 并赋值给 ptr1
-
-  int* ptr2 = (int*)(*(aa + 1));
-  // aa 表示二维数组首元素地址--第一行地址
-  // aa+1 跳过 int [5] 大小，--第二行地址 
-  // *(aa+1) 得到第二行数组--第二行数组首元素地址
-  // (int*)(*(aa+1)) 强制类型转换为整形指针 并赋值给 ptr2
-  // (不过，本来已经是整形指针，此转换没有必要)
-
-  printf(&quot;%d, %d\n&quot;, *(ptr1 - 1), *(ptr2 - 1));
-  // *(ptr1-1) 向前跳 一个整形大小 并解引用 得到二维数组的最后一个元素
-  // *(ptr2-1) 向前跳 一个整形大小 并解引用 得到二维数组第一行最后一个元素
-
-  // 输出结果为：10, 5
-  return 0;
-}
-</code></pre>
-<h4 id="298-练习7">2.9.8 练习7</h4>
-<pre><code class="language-C">int main()
-{
-  char* a[] = { &quot;work&quot;, &quot;at&quot;, &quot;home&quot; };
-  char** pa = a;
-  // 数组 a 中元素的类型时 char*
-  // a 表示数组首元素的地址 所以a是二级指针 并赋值给pa
-
-  pa++;
-  // pa指向的类型为 char* 自增之后 跳过 1个地址的大小
-  // 指向数组a第二个元素的地址
-
-  printf(&quot;%s\n&quot;, *pa);
-  // 对 pa 解引用，得到数组 a 第二个元素(是一个地址)
-  // %s 打印 从该地址*pa开始向后查找'/0' 并打印字符串
-
-  // 输出结果为 &quot;at&quot;
-  return 0;
-}
-
-
-// 初始化数组a和二级指针pa之后的内存如下：
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_11.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676989289.png" alt="" loading="lazy"></p>
-<h4 id="299-练习8">2.9.9 练习8</h4>
-<pre><code class="language-C">int main()
-{
-  char* c[] = { &quot;ENTER&quot;, &quot;NEW&quot;, &quot;POINT&quot;, &quot;FIRST&quot; };
-  char** cp[] = { c + 3, c + 2, c + 1, c };
-  char*** cpp = cp;
-  // 初始化之后的内存情况如果0所示
-  printf(&quot;%s\n&quot;, **++cpp); // POINT
-  printf(&quot;%s\n&quot;, *-- * ++cpp + 3); // ER
-  printf(&quot;%s\n&quot;, *cpp[-2] + 3); // ST
-  printf(&quot;%s\n&quot;, cpp[-1][-1] + 1); // EW
-  return 0;
-}
-</code></pre>
-<p>![图0](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_12.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676999726.png" alt="图0" loading="lazy"></p>
-<ul>
-<li>
-<p>第一个printf</p>
-<pre><code class="language-C">  printf(&quot;%s\n&quot;, **++cpp); // POINT
-  // ++cpp cpp下移动如图1所示
-  // 第一次解引用 得到c+2
-  // 第二次解引用得到指向字符串&quot;POINT&quot;的字符指针
-  // 则打印字符串 &quot;POINT&quot;
-</code></pre>
-<p>![图1](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_13.png)<br>
-<img src="https://listen2022.github.io/post-images/1643677012066.png" alt="图1" loading="lazy"></p>
-</li>
-<li>
-<p>第二个printf</p>
-<pre><code class="language-C">  printf(&quot;%s\n&quot;, *-- * ++cpp + 3); // ER
-  // ++cpp cpp下移如图2所示
-  // 第一次解引用得到 c+1
-  // *-- 得到指向&quot;ENTER&quot;的字符指针
-  // +3 跳过3个字符，--&gt; 字符'E'的地址
-  // 则打印字符串&quot;ER&quot;
-</code></pre>
-<p>![图2](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_14.png)<br>
-<img src="https://listen2022.github.io/post-images/1643677023451.png" alt="图2" loading="lazy"></p>
-</li>
-<li>
-<p>第三个printf</p>
-<pre><code class="language-C">  printf(&quot;%s\n&quot;, *cpp[-2] + 3); // ST
-  // *cpp[-2] 相当于 **(cpp-2)，cpp-2 指向如图3所示
-  // *(cpp-2) 得到 c+3 
-  // **(cpp-2) 得到 指向&quot;FIRST&quot;的字符指针
-  // *cpp[-2] + 3 跳过3个字符，--&gt; 字符'S'的地址
-</code></pre>
-<p>![图3](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_15.png)<br>
-<img src="https://listen2022.github.io/post-images/1643677248972.png" alt="图3" loading="lazy"></p>
-</li>
-<li>
-<p>第四个printf</p>
-<pre><code class="language-C">  printf(&quot;%s\n&quot;, cpp[-1][-1] + 1); // EW
-  // cpp[-1][-1] 相当于 *(*(cpp-1)-1)
-  // cpp-1 指向如图4所示 *(cpp-1) 得到c+2
-  // *(*(cpp-1)-1) 向后跳一个指针大小 得到指向&quot;NEW&quot;的字符指针
-  // cpp[-1][-1] + 1 向后跳过1个字符，--&gt; 字符'E'的地址
-  // 则打印字符串 &quot;EW&quot;
-</code></pre>
-<p>![图4](file://C:\Users\Turbo\Desktop\2. 指针进阶\image\image_16.png)<br>
-<img src="https://listen2022.github.io/post-images/1643677151822.png" alt="图4" loading="lazy"></p>
-</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[9. C语言进阶--数据存储]]></title>
-        <id>https://listen2022.github.io/KqgOIuMEN/</id>
-        <link href="https://listen2022.github.io/KqgOIuMEN/">
-        </link>
-        <updated>2022-02-01T00:46:29.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="1-数据存储">1. 数据存储</h1>
-<h2 id="11-数据类型">1.1 数据类型</h2>
-<h4 id="111-整形">1.1.1 整形</h4>
-<pre><code class="language-C">char 
-    unsigned char
-    signed char
-
-short
-    unsigned short [int]
-    signed short [int]
-
-int
-    unsigned int
-    signed int
-
-long
-    unsigned long [int]
-    signed long [int]
-</code></pre>
-<h4 id="112-浮点型">1.1.2 浮点型</h4>
-<pre><code class="language-C">float
-double
-</code></pre>
-<h4 id="113-构造类型">1.1.3 构造类型</h4>
-<pre><code class="language-C">// 数组
-// 结构体 struct
-// 枚举类型 enum
-// 联合类型 union
-</code></pre>
-<h4 id="114-指针类型">1.1.4 指针类型</h4>
-<pre><code class="language-C">int* pi;
-char* pc;
-float* pf;
-void* pv;
-</code></pre>
-<h4 id="115-空类型">1.1.5 空类型</h4>
-<pre><code class="language-C">void // 空类型（无类型）
-// 通常应用于函数的返回类型、函数的参数、指针类型
-</code></pre>
-<h2 id="12-整形在内存中的存储">1.2 整形在内存中的存储</h2>
-<blockquote>
-<p>变量的创建需要在内存中开辟空间，空间的大小根据不同的类型而定。</p>
-</blockquote>
-<pre><code class="language-C">int a = 100;
-int b = -200;
-// a分配四个字节的内存空间
-// 无论是在32位还是64位环境下，int类型都是4byte
-
-// 表示范围在limits.h中定义
-</code></pre>
-<h4 id="121-原码-反码-补码">1.2.1 原码、反码、补码</h4>
-<blockquote>
-<p>计算机中有符号数的三种表示方法。整数在计算机中以补码的形式存储。</p>
-</blockquote>
-<ul>
-<li>原码</li>
-<li>反码：原码符号位不变，其他位按位取反</li>
-<li>补码：反码加一</li>
-</ul>
-<blockquote>
-<p>正数的原码、反码、补码相同。</p>
-</blockquote>
-<h4 id="122-为什么数据在计算机中以补码形式存储">1.2.2 为什么数据在计算机中以补码形式存储？</h4>
-<blockquote>
-<p>在计算机系统中，数值一律用补码来表示和储存。因为使用补码，可以将符号位和数值域统一处理；同时，加法和减法也可以统一处理**（CPU只有加法器）**此外，补码与原码相互转换，其运算过程是相同的，不需要额外的硬件电路。</p>
-</blockquote>
-<h2 id="13-大小端字节序">1.3 大小端字节序</h2>
-<h4 id="131-大小端介绍">1.3.1 大小端介绍</h4>
-<ul>
-<li>大端（存储）模式：是指数据的低位保存在内存的高地址中，而数据的高位，保存在内存的低地址中；</li>
-<li>小端（存储）模式：是指数据的低位保存在内存的低地址中，而数据的高位，保存在内存的高地址中。</li>
-</ul>
-<p>![](file://C:\Users\Turbo\Desktop\1. 数据存储\image\image.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676552283.png" alt="" loading="lazy"></p>
-<h4 id="132-为什么又大端和小端">1.3.2 为什么又大端和小端？</h4>
-<blockquote>
-<p>在计算机系统中，以字节为单位，每个地址单元都对应着一个字节，一个字节为8bit。但是在C语言中除了8bit的char之外，还有16bit的short类型，32bit的int类型，以及long类型。另外，对于位数大于8位的处理器，例如16位或32位的处理器，由于寄存器宽度大于一个字节，那么必然存在着如何将多个字节安排的问题。因此就导致了大端和小端两种存储模式。</p>
-</blockquote>
-<h4 id="133-相关习题">1.3.3 相关习题</h4>
-<blockquote>
-<p>简述大端字节序和小端字节序的概念，设计一个小程序来判断当前机器的字节序。</p>
-</blockquote>
-<pre><code class="language-C">int main()
-{
-  int a = 1;
-  char* p = (char*) &amp;a;
-  if (*p==1)
-  {
-    printf(&quot;小端\n&quot;);
-  }
-  else {
-    printf(&quot;大端\n&quot;);
-  }
-  return 0;
-}
-</code></pre>
-<h2 id="14-浮点型在内存中的存储">1.4 浮点型在内存中的存储</h2>
-<h4 id="141-浮点类型">1.4.1 浮点类型</h4>
-<pre><code class="language-C">float // 4byte
-double // 8byte
-long double // 8byte
-// 表示范围再float.h中定义
-</code></pre>
-<h4 id="142-ieee754">1.4.2 IEEE754</h4>
-<blockquote>
-<p>C/C++中的浮点数采用IEEE754。根据过国际标准IEEE（电气和电子工程协会）754，任意一个二进制浮点数V可以表示成下面的格式：</p>
-</blockquote>
-<ul>
-<li>(-1)<sup>S*M*2</sup>E （E为指数，2为基数，M为尾数）</li>
-<li>(-1)^S 符号位 当S=0，V为正数；当S=1，V为负数。</li>
-<li>M 有效数字，2&gt;M≥1。</li>
-<li>2^E 指数位。</li>
-</ul>
-<pre><code class="language-C">// 浮点数举例
-// 十进制：5.5
-// 二进制：101.1 -&gt; 1.011 * 2 ^ 2            1.011为尾数，2(第一个)为基数，2(第二个)为指数
-//        -&gt; (-1) ^ 0 * 1.011 * 2 ^ 2
-//        -&gt; S=0; E=2; M=1.011
-</code></pre>
-<p><strong>其他规定</strong></p>
-<ul>
-<li>
-<p>对于E，E是一个无符号整数。而科学计数法中E可能出现负值。为避免这种情况，在存储E时，对于float类型，再加上127；对于double类型，再加上1023。</p>
-<pre><code class="language-C">// 例：
-// 十进制：0.5
-// 二进制：0.1 (float)
-// 科学计数法：(-1)^0 * 1.0 * 2^(-1)
-// S=0; E=-1+127=126
-</code></pre>
-</li>
-<li>
-<p>对于M，M表示为1.xxxxxx，可见其中的1时固定不变的。所以在存储中可将其省略，将E变成xxxxxx，只将小数部分存储在内存中，节省1bit空间。</p>
-<pre><code class="language-C">// 例：
-// 同上，十进制0.5的二进制表示为0.1(float)
-// 科学计数法：(-1)^0 * 1.0 * 2^(-1)
-// E=&gt;1.000000=&gt;00000
-</code></pre>
-</li>
-</ul>
-<p>![](file://C:\Users\Turbo\Desktop\1. 数据存储\image\image_1.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676564087.png" alt="" loading="lazy"></p>
-<h4 id="143-读取">1.4.3 读取</h4>
-<ul>
-<li>
-<p>E不全为1，也不全为0</p>
-<blockquote>
-<p>指数E的计算值减去127（或1023），得真实值，再将M加上第一位的1。</p>
-</blockquote>
-</li>
-<li>
-<p>E全为0</p>
-<blockquote>
-<p>浮点数的指数E等于1-127（或者1-1023）即为真实值，有效数字M不再加上第一位的1，而是还原为0.xxxxxx的小数。为了表示+/-0，以及接近于0的很小的数字。</p>
-</blockquote>
-</li>
-<li>
-<p>E全为1</p>
-<blockquote>
-<p>如果有效数字M全为0，表示+/-无穷大（正负取决于符号位S）。</p>
-</blockquote>
-</li>
-<li>
-<p>其他：浮点数在内存中也存在大小端问题。</p>
-</li>
-</ul>
-<h4 id="144-实例1">1.4.4 实例1</h4>
-<pre><code class="language-C">int main()
-{
-  int n = 9;
-  float* pf = (float*)&amp;n; // 00000000000000000000000000001001
-  printf(&quot;n的值为：%d\n&quot;, n); // 9
-  printf(&quot;*pf的值为：%f\n&quot;, *pf); // 0.0
-  // 0 00000000 00000000000000000001001
-  // S=0; E=1-127=-126; M=0.00000000000000000001001
-  // 0.00000000000000000001001 * 2 ^ (-126)
-  // float的精度为6 则打印0.000000
-
-  *pf = 9.0; // 0 01111100 00100000000000000000000
-  printf(&quot;n的值为：%d\n&quot;, n); // 1091567616
-  printf(&quot;*pf的值为：%f\n&quot;, *pf); // 9.0
-  return 0;
-}
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\1. 数据存储\image\image_2.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676571471.png" alt="" loading="lazy"></p>
-<h4 id="145-实例2">1.4.5 实例2</h4>
-<pre><code class="language-C">int main()
-{
-  float f = 9.0; // 0 01111100 00100000000000000000000
-  printf(&quot;%d\n&quot;, f); // 以浮点型存储，浮点型读取，整形打印
-
-  int* p = (int*)&amp;f;
-  printf(&quot;%d\n&quot;, *p); // 以浮点型存储，整形读取，整形打印
-  return 0;
-}
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\1. 数据存储\image\image_3.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676577007.png" alt="" loading="lazy"></p>
-<h2 id="15-习题">1.5 习题</h2>
-<h4 id="151-一">1.5.1 一</h4>
-<pre><code class="language-C">int main()
-{
-  char a = -1;
-  signed char b = -1;
-  unsigned char c = -1;
-  // -1的二进制
-  // 10000000000000000000000000000001 -&gt; 原码
-  // 11111111111111111111111111111110 -&gt; 反码
-  // 11111111111111111111111111111111 -&gt; 补码
-  // 存放到char类型变量中，高位截断
-  // 在a b c中存放的都是11111111
-  printf(&quot;%d %d %d\n&quot;, a, b, c); 
-  // %d打印整形，补码整形提升，打印原码
-  // a b 整型提升 高位补1
-  // c 无符号整型提升 高位补0
-  // a b 中的值为 11111111111111111111111111111111
-  // c   中的值为 00000000000000000000000011111111
-  // 以原码打印 a, b = -1; c = 255;
-  return 0;
- }
-
-// 补充
-// 1. char到底是signed char 还是 unsigned char?
-//    C语言标准并没有规定，取决于编译器（但大多数编译器都是signed char）
-// 2. int是signed int 还是 unsigned int?
-//    C语言规定int没有unsigned作为前缀时为signed int
-</code></pre>
-<h4 id="252-二">2.5.2 二</h4>
-<pre><code class="language-C">int main()
-{
-  char a = -128;
-  // 10000000000000000000000010000000
-  // a = 10000000 
-  printf(&quot;%u\n&quot;, a); // %u打印无符号整数
-  // a是有符号char 整型提升 高位补1
-  // 11111111111111111111111110000000
-  return 0;
-}
-</code></pre>
-<h4 id="253-三">2.5.3 三</h4>
-<pre><code class="language-C">int main()
-{
-  char a = 128;
-  // 00000000000000000000000010000000
-  // a 10000000
-  printf(&quot;%u\n&quot;, a);
-  // a是有符号char 整型提升 高位补1
-  // 11111111111111111111111110000000
-}
-
-// 10000000 在内存中直接被解析为-128
-// 有符号char的取值范围为-128~127，如果存放的值大于127，则被解析为负数
-// 例如128会被解析为-128
-</code></pre>
-<h4 id="254-四">2.5.4 四</h4>
-<pre><code class="language-C">int main()
-{
-  int i = -20;
-  // 10000000000000000000000000010100 -20 原码
-  // 11111111111111111111111111101100 -20 补码
-  unsigned int j = 10;
-  // 00000000000000000000000000001010 10
-  printf(&quot;%d\n&quot;, i + j);
-  // 相加
-  // 11111111111111111111111111110110 补码
-  // 10000000000000000000000000001010 原码 -10
-  // %d，认为内存中放的是有符号int类型
-  return 0;
-}
-// 站在内存的视角
-</code></pre>
-<h4 id="255-五">2.5.5 五</h4>
-<pre><code class="language-C">int main()
-{
-  int a = -20;
-  unsigned int b = 10;
-  if (a + b &gt; 0) {
-    printf(&quot;a+b&gt;0&quot;);
-  }else{
-    printf(&quot;a+b&lt;=0&quot;);
-  }
-  return 0;
-}
-// int类型和无符号int类型相加，int类型转换为unsigned int类型
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\1. 数据存储\image\image_4.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676590331.png" alt="" loading="lazy"></p>
-<h4 id="256-六">2.5.6 六</h4>
-<pre><code class="language-C">int main()
-{
-  unsigned int i; // 无符号整数，i&gt;=0恒成立
-  for ( i = 9; i &gt;= 0; i--)
-  {
-    printf(&quot;%u\n&quot;, i);
-  }
-  return 0;
-}
-// 无限循环
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\1. 数据存储\image\image_5.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676596526.png" alt="" loading="lazy"></p>
-<h4 id="257-七">2.5.7 七</h4>
-<pre><code class="language-C">#include &lt;string.h&gt;
-
-int main()
-{
-  char a[1000];
-  int i;
-  for ( i = 0; i &lt; 1000; i++)
-  {
-    a[i] = -1 - i;
-  }
-  printf(&quot;%d\n&quot;, strlen(a));
-  return 0;
-}
-// -1 - i
-// -1 -2 -3 ... -128 127 126 ... 3 2 1 0('\0')
-// 128 + 127 = 255
-</code></pre>
-<p>![](file://C:\Users\Turbo\Desktop\1. 数据存储\image\image_6.png)<br>
-<img src="https://listen2022.github.io/post-images/1643676602984.png" alt="" loading="lazy"></p>
-<h4 id="258-八">2.5.8 八</h4>
-<pre><code class="language-C">unsigned char i = 0;
-int main()
-{
-  for ( i = 0; i &lt;= 255 ; i++)
-  {
-    printf(&quot;Hello World!\n&quot;);
-  }
-  return 0;
-}
-</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -4884,6 +3083,486 @@ int main()
 <img src="https://listen2022.github.io/post-images/1643534369082.png" alt="" loading="lazy"></p>
 <pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS // 源文件第一行（忽略VS的安全检测）
 </code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[1. C语言--初始C语言]]></title>
+        <id>https://listen2022.github.io/1chu-shi-c-yu-yan/</id>
+        <link href="https://listen2022.github.io/1chu-shi-c-yu-yan/">
+        </link>
+        <updated>2022-01-30T06:15:32.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="1-初始c语言">1. 初始C语言</h1>
+<h2 id="11-介绍">1.1 介绍</h2>
+<blockquote>
+<p>广泛应用于底层开发（如：驱动）。有完整的美国国家标准语法，称为ANDI C。C语言是一门面向过程的的计算机语言。主要的编译器有Clang、GCC、WIN-TC、Turbo C等。</p>
+</blockquote>
+<blockquote>
+<p>国际标准：C89、C90、C99、C11（C90之后的标准没有火起来）</p>
+</blockquote>
+<h2 id="12-第一个c程序">1.2 第一个C程序</h2>
+<h4 id="121-编译器">1.2.1 编译器</h4>
+<blockquote>
+<p>Visual Studio、Dev C++、Visual C++ 6.0、GCC、Clang、Pelles C、Watcom C/C++、Tiny C Compiler、Code::Blocks、Turbo C、C-Free等</p>
+</blockquote>
+<h4 id="122-继承开发环境ide">1.2.2 继承开发环境（IDE）</h4>
+<blockquote>
+<p>VS2013/VS2019：集成开发环境，集成了windows下的C语言编译器</p>
+</blockquote>
+<h4 id="123-文件">1.2.3 文件</h4>
+<ul>
+<li>xxx.c 源文件</li>
+<li>xxx.h 头文件</li>
+</ul>
+<h4 id="124-步骤">1.2.4 步骤</h4>
+<ul>
+<li>
+<p>创建项目<br>
+<img src="image/image.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525335573.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>创建源文件<br>
+<img src="image/image_1.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525353924.png" alt="" loading="lazy"><br>
+<img src="image/image_2.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525361628.png" alt="" loading="lazy"><br>
+<img src="image/image_3.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525367497.png" alt="" loading="lazy"><br>
+<img src="image/image_4.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525373449.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>编写代码</p>
+<ul>
+<li>主函数（main函数）</li>
+</ul>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+int main()
+{
+  printf(&quot;Hello World!&quot;);
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_5.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525403966.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>编译、链接、运行代码<br>
+<img src="image/image_6.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525411791.png" alt="" loading="lazy"><br>
+<img src="image/image_7.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525417572.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="125-补充">1.2.5 补充</h4>
+<ul>
+<li>一个项目中可以有多个.c文件</li>
+<li>多个.c文件中有且仅有一个main函数</li>
+</ul>
+<h2 id="13-基本数据类型">1.3 基本数据类型</h2>
+<blockquote>
+<p>在 C 语言中，数据类型指的是用于声明不同类型的变量或函数的一个广泛的系统。变量的类型决定了变量存储占用的空间，以及如何解释存储的位模式。</p>
+</blockquote>
+<h4 id="131-整数类型">1.3.1 整数类型</h4>
+<pre><code class="language-C">short (int)
+int
+long (int)
+long long (int)
+// 不同数据类型的大小因不同的计算机系统而异
+// 编译器可以决定数据类型的大小但必须保证：short &lt;= int &lt;= long &lt;= long long
+</code></pre>
+<h4 id="132-浮点类型">1.3.2 浮点类型</h4>
+<pre><code class="language-C">float // 单精度浮点型
+double // 双精度浮点型
+</code></pre>
+<h4 id="133-字符型">1.3.3 字符型</h4>
+<pre><code class="language-C">char // 可以当作整数类型处理
+</code></pre>
+<p><img src="image/image_8.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525426958.png" alt="" loading="lazy"></p>
+<h4 id="134-sizeof运算符">1.3.4 sizeof运算符</h4>
+<pre><code class="language-C">// sizeof(type) 得到对象或类型的存储字节大小
+// 使用sizeof查看数据类型大小
+int main()
+{
+  printf(&quot;size of short %d\n&quot;, sizeof(short));
+  printf(&quot;size of short %d\n&quot;, sizeof(int));
+  printf(&quot;size of short %d\n&quot;, sizeof(long));
+  printf(&quot;size of short %d\n&quot;, sizeof(long long));
+  printf(&quot;size of short %d\n&quot;, sizeof(float));
+  printf(&quot;size of short %d\n&quot;, sizeof(double));
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image_9.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525434925.png" alt="" loading="lazy"></p>
+<h2 id="14-常量变量">1.4 常量变量</h2>
+<h4 id="141-变量">1.4.1 变量</h4>
+<blockquote>
+<p>程序可操作的存储区的名称。C 中每个变量都有特定的类型，类型决定了变量存储的大小和布局，该范围内的值都可以存储在内存中，运算符可应用于变量上。</p>
+</blockquote>
+<ul>
+<li>
+<p>变量定义<br>
+告诉编译器在何处创建变量的存储，以及如何创建变量的存储。变量定义指定一个数据类型，并包含了该类型的一个或多个变量的列表。</p>
+<pre><code class="language-C">type var_list;
+// type为C数据类型或自定义的对象
+// var_list由一个或多个标识符组成，多个标识符之间使用逗号隔开
+// eg:
+int a, b;
+char c;
+
+// 初始化：变量可以在声明时初始化（指定一个初始值）
+// eg:
+int a = 666;
+int x = 3, y = 4;
+</code></pre>
+</li>
+<li>
+<p>变量声明<br>
+向编译器保证变量以指定的类型和名称存在，这样编译器在不需要知道变量完整细节的情况下也能继续进一步的编译。变量声明只在编译时有它的意义，在程序连接时编译器需要实际的变量声明。</p>
+<pre><code class="language-C">变量声明的两种情况：
+  1.需要建立存储空间。int a; 在声明时建立了存储空间
+  2.不需要建立存储空间。extern关键字声明变量而不定义 extern int a 其中变量a可以在其他c文件中定义
+    除非有extern关键字，其余都是变量的定义
+
+</code></pre>
+</li>
+<li>
+<p>左值和右值</p>
+<ul>
+<li>左值（lvalue）：指向内存位置的表达式。左值可以出现在赋值号的左边或右边。变量时左值。</li>
+<li>右值（rvalue）：存储在内存中某些地址的数值。右值是不能对其进行赋值的表达式，也就是说，右值可以出现在赋值号的右边，但不能出现在赋值号的左边。数值型字面量是右值。</li>
+</ul>
+</li>
+</ul>
+<h4 id="142-常量">1.4.2 常量</h4>
+<blockquote>
+<p>固定值。程序执行期间不会改变。又称为字面量。</p>
+</blockquote>
+<ul>
+<li>可以是任何数据类型。比如：整数常量、浮点常量、字符常量、字符串字面值、枚举常量。</li>
+<li>可认为是常规的变量，只不过在定义后不能修改。</li>
+<li>转义字符：特定字符前有反斜杠，具有特殊含义。</li>
+</ul>
+<pre><code class="language-C">/*
+常量定义的方式：
+  1. #define预处理器
+     格式：#define identifier value
+  2. const关键字（const声明常量要在一条语句内完成）
+     格式：const type variable = value;
+  3. 枚举常量（本质：数字由字符来表达）
+     格式：enum 枚举类型名称 {符号变量a, 符号变量b, 符号变量c}; a、b、c的值从零开始递增
+          指定值：enum COLOR {red=1,yellow,green=5}; 则red=1,yellow=2,green=5(默认递增)
+     重点：枚举类型只能是int
+*/
+</code></pre>
+<h2 id="15-字符串">1.5 字符串</h2>
+<blockquote>
+<p>本质：使用null字符<code>\0</code>终止的一维字符数组</p>
+</blockquote>
+<h2 id="16-注释">1.6 注释</h2>
+<blockquote>
+<p>解释代码</p>
+</blockquote>
+<pre><code class="language-C">// C++注释风格，最后引入C语言中/*C语言注释风格不支持嵌套注释*/
+</code></pre>
+<p><img src="image/image_10.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525451984.png" alt="" loading="lazy"></p>
+<h2 id="17-选择语句">1.7 选择语句</h2>
+<pre><code class="language-C">/*分支语句*/
+int main() {
+  int a = 1;
+  if (a==1)
+  {
+    printf(&quot;a = 1&quot;);
+  }
+  else
+  {
+    printf(&quot;a != 1&quot;);
+  }
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_11.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525459799.png" alt="" loading="lazy"></p>
+<blockquote>
+<p>当if或else内只有一条语句时可省略大括号</p>
+</blockquote>
+<figure data-type="image" tabindex="1"><img src="image/image_12.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://listen2022.github.io/post-images/1643525467217.png" alt="" loading="lazy"></figure>
+<h2 id="18-循环语句">1.8 循环语句</h2>
+<pre><code class="language-C">/* 循环语句 */int main() {  int line = 0;  while (line &lt; 30000)  {    printf(&quot;coding: %d\n&quot;, line);    line++;  }  if (line==30000)  {    printf(&quot;进大厂 拿高薪\n&quot;);  }  return 0;}
+</code></pre>
+<p><img src="image/image_13.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525475697.png" alt="" loading="lazy"></p>
+<blockquote>
+<p>while循环内只有一条语句时可省略大括号</p>
+</blockquote>
+<h2 id="19-函数">1.9 函数</h2>
+<pre><code class="language-C">/* 函数 */int main(){  int a = 3;  int b = 4;  int result = 0;  result = Add(a, b);  printf(&quot;result =&gt; %d\n&quot;, result);  return 0;}int Add(int x, int y){  int result = 0;  result = x + y;  return result;}
+</code></pre>
+<p><img src="image/image_14.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525482852.png" alt="" loading="lazy"></p>
+<h2 id="110-数组">1.10 数组</h2>
+<blockquote>
+<p>一组相同类型的元素的集合</p>
+</blockquote>
+<pre><code class="language-C">// 数组int main(){  // 创建  int arr[10] = { 0,1,2,3,4,5,6,7,8,9 };  // 其中arr为数组名 int为数组中每个元素的类型 10为数组中元素的个数  char ch[10] = { 'a', 'b', 'c', 'd', 'e' }; // 不完全初始化，其余值默认为0  // 访问(利用每个元素的下标 索引从零开始依次往后)  int i = 0;  while (i&lt;10)  {    printf(&quot;arr[%d] =&gt; %d\n&quot;, i, arr[i]);    i++;  }  return 0;}
+</code></pre>
+<p><img src="image/image_15.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525490094.png" alt="" loading="lazy"></p>
+<h2 id="111-操作符">1.11 操作符</h2>
+<h4 id="1111-算数操作符">1.11.1 算数操作符</h4>
+<pre><code class="language-C">+ - * / %
+</code></pre>
+<h4 id="1112-移位操作符">1.11.2 移位操作符</h4>
+<pre><code class="language-C">&gt;&gt; &lt;&lt;
+</code></pre>
+<h4 id="1113-位操作符">1.11.3 位操作符</h4>
+<pre><code class="language-C">&amp; 按位与| 按位或^ 按位异或
+</code></pre>
+<h4 id="1114-赋值操作符">1.11.4 赋值操作符</h4>
+<pre><code class="language-C">= += -= *= /= &gt;&gt;= &lt;&lt;=
+</code></pre>
+<h4 id="1115-单目操作符">1.11.5 单目操作符</h4>
+<pre><code class="language-C">！ // 逻辑非运算符~ // 按位取反运算符++ -- // 自增自减运算符- // 负号运算符(type) // 类型转换运算符*和&amp; // 指针运算符和取地址运算符sizeof // 长度运算符 sizeof求变量时后面的括号可以省略 求类型时不可以省略       // sizeof(int) sizeof(a)       // 可以计算数组，单位是字节
+</code></pre>
+<h4 id="1116-关系操作符">1.11.6 关系操作符</h4>
+<pre><code class="language-C">==
+!=
+&gt;
+&gt;=
+&lt;
+&lt;=
+</code></pre>
+<h4 id="1117-逻辑运算符">1.11.7 逻辑运算符</h4>
+<pre><code class="language-C">&amp;&amp; // 逻辑与
+|| // 逻辑或
+!  // 逻辑非
+</code></pre>
+<h4 id="1118-条件操作符">1.11.8 条件操作符</h4>
+<pre><code class="language-C">// 三目操作符
+exp1 ? exp2 : exp3;
+// exp1成立，exp2执行，整个表达式的结果为exp2的结果
+// exp1不成立，exp3执行，整个表达式结果为exp3的结果
+</code></pre>
+<h4 id="1119-逗号表达式">1.11.9 逗号表达式</h4>
+<pre><code class="language-C">// 逗号隔开的一串表达式
+exp1, exp2, exp3;
+eg: (2, 2+1, 2+2, 2+3);
+// 从前往后计算，整个表达式的结果是最后一个表达式的结果
+</code></pre>
+<h4 id="11110-其他">1.11.10 其他</h4>
+<pre><code class="language-C">[] // 下标引用操作符() // 函数调用操作符.-&gt;
+</code></pre>
+<ul>
+<li>
+<p>自增/自减</p>
+<pre><code class="language-C">// 前置++： 先++后使用int main(){  int a = 6;  int b = ++a;  printf(&quot;%d\n&quot;, a); // 7  printf(&quot;%d\n&quot;, b); // 7  return 0;}
+</code></pre>
+<p><img src="image/image_16.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525506704.png" alt="" loading="lazy"></p>
+<pre><code class="language-C">// 后置++： 先使用后++int main(){  int a = 6;  int b = a++;  printf(&quot;%d\n&quot;, a); // 7  printf(&quot;%d\n&quot;, b); // 7  return 0;}
+</code></pre>
+<p><img src="image/image_17.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525515337.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>强制类型转换</p>
+<pre><code class="language-C">int main() 
+{
+  int pi = (int)3.1415926;
+  return 0;
+}
+
+</code></pre>
+</li>
+</ul>
+<h2 id="112-关键字32个">1.12 关键字(32个)</h2>
+<blockquote>
+<p>C语言保留的一些有特殊作用词语。变量名不能是关键字。</p>
+</blockquote>
+<pre><code class="language-C">auto     声明自动变量。自动创建、自动销毁。修饰局部变量，可省略。
+double   声明双精度变量或函数
+typedef  用以给数据类型取别名
+register 声明寄存器变量
+short    声明短整型变量或函数
+char     声明字符型变量或函数
+const    声明只读变量
+static   声明静态变量
+int      声明整型变量或函数
+struct   声明结构体变量或函数
+unsigned 声明无符号类型变量或函数
+volatile 说明变量在程序执行中可被隐含地改变
+long     声明长整型变量或函数
+union    声明共用数据类型，共用体
+signed   声明有符号类型变量或函数
+void     声明函数无返回值或无参数，声明无类型指针
+float    声明浮点型变量或函数
+enum     声明枚举类型
+extern   声明变量是在其他文件正声明
+if       条件语句
+else     条件语句否定分支（与 if 连用）
+switch   用于开关语句
+case     开关语句分支
+for      一种循环语句
+do       循环语句的循环体
+while    循环语句的循环条件
+goto     无条件跳转语句
+continue 结束当前循环，开始下一轮循环
+break    跳出当前循环
+default  开关语句中的&quot;其他&quot;分支
+sizeof   计算数据类型长度
+return   子程序返回语句（可以带参数，也可不带参数）循环条件
+
+</code></pre>
+<h4 id="其他">其他</h4>
+<pre><code class="language-C">define、include不是关键字，是预处理指令 
+</code></pre>
+<ul>
+<li>
+<p>typedef</p>
+<pre><code class="language-C">// 类型别名 类型重命名 用来简化代码
+</code></pre>
+<p><img src="image/image_18.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525525157.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>static</p>
+<pre><code class="language-C">/*三种用法：  1.修饰局部变量：局部变量生命周期延长（本质：改变了数据类型，从栈区-&gt;静态区）  2.修饰全局变量：使全局变量只能在自己所在的源文件.c内部使用，即使在其他源文件种声明也不能使用改全局变量  3.修饰函数：使函数只能在自己的内部源文件.c种使用，项目中其他源文件不能使用*/ 
+</code></pre>
+<p><strong>示例</strong></p>
+<ol>
+<li>static修饰局部变量<br>
+<img src="image/image_19.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525540111.png" alt="" loading="lazy"></li>
+<li>static修饰全局变量<br>
+<img src="image/image_20.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525548670.png" alt="" loading="lazy"></li>
+<li>static修饰函数<br>
+<img src="image/image_21.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525587921.png" alt="" loading="lazy"></li>
+</ol>
+</li>
+</ul>
+<h2 id="113-define">1.13 define</h2>
+<blockquote>
+<p>define使预处理指令</p>
+</blockquote>
+<pre><code class="language-C">/*作用：  1. 定义常量  2. 定义宏（宏用来完成替换）*/
+</code></pre>
+<h4 id="1131-定义变量">1.13.1 定义变量</h4>
+<p><img src="image/image_22.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525597325.png" alt="" loading="lazy"></p>
+<h4 id="1132-定义宏">1.13.2 定义宏</h4>
+<p><img src="image/image_23.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525605286.png" alt="" loading="lazy"></p>
+<pre><code class="language-C">// 宏只完成替换// 为保证正常运行，应使用小括号将函数体括起来
+</code></pre>
+<p><img src="image/image_24.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525614422.png" alt="" loading="lazy"></p>
+<h2 id="114-指针">1.14 指针</h2>
+<blockquote>
+<p>指针描述了数据在内存中的位置（内存地址），标示了一个占据存储空间的实体。 C/C++语言中，指针一般被认为是指针变量，指针变量的内容存储的是其指向的对象的首地址，指向的对象可以是变量（指针变量也是变量），数组，函数等占据存储空间的实体。</p>
+</blockquote>
+<h4 id="1141-指针变量的声明">1.14.1 指针变量的声明</h4>
+<pre><code class="language-C">// 格式；type *var_name;// type使指针的基类型，*表示该变量是一个指针变量，var_name使变量名// eg:int* pi;double* pd;
+</code></pre>
+<h4 id="1142-指针变量的大小">1.14.2 指针变量的大小</h4>
+<pre><code class="language-C">// 在32位系统种，指针变量大小为4byte// 在64位系统种，指针变量大小位8byte// 指针变量大小与指针指向的数据类型无关// 下图为64位系统种，指针大小演示：
+</code></pre>
+<p><img src="image/image_25.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525625321.png" alt="" loading="lazy"></p>
+<h4 id="1142-访问数据地址">1.14.2 访问数据地址</h4>
+<pre><code class="language-C">// 格式：
+&amp;var_name
+// 通过&amp;获取var_name所在的内存地址
+// eg:
+int main() 
+{
+  int a = 666;
+  int* pa = &amp;a; // 去除变量a的地址并赋值给指针变量pa
+  printf(&quot;%p\n&quot;, pa);
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image_26.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525634547.png" alt="" loading="lazy"></p>
+<h4 id="1143-null指针">1.14.3 NULL指针</h4>
+<pre><code class="language-C">// NULL指针：空指针，是一个定义在标准库中的值为零的常量。
+
+</code></pre>
+<p><img src="image/image_27.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525642059.png" alt="" loading="lazy"></p>
+<blockquote>
+<p>在大多数的操作系统上，程序不允许访问地址为 0 的内存，因为该内存是操作系统保留的。然而，内存地址 0 有特别重要的意义，它表明该指针不指向一个可访问的内存位置。</p>
+</blockquote>
+<h2 id="115-结构体">1.15 结构体</h2>
+<blockquote>
+<p><strong>结构</strong>是 C 编程中另一种用户自定义的可用的数据类型，它允许您存储不同类型的数据项。结构用于表示一条记录。</p>
+</blockquote>
+<h4 id="1151-定义">1.15.1 定义</h4>
+<pre><code class="language-C">// 格式：struct 结构体名 {     结构体所包含的变量};// eg:struct Student{  char name[16]; // 姓名  int age;       // 年龄  double height; // 身高};
+</code></pre>
+<h4 id="1152-结构体变量">1.15.2 结构体变量</h4>
+<ul>
+<li>
+<p>定义结构体时定义结构体变量</p>
+<pre><code class="language-C">struct Student
+{
+  char name[16]; // 姓名
+  int age;       // 年龄
+  double height; // 身高
+} s1, s2;
+// 将变量放在结构体的最后
+</code></pre>
+</li>
+<li>
+<p>如果只需要是使用s1和s2，此后不再使用结构体，则可省略结构体名称</p>
+<pre><code class="language-C">struct{
+  char name[16]; // 姓名
+  int age;       // 年龄
+  double height; // 身高
+} s1, s2;
+</code></pre>
+</li>
+</ul>
+<h4 id="1153-成员获取和赋值">1.15.3 成员获取和赋值</h4>
+<ul>
+<li>
+<p>获取</p>
+<pre><code class="language-C">// 1).结构体变量名.成员名
+printf(&quot;name: %s, age: %d, height: %lf\n&quot;, s.name, s.age, s.height);
+// 2).结构体指针变量名-&gt;成员名
+struct Student* ps = &amp;s;
+printf(&quot;name: %s, age: %d, height: %lf\n&quot;, (*ps).name, (*ps).age, (*ps).height);
+printf(&quot;name: %s, age: %d, height: %lf\n&quot;, ps-&gt;name, ps-&gt;age, ps-&gt;height);
+</code></pre>
+</li>
+<li>
+<p>赋值</p>
+<pre><code class="language-C">// 1).单个赋值：结构体变量名.成员名 = &quot;Value&quot;;
+// 2).整体赋值，eg：
+//    a.定义结构体时整体赋值：
+      struct{
+        char name[16]; // 姓名
+        int age;       // 年龄
+        double height; // 身高
+      } s = {&quot;listen&quot;, 20, 180.5};
+//    b.定义结构体后整体赋值：
+      struct Student s = {&quot;listen&quot;, 20, 185};
+
+// 结构体是创建变量的模板，不占用内存空间
+// -&gt; 先找到指针指向的对象，再找到他的成员
+</code></pre>
+</li>
+</ul>
+<p><img src="image/image_28.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1643525654342.png" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>
