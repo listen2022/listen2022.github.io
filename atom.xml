@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://listen2022.github.io</id>
     <title>listen</title>
-    <updated>2022-02-02T00:29:19.068Z</updated>
+    <updated>2022-02-07T13:05:38.837Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://listen2022.github.io"/>
     <link rel="self" href="https://listen2022.github.io/atom.xml"/>
@@ -30,17 +30,14 @@
 <ul>
 <li>
 <p><strong>日安排</strong><br>
-<img src="image/image.png" alt="" loading="lazy"><br>
 <img src="https://listen2022.github.io/post-images/1643726211640.png" alt="" loading="lazy"></p>
 </li>
 <li>
 <p><strong>周安排</strong><br>
-<img src="image/image_1.png" alt="" loading="lazy"><br>
 <img src="https://listen2022.github.io/post-images/1643726216769.png" alt="" loading="lazy"></p>
 </li>
 <li>
 <p><strong>月安排</strong><br>
-<img src="image/image_2.png" alt="" loading="lazy"><br>
 <img src="https://listen2022.github.io/post-images/1643726221179.png" alt="" loading="lazy"></p>
 </li>
 <li>
