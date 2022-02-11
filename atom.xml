@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://listen2022.github.io</id>
     <title>listen</title>
-    <updated>2022-02-07T13:05:38.837Z</updated>
+    <updated>2022-02-11T00:01:04.483Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://listen2022.github.io"/>
     <link rel="self" href="https://listen2022.github.io/atom.xml"/>
@@ -10,6 +10,1210 @@
     <logo>https://listen2022.github.io/images/avatar.png</logo>
     <icon>https://listen2022.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, listen</rights>
+    <entry>
+        <title type="html"><![CDATA[11. C语言进阶--字符串+内存函数]]></title>
+        <id>https://listen2022.github.io/ffelNQomt/</id>
+        <link href="https://listen2022.github.io/ffelNQomt/">
+        </link>
+        <updated>2022-02-10T23:59:57.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="3-字符串内存函数">3. 字符串+内存函数</h1>
+<h2 id="31-字符串函数">3.1 字符串函数</h2>
+<blockquote>
+<p>头文件：string.h</p>
+</blockquote>
+<h4 id="311-strlen">3.1.1 strlen</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：返回字符串的长度
+size_t strlen ( const char * str );
+// 形参：字符指针
+// 返回值：C字符串的长度
+
+</code></pre>
+</li>
+<li>
+<p>原理</p>
+<pre><code class="language-C">size_t strlen (
+        const char * str
+        )
+{
+        const char *eos = str;
+
+        while( *eos++ ) ;
+
+        return( eos - str - 1 );
+}
+
+</code></pre>
+</li>
+<li>
+<p>说明</p>
+<ul>
+<li>
+<p>字符串以 '\0' 作为结束标志，strlen函数返回的是在字符串中 '\0' 前面出现的字符个数（不包含 '\0' ）</p>
+</li>
+<li>
+<p>参数指向的字符串必须要以 '\0' 结束</p>
+</li>
+<li>
+<p>函数的返回值为size_t，无符号整形</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  if (strlen(&quot;abc&quot;) - strlen(&quot;abcdef&quot;) &gt; 0)
+  {
+    printf(&quot;&gt;\n&quot;);
+  }
+  else
+  {
+    printf(&quot;&lt;=\n&quot;);
+  }
+}
+// 输出结果： &lt;=
+// &quot;abc&quot;的长度为3; &quot;abcdef&quot;的长度为6
+// 而输出结果表示&quot;abc&quot;的长度 小于 &quot;abcdef&quot;的长度
+// 原因：strlen(&quot;abc&quot;) - strlen(&quot;abcdef&quot;)
+//      (无符号整形)3 - (无符号整形)6 = (无符号整形)-3
+//      -3为 unsigned int 应表示为 一个正数 (FFFFFFFF-3)(十六进制)
+
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="image/image.png" alt="" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char* s = &quot;hello world!&quot;;
+  printf(&quot;%u\n&quot;, strlen(s)); // 12
+  return 0;
+}
+// 输出结果：12
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="image/image_1.png" alt="" loading="lazy"></figure>
+</li>
+</ul>
+<h4 id="312-strcpy">3.1.2 strcpy</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：拷贝字符串
+char * strcpy ( char * destination, const char * source );
+// 形参：destination 将要拷贝到的地址空间的指针
+//      source 被拷贝的字符串
+// 返回值：目标空间地址destination 
+</code></pre>
+</li>
+<li>
+<p>原理</p>
+<pre><code class="language-C">char * strcpy(char * dst, const char * src)
+{
+        char * cp = dst;
+
+        while((*cp++ = *src++) != '\0')
+                ;               /* Copy src over dst */
+
+        return( dst );
+}
+
+
+</code></pre>
+</li>
+<li>
+<p>说明</p>
+<ul>
+<li>
+<p>源字符串必须以 '\0' 结束</p>
+</li>
+<li>
+<p>会将源字符串中的 '\0' 拷贝到目标空间</p>
+</li>
+<li>
+<p>目标空间必须足够大，以确保能存放源字符串</p>
+<pre><code class="language-C">// strcpy并不会检查目标空间是否大于要拷贝的字符串
+// 而是直接强行拷贝 所以strcpy不安全
+// 源文件最前面加上一行代码 #define _CRT_SECURE_NO_WARNINGS
+
+</code></pre>
+</li>
+<li>
+<p>目标空间必须可变</p>
+<pre><code class="language-C">// C语言中数组是可变的
+char arr[20] = { 0 };
+
+// 字符串是常量，不可变的
+char* s = &quot;     &quot;;
+
+// 所以目标空间可以是arr，而不能是s
+// C语言中，字符串的底层就是字符串首字符地址
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char arr[20] = { 0 };
+  // arr = &quot;hello&quot;;
+  // arr表示的是数组首元素的地址，是数组的标识
+  // 而字符串 &quot;hello&quot; 应放到arr所指的空间中
+  // 所以需要使用库函数strcpy将字符串拷贝放到arr中
+  // 而不能直接赋值 arr = &quot;hello&quot;;
+  strcpy(arr, &quot;hello&quot;);
+  // 字符串使用本质上是字符串首字符的地址
+  printf(&quot;%s\n&quot;, arr); // hello
+}
+</code></pre>
+</li>
+</ul>
+<h4 id="313-strcat">3.1.3 strcat</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：字符串追加
+char * strcat ( char * destination, const char * source );
+// 形参：source 被追加的字符串
+//      destination 目标字符串
+// 返回值：目标字符串 destination 地址
+</code></pre>
+</li>
+<li>
+<p>原理</p>
+<pre><code class="language-C">char * strcat (
+        char * dst,
+        const char * src
+        )
+{
+        char * cp = dst;
+
+        while( *cp )
+                cp++;                   /* find end of dst */
+
+        while((*cp++ = *src++) != '\0') ;       /* Copy src to end of dst */
+
+        return( dst );                  /* return dst */
+
+}
+</code></pre>
+</li>
+<li>
+<p>说明</p>
+<ul>
+<li>源字符串必须以 '\0' 结束</li>
+<li>目标空间必须有足够的大，能容纳下源字符串的内容</li>
+<li>目标空间必须可修改</li>
+</ul>
+</li>
+<li>
+<p>模拟实现</p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+#include &lt;assert.h&gt;
+
+char* my_strcat(char* dst, const char* src)
+{
+  assert(dst &amp;&amp; src);
+  char* cp = dst;
+  while (*cp)
+  {
+    cp++;
+  } // 找到dst中的'\0'
+  //while (*cp++);  问题：为什么上一条while循环不能简写成这样
+  while (*cp++ = *src++); // 将src复制到dst末尾
+  return dst;
+}
+</code></pre>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char arr1[20] = &quot;Hello \0#########&quot;;
+  char arr2[] = &quot;world&quot;;
+  strcat(arr1, arr2);
+  printf(&quot;%s\n&quot;, arr1); // Hello world
+  return 0;
+}
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="image/image_2.png" alt="" loading="lazy"></figure>
+</li>
+<li>
+<p>追加字符串自己</p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char arr[20] = &quot;abcd&quot;;
+  strcat(arr, arr);
+  printf(&quot;%s\n&quot;, arr); // abcdabcd
+  return 0;
+}
+
+// 输出结果：abcdabcd
+
+// 而自己实现的strcat函数会出现死循环
+// dst和src指向同一块区域 追加时 '\0' 被覆盖
+</code></pre>
+</li>
+</ul>
+<h4 id="314-strcmp">3.1.4 strcmp</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 比较字符串1和字符串2
+int strcmp ( const char * str1, const char * str2 );
+// 形参：str1 str2 分别是要比较的两个字符串
+// 返回值：整形  标准规定：
+//        &lt;0 str1&lt;str2
+//        &gt;0 str1&gt;str2
+//        =0 str1=str2
+//        VS中返回值为-1 0 1
+// C语言中不能直接使用使用关系运算符确定两个字符串的大小
+// 字符串比较，实际上是比较字符的ASCII码
+</code></pre>
+</li>
+<li>
+<p>原理</p>
+<pre><code class="language-C">int strcmp (
+        const char * src,
+        const char * dst
+        )
+{
+        int ret = 0 ;
+
+        while((ret = *(unsigned char *)src - *(unsigned char *)dst) == 0 &amp;&amp; *dst)
+                {
+                ++src, ++dst;
+                }
+
+        return ((-ret) &lt; 0) - (ret &lt; 0); // (if positive) - (if negative) generates branchless code
+}
+</code></pre>
+</li>
+<li>
+<p>模拟实现</p>
+<pre><code class="language-C">#include &lt;assert.h&gt;
+
+int my_strcmp(const char* s1, const char* s2)
+{
+  assert(s1 &amp;&amp; s2);
+  while (*s1 == *s2)
+  {
+    if (*s1 == '\0')
+    {
+      return 0;
+    }
+    s1++;
+    s2++;
+  }
+  return *s1 - *s2;
+}
+
+</code></pre>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  printf(&quot;%d\n&quot;, strcmp(&quot;abc&quot;, &quot;abcd&quot;)); // -1
+  return 0;
+}
+
+// 输出结果：-1
+// 'a' 比较 'a' 结果 =
+// 'b' 比较 'b' 结果 =
+// 'c' 比较 'c' 结果 =
+// '\0' 比较 'd' 结果 &lt;
+// 返回 -1
+</code></pre>
+</li>
+</ul>
+<h4 id="315-strncpy">3.1.5 strncpy</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 将n个字符拷贝到另一个字符串中
+char * strncpy ( char * destination, const char * source, size_t num );
+// 形参： destination 目标字符串
+//       source 被拷贝字符串
+//       num 拷贝字符个数
+// 返回值：destination
+</code></pre>
+</li>
+<li>
+<p>原理</p>
+<pre><code class="language-C">char * strncpy (
+        char * dest,
+        const char * source,
+        size_t count
+        )
+{
+        char *start = dest;
+
+        while (count &amp;&amp; (*dest++ = *source++) != '\0')    /* copy string */
+                count--;
+
+        if (count)                              /* pad out with zeroes */
+                while (--count)
+                        *dest++ = '\0';
+
+        return(start);
+}
+
+</code></pre>
+</li>
+<li>
+<p>模拟实现</p>
+<pre><code class="language-C">#include &lt;assert.h&gt;
+
+char* my_strncpy(char* destination, const char* source, size_t num) 
+{
+  // 当 num 大于 source 长度时 
+  // 当 num 大于 destination 长度时  
+  // 当 num 等于 0
+  assert(destination &amp;&amp; source);
+  char* ret = destination;
+  char* src = source;
+  while (num &amp;&amp; (*destination++ = *source++))
+  {
+    num--;
+  }
+  if (num)
+  {
+    return ret;
+  }
+  while (num--)
+  {
+    *destination++ = '\0';
+  }
+  return ret;
+}
+</code></pre>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char dest[20] = { 0 };
+  char src[] = &quot;i like c.&quot;;
+  strncpy(dest, src, 6);
+  printf(&quot;%s\n&quot;, dest); // i like
+  return 0;
+}
+
+// 输出结果：
+// i like
+
+</code></pre>
+</li>
+</ul>
+<h4 id="316-strncat">3.1.6 strncat</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：将n个字符追加到另一个字符串后
+char * strncat ( char * destination, const char * source, size_t num );
+// 形参： destination 目标字符串
+//       source 被追加字符串
+//       num 追加字符个数
+// 返回值：destination
+
+</code></pre>
+</li>
+<li>
+<p>原理</p>
+<pre><code class="language-C">char * strncat (
+        char * front,
+        const char * back,
+        size_t count
+        )
+{
+        char *start = front;
+
+        while (*front++)
+                ;
+        front--;
+
+        while (count--)
+                if ((*front++ = *back++) == 0)
+                        return(start);
+
+        *front = '\0';
+        return(start);
+}
+
+</code></pre>
+</li>
+<li>
+<p>模拟实现</p>
+<pre><code class="language-C">#include &lt;assert.h&gt;
+
+char* my_strncat( char* front, const char* back, size_t count )
+{
+    // count 大于 back 的字符数(包括'\0'在内)
+    // count 等于 0 
+    assert(front &amp;&amp; back); // 断言 空指针
+    char* ret = front;
+    while (*front++); // 找到被追加字符串的结束位置 '\0'
+    front--; // 回退到 '\0' 位置
+    while (count--) // 循环 count 次
+        if (!(*front++ = *back++)) // 将 back 复制到 被追加字符串末尾 
+            return ret; // 遇到 '\0' 返回 ret (表示 已经将back的所有字符追加到front后面)
+    *front = '\0'; // 字符串末尾补 '\0'
+    return ret;
+}
+</code></pre>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char dest[20] = &quot;I like &quot;;
+  char src[] = &quot;clang and golang&quot;;
+  char* ret = strncat(dest, src, 5);
+  printf(&quot;%s\n&quot;, ret); // I like clang
+  return 0;
+}
+
+// 输出结果：
+// I like clang
+</code></pre>
+</li>
+</ul>
+<h4 id="317-strncmp">3.1.7 strncmp</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：比较两字符串前n个字符
+int strncmp ( const char * str1, const char * str2, size_t num );
+// 形参：str1 str2 分别是要比较的两个字符串
+//      num 比较的字符个数
+// 返回值：整形（规定与strcmp相同）
+
+// 相对于 strcmp函数 更安全
+
+</code></pre>
+</li>
+<li>
+<p>原理</p>
+<pre><code class="language-C">int strncmp
+(
+    const char *first,
+    const char *last,
+    size_t      count
+)
+{
+    size_t x = 0;
+
+    if (!count)
+    {
+        return 0;
+    }
+
+    /*
+     * This explicit guard needed to deal correctly with boundary
+     * cases: strings shorter than 4 bytes and strings longer than
+     * UINT_MAX-4 bytes .
+     */
+    if( count &gt;= 4 )
+    {
+        /* unroll by four */
+        for (; x &lt; count-4; x+=4)
+        {
+            first+=4;
+            last +=4;
+
+            if (*(first-4) == 0 || *(first-4) != *(last-4))
+            {
+                return(*(unsigned char *)(first-4) - *(unsigned char *)(last-4));
+            }
+
+            if (*(first-3) == 0 || *(first-3) != *(last-3))
+            {
+                return(*(unsigned char *)(first-3) - *(unsigned char *)(last-3));
+            }
+
+            if (*(first-2) == 0 || *(first-2) != *(last-2))
+            {
+                return(*(unsigned char *)(first-2) - *(unsigned char *)(last-2));
+            }
+
+            if (*(first-1) == 0 || *(first-1) != *(last-1))
+            {
+                return(*(unsigned char *)(first-1) - *(unsigned char *)(last-1));
+            }
+        }
+    }
+
+    /* residual loop */
+    for (; x &lt; count; x++)
+    {
+        if (*first == 0 || *first != *last)
+        {
+            return(*(unsigned char *)first - *(unsigned char *)last);
+        }
+        first+=1;
+        last+=1;
+    }
+
+    return 0;
+}
+
+</code></pre>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">
+int main()
+{
+  char str1[] = &quot;I like&quot;;
+  char str2[] = &quot;I like c&quot;;
+  int ret = 0;
+  ret = strncmp(str1, str2, 5);
+  printf(&quot;%d\n&quot;, ret); // 0
+  ret = strncmp(str1, str2, 7);
+  printf(&quot;%d\n&quot;, ret); // -1
+  return 0;
+}
+
+// 输出结果：
+// 0
+// -1
+</code></pre>
+</li>
+</ul>
+<h4 id="318-strstr">3.1.8 strstr</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：在字符串 str1 中查找第一次出现字符串 str2 的位置 不包含终止符 '\0'。
+const char * strstr ( const char * str1, const char * str2 );
+      char * strstr (       char * str1, const char * str2 );
+// 参数：str1 str2 字符串
+// 返回值：str2 在 str1 中第一次出现的位置--指针
+</code></pre>
+</li>
+<li>
+<p>模拟实现</p>
+<ul>
+<li>
+<p>查找原理</p>
+<blockquote>
+<p>假设在字符串 &quot;acdeef&quot; 中查找 &quot;ef&quot; 查找步骤如下图：</p>
+</blockquote>
+<figure data-type="image" tabindex="4"><img src="image/image_3.png" alt="" loading="lazy"></figure>
+</li>
+<li>
+<p>代码</p>
+<pre><code class="language-C">#include &lt;assert.h&gt;
+#include &lt;stdio.h&gt;
+
+char* my_strstr(const char* str1, const char* str2)
+{
+  assert(str1 &amp;&amp; str2);
+  const char* s = str1;
+  const char* s1 = NULL;
+  const char* s2 = NULL;
+  // C语言规定 如果str2为空字符串，返回str1
+  if (*str2 == '\0')
+  {
+    return (char*)str1;
+  }
+
+  while (*s)
+  {
+    s1 = s;
+    s2 = str2;
+    while (*s1 &amp;&amp; *s2 &amp;&amp; (*s1 == *s2))
+    // 或者 while ((*s2 != '\0') &amp;&amp; (*s1 == *s2))
+    // *s2 != '\0' 主要是防止越界访问
+    {
+      s1++;
+      s2++;
+    }
+    if (*s2 == '\0')
+    {
+      return (char*)s;
+    }
+    s++;
+  }
+  return NULL;
+}
+
+// 测试函数
+void test()
+{
+  char str1[] = &quot;acdeef&quot;;
+  char str2[] = &quot;ef&quot;;
+  char* ret;
+  ret = my_strstr(str1, str2);
+  printf(&quot;%s\n&quot;, ret); // ef
+}
+
+// main主函数
+int main()
+{
+  test();
+  return 0;
+}
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char str1[] = &quot;i like c&quot;;
+  char str2[] = &quot;like&quot;;
+  char* ret = strstr(str1, str2);
+  printf(&quot;%s\n&quot;, ret);
+  return 0;
+}
+// 输出结果：like c
+</code></pre>
+</li>
+</ul>
+<h4 id="319-strtok">3.1.9 strtok</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：分割字符串
+char * strtok ( char * str, const char * delimiters );
+// 参数：
+//     str2 字符串 定义了用作分隔符的字符集合
+//     str1 字符串 包含0个或多个由str2中一个或多个字符分割的标记
+
+</code></pre>
+</li>
+<li>
+<p>说明</p>
+<ul>
+<li>strtok函数找到str中的下一个标记，并将其用 '\0' 结尾，返回一个指向这个标记的指针。（注：strtok函数会改变被操作的字符串，所以在使用strtok函数切分的字符串一般都是临时拷贝的内容并且可修改）</li>
+<li>strtok函数第一个参数不为NULL时，函数将找到str中第一个标记，strtok函数将保存它在字符串中的位置（基于static）</li>
+<li>strtok函数第一个参数为NULL时，函数将在同一个字符串中保存的位置开始，查找下一个标记</li>
+<li>如果字符串中不存在更多的标记，则返回NULL指针</li>
+</ul>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char str[] = &quot;he#ll*o wo#rl*d&quot;;
+  char delimiters[] = &quot;*#&quot;;
+  // strtok会修改被分割字符串，所以创建临时变量
+  char tmp[20] = { 0 };
+  strcpy(tmp, str);
+  for (
+    char* s = strtok(tmp, delimiters); // 找到str中第一个标记 strtok函数将保存它在字符串中的位置
+    s != NULL;  // 当s=NULL时剩余的字符串中没有更多的标记
+    s = strtok(NULL, delimiters) // strtok 函数将在同一个字符串中保存的位置开始 查找下一个标记
+    )
+  {
+    printf(&quot;%s\n&quot;, s);
+  }
+  return 0;
+}
+// 输出结果：
+// he
+// ll
+// o wo
+// rl
+// d
+
+</code></pre>
+</li>
+</ul>
+<h4 id="3110-strerror">3.1.10 strerror</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：将错误码转换为错误信息
+char * strerror ( int errnum );
+// 参数：errnum 整形 由C语言提供的全部变量 存在于头文件 &lt;errno.h&gt; 中 调用库函数失败时 都会设置全局错误码
+// 返回值：转换的错误信息字符串第一个字符地址
+</code></pre>
+</li>
+<li>
+<p>实例1</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char* str0 = strerror(0);
+  printf(&quot;%s\n&quot;, str0);
+  char* str1 = strerror(1);
+  printf(&quot;%s\n&quot;, str1);
+  char* str2 = strerror(2);
+  printf(&quot;%s\n&quot;, str2);
+  char* str3 = strerror(3);
+  printf(&quot;%s\n&quot;, str3);
+  char* str4 = strerror(4);
+  printf(&quot;%s\n&quot;, str4);
+  return 0;
+}
+
+
+// 输出结果：
+// No error
+// Operation not permitted
+// No such file or directory
+// No such process
+// Interrupted function call
+
+</code></pre>
+</li>
+<li>
+<p>实例2</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+
+int main()
+{
+    FILE* pFile;
+    pFile = fopen(&quot;unexist.ent&quot;, &quot;r&quot;);
+    if (pFile == NULL)
+        printf(&quot;Error: %s\n&quot;, strerror(errno));
+    //... 文件处理
+    fclose(pf);
+    pf = NULL;
+    return 0;
+}
+
+// 输出结果：
+// Error: No such file or directory
+</code></pre>
+</li>
+</ul>
+<h4 id="3111-perror">3.1.11 perror</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：
+//    1. 将错误码转换为错误信息 strerror
+//    2. 将错误信息打印 printf
+
+void perror ( const char * str );
+// 参数：提示信息 会自动与错误信息拼接打印
+
+// 头文件 stdio.h 中
+</code></pre>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE* pFile;
+    pFile = fopen(&quot;unexist.ent&quot;, &quot;r&quot;);
+    if (pFile == NULL)
+        perror(&quot;Error&quot;);
+    //... 文件处理
+    fclose(pf);
+    pf = NULL;
+    return 0;
+}
+
+// 输出结果：
+// Error: No such file or directory
+
+</code></pre>
+</li>
+</ul>
+<h2 id="32-字符函数">3.2 字符函数</h2>
+<blockquote>
+<p>头文件：ctype.h</p>
+</blockquote>
+<h4 id="321-字符分类">3.2.1 字符分类</h4>
+<table>
+<thead>
+<tr>
+<th><strong>函数</strong></th>
+<th><strong>如果他的参数符合下列要求 则返回真</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iscntrl</td>
+<td>任何控制字符</td>
+</tr>
+<tr>
+<td>isspace</td>
+<td>空白字符：空格' '，换页 '\f'，换行 '\n'，回车 '\r'，制表符 '\t'，垂直制表符 '\v'</td>
+</tr>
+<tr>
+<td>isxdigit</td>
+<td>十进制数字0~9</td>
+</tr>
+<tr>
+<td>islower</td>
+<td>十六进制数字，包括所有十进制数字，小写字母a<sub>f，大写字母A</sub>F</td>
+</tr>
+<tr>
+<td>islower</td>
+<td>小写字母a~z</td>
+</tr>
+<tr>
+<td>isupper</td>
+<td>大写字母A~Z</td>
+</tr>
+<tr>
+<td>isalpha</td>
+<td>字母a<sub>z或A</sub>Z</td>
+</tr>
+<tr>
+<td>isalnum</td>
+<td>字母或者数字，a~z, A~Z, 0~9</td>
+</tr>
+<tr>
+<td>ispunct</td>
+<td>标点符号，任何不属于数组或者字母的图形字符（可打印）</td>
+</tr>
+<tr>
+<td>isgraph</td>
+<td>任何图形字符</td>
+</tr>
+<tr>
+<td>isprint</td>
+<td>任何可打印字符，包括图形字符和空白字符</td>
+</tr>
+</tbody>
+</table>
+<h4 id="322-字符转换">3.2.2 字符转换</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// tolower：将大写字符转换为小写字符
+int tolower ( int c );
+
+
+// toupper：将小写字符转换为大写字符
+int toupper ( int c );
+
+</code></pre>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#include &lt;ctype.h&gt;
+#include &lt;stdio.h&gt;
+
+int main()
+{
+  char str[] = &quot;hello&quot;;
+  int size = sizeof(str) / sizeof(str[0]);
+
+  for (int i = 0; i &lt; size; i++)
+  {
+    str[i] = toupper(str[i]);
+  }
+  printf(&quot;%s\n&quot;, str); // HELLO
+}
+
+// 输出结果：
+// HELLO
+</code></pre>
+</li>
+</ul>
+<h2 id="33-内存函数">3.3 内存函数</h2>
+<blockquote>
+<p>头文件：string.h</p>
+</blockquote>
+<h4 id="331-memcpy">3.3.1 memcpy</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能拷贝不重叠内存（C语言规定实现拷贝不重叠内存即可，但是VS编译器中该函数也实现了拷贝重叠内存功能）
+void * memcpy ( void * destination, const void * source, size_t num );
+// 参数：destination 拷贝目标地址
+//      source 被拷贝数据地址
+//      num 拷贝的大小 单位：字节
+// 返回值：destination
+</code></pre>
+</li>
+<li>
+<p>模拟实现</p>
+<pre><code class="language-C">#include &lt;assert.h&gt;
+
+void* my_memcpy(void* dest, const void* src, size_t num)
+{
+  assert(dest &amp;&amp; src);
+  void* ret = dest;
+  while (num--)
+  {
+    *(char*)dest = *(char*)src;
+    dest = (char*)dest + 1;
+    src = (char*)src + 1;
+    // 不能 (char*)src++ 因为(type)类型转换优先级高于后置自增++操作符
+    // 或者说 单目运算符 从右向左 先自增再类型转换 而类型转换前 src时无类型指针 不能自增
+    // 可以这样改写 ((char*)src)++
+  }
+  return ret;
+}
+
+</code></pre>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char arr[] = &quot;abcdefg&quot;;
+  memcpy(arr + 4, arr, 2);
+  printf(&quot;%s\n&quot;, arr); // abcdabg
+  return 0;
+}
+
+// 输出结果：
+// abcdabg
+</code></pre>
+</li>
+</ul>
+<h4 id="332-memmove">3.3.2 memmove</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：可拷贝重叠内存
+void * memmove ( void * destination, const void * source, size_t num );
+// 参数：destination 拷贝目标地址
+//      source 被拷贝数据地址
+//      num 拷贝的大小 单位：字节
+// 返回值：destination
+
+</code></pre>
+</li>
+<li>
+<p>模拟实现</p>
+<ul>
+<li>
+<p>分析</p>
+<pre><code class="language-C">// 对于一个数组：
+int arr[] = { 1,2,3,4,5,6,7 }; 
+// 想要将数组索引为1~4的数据复制到索引为3~6的位置
+// 使用memcpy函数(C标准规定)得到的结果是 { 1,2,3,2,3,2,3 }
+// 而预期结果是{  1,2,3,2,3,4,5 } 显然结果不同
+// 原因是 memcpy在拷贝时 如果拷贝内容重叠 会发生覆盖
+</code></pre>
+<blockquote>
+<p>拷贝有两种情况，分别为从前向后和从后向前</p>
+</blockquote>
+<ul>
+<li>
+<p>情况一<br>
+<img src="image/image_4.png" alt="" loading="lazy"></p>
+<blockquote>
+<p>如图，将红框中内容拷贝到篮框中，如果从前往后拷贝则不会发生覆盖，是预期结果；而从后往前拷贝则会发生覆盖，非预期结果。</p>
+</blockquote>
+</li>
+<li>
+<p>情况二<br>
+<img src="image/image_5.png" alt="" loading="lazy"></p>
+<blockquote>
+<p>如图，将红框中内容拷贝到篮框中，如果从前往后拷贝则会发生覆盖，非预期结果；而从后往前拷贝则不会发生覆盖，达到预期结果。</p>
+</blockquote>
+</li>
+<li>
+<p>情况三<br>
+<img src="image/image_6.png" alt="" loading="lazy"></p>
+<blockquote>
+<p>如图，将红框中内容拷贝到篮框中，无论是从前向后拷贝还是从后向前拷贝，并不会发生覆盖，都是预期结果。</p>
+</blockquote>
+</li>
+<li>
+<p>总结</p>
+<blockquote>
+<p>当目标地址和被拷贝地址重合时，如果目标地址在被拷贝地址之前，则从前向后拷贝；如果目标地址在被拷贝地址之后，则从后向前拷贝。</p>
+</blockquote>
+<pre><code>  当目标地址和被拷贝地址不重合时，拷贝顺序并不影响结果。
+  显然：选择适当的拷贝顺序，就可以避免发生覆盖。
+  方便起见，和重合统一划分为，如果目标地址在被拷贝地址之前，则从前向后拷贝；如果目标地址在被拷贝地址之后，则从后向前拷贝。
+</code></pre>
+<ul>
+<li>代码<pre><code class="language-C">#include &lt;assert.h&gt;
+
+void* my_memmove(void* dest, const void* src, size_t num)
+{
+  assert(dest &amp;&amp; src);
+  void* ret = dest;
+  if (dest&gt;src)
+  { // 从前向后拷贝
+    while (num--)
+    {
+      *(char*)dest = *(char*)src;
+      dest = (char*)dest + 1;
+      src = (char*)src + 1;
+    }
+  }
+  else
+  { // 从后向前拷贝
+    while (num--)
+    {
+      *((char*)dest + num) = *((char*)src + num);
+    }
+  }
+  return ret;
+}
+
+// 测试函数
+void test()
+{
+  char arr[] = &quot;abcdefg&quot;;
+  my_memmove(arr + 2, arr, 4);
+  printf(&quot;%s\n&quot;, arr); // ababcdg
+}
+
+// main主函数
+int main()
+{
+  test();
+  return 0;
+}
+
+// 输出结果：
+// ababcdg
+
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char arr[] = &quot;abcdefg&quot;;
+  memmove(arr + 2, arr, 4);
+  printf(&quot;%s\n&quot;, arr); // ababcdg
+  return 0;
+}
+// 输出结果：
+// ababcdg
+</code></pre>
+</li>
+</ul>
+<h4 id="333-memcmp">3.3.3 memcmp</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：内存比较
+int memcmp ( const void * ptr1, const void * ptr2, size_t num );
+// 参数：ptr1 ptr2 地址
+//      num 比较小大 单位：字节
+// 返回值：整形  标准规定：
+//        &lt;0 str1&lt;str2
+//        &gt;0 str1&gt;str2
+//        =0 str1=str2
+//        VS中返回值为-1 0 1
+
+</code></pre>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  int arr1[] = { 1,2,3 };
+  int arr2[] = { 1,3,5 };
+  int ret = 0;
+  
+  // 比较arr1和arr2内存空间中的前4字节
+  ret = memcmp(arr1, arr2, 4);
+  printf(&quot;%d\n&quot;, ret); // 0
+  
+  // 比较arr1和arr2内存空间中的前8字节
+  ret = memcmp(arr1, arr2, 8);
+  printf(&quot;%d\n&quot;, ret); // -1
+  return 0;
+}
+
+// 输出结果：
+// 0
+// -1
+</code></pre>
+</li>
+</ul>
+<h4 id="334-memset">3.3.4 memset</h4>
+<ul>
+<li>
+<p>原型</p>
+<pre><code class="language-C">// 功能：内存设置
+void * memset ( void * ptr, int value, size_t num );
+// 参数：ptr 地址
+//      value 值
+//      num 大小 单位：字节
+// 返回值：ptr
+</code></pre>
+</li>
+<li>
+<p>实例</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char s[10] = { 0 };
+  memset(s, 'a', 10);
+  for (int i = 0; i &lt; 10; i++)
+  {
+    printf(&quot;%c &quot;, s[i]); // a a a a a a a a a a
+  }
+  return 0;
+}
+
+// 输出结果：
+// a a a a a a a a a a
+</code></pre>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[2022]]></title>
         <id>https://listen2022.github.io/6Tad6moOG/</id>
