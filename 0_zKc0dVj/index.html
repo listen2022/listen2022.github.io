@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta name="referrer" content="never">
+<meta name="keywords" content="">
+<meta name="description" content="欢迎访问[listen]的个人博客">
+<meta name="author" content="kveln">
+<title>13. C语言进阶--动态内存管理 | listen</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link
+  href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+  rel='stylesheet' type='text/css'>
+<link rel="alternate" type="application/rss+xml" title="13. C语言进阶--动态内存管理 | listen » Feed"
+  href="https://listen2022.github.io/atom.xml">
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/androidstudio.min.css">
+<link href="https://listen2022.github.io/styles/main.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/850552586/ericamcdn@0.1/css/live2d.css">
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+  <meta property="og:description" content="13. C语言进阶--动态内存管理" />
+  <meta property="og:url" content="https://listen2022.github.io/0_zKc0dVj/" />
+  <meta property="og:locale" content="zh-CN" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="listen" />
+  <!-- <script src="../assets/styles/scripts/tocScript.js"></script> -->
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://listen2022.github.io">listen</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://listen2022.github.io">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://support.qq.com/products/378935" target="_blank">反馈</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1644538697126"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  <!-- Page Header -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://listen2022.github.io">listen</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://listen2022.github.io">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://support.qq.com/products/378935" target="_blank">反馈</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1644538697126"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="masthead" style="background-image: url('https://listen2022.github.io/media/images/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        
+          <!-- 没Title为其他页面Header -->
+          
+            <!-- 没Title并且有headerType为Post：文章Header -->
+            <div class="post-heading">
+              <span class="tags">
+                
+              </span>
+              <h1>13. C语言进阶--动态内存管理</h1>
+              <span class="meta">
+                Posted on
+                2022-02-11，15 min read
+              </span>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+  <!-- Post Content -->
+  <article id="post-content-article">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto post-content-container">
+          
+          <h1 id="5-动态内存管理">5. 动态内存管理</h1>
+<h2 id="51-为什么存在动态内存分配">5.1 为什么存在动态内存分配？</h2>
+<blockquote>
+<p>已经掌握的内存开辟方式有：</p>
+</blockquote>
+<pre><code class="language-C">int val = 20; // 在栈空间上开辟四个字节
+char arr[10] = { 0 }; //在栈空间上开辟10字节的连续空间
+</code></pre>
+<p>以上两种开辟空间方式特点如下：</p>
+<ol>
+<li>
+<p>空间开辟大小是固定的</p>
+</li>
+<li>
+<p>数组在声明的时候，必须指定数组的长度，它所需要的内存在编译时分配</p>
+</li>
+</ol>
+<ul>
+<li>但有时并不能预先知道需要需要开辟的空间大小，此时就需要动态内存。</li>
+</ul>
+<h2 id="52-动态内存函数">5.2 动态内存函数</h2>
+<blockquote>
+<p>动态内存函数用来管理（开辟和释放）动态内存的。存在于头文件<code>stdlib.h</code>可编程内存分为栈区、堆区、静态存储区三部分。</p>
+</blockquote>
+<ul>
+<li>栈区（stack）：函数内部局部变量、函数参数、函数返回值在栈区创建，函数执行结束，存储单元自动释放。栈区内存分配运算内置于处理器指令集中，效率高，但分配的内存容量有限。</li>
+<li>堆区（heap）：或称为动态内存分配区。程序运行时申请，使用结束后释放。如果不手动释放，在程序运行结束后将被操作系统回收。若不释放，会导致内存泄露。分配方式类似于链表。</li>
+<li>静态存储区（static）：主要存放静态数据，全局数据和常量。该内存在程序编译时已经分配，在程序的整个运行期间都存在。</li>
+<li>更多—<a href="https://zhuanlan.zhihu.com/p/77122692">程序内存分配</a><br>
+<img src="image/image.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538273657.png" alt="" loading="lazy"></li>
+</ul>
+<h4 id="521-malloc">5.2.1 <a href="http://www.cplusplus.com/reference/cstdlib/malloc/?kw=malloc">malloc</a></h4>
+<pre><code class="language-C">// 原型
+void* malloc (size_t size);
+// 参数：size -- 需要开辟的动态内存大小 单位byte
+
+// 功能：向内存申请一块连续可用的空间 并返回指向该空间的指针
+
+</code></pre>
+<ul>
+<li>如果开辟成功，则返回一个指向开辟号空间的指针</li>
+<li>如果开辟失败，则返回一个<code>NULL</code>指针 因此<code>malloc</code>的返回值一定要做检查</li>
+<li>返回值的类型是<code>void*</code>，使用时需要强制类型转换为需要的类型</li>
+<li>如果参数<code>size</code>为<code>0</code>，<code>malloc</code>的行为是标准未定义的，取决于编译器</li>
+<li>使用<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+  int* p = (int*)malloc(3 * sizeof(int)); // 申请3个int大小的堆区内存空间
+  if (p == NULL)
+  {
+    perror(&quot;main&quot;);
+  }
+  for (int i = 0; i &lt; 3; i++)
+  {
+    *(p + i) = i;
+  }
+  free(p);
+  p = NULL;
+  return 0;
+}
+</code></pre>
+</li>
+</ul>
+<h4 id="522-calloc">5.2.2 <a href="http://www.cplusplus.com/reference/cstdlib/calloc/?kw=calloc">calloc</a></h4>
+<pre><code class="language-C">// 原型
+void* calloc (size_t num, size_t size);
+// 参数：num 申请元素个数 
+//      size 申请元素大小
+
+// 功能：申请动态内存
+
+</code></pre>
+<ul>
+<li>函数的功能是为<code>num</code>个大小为<code>size</code>的元素开辟一块空间，并且把空间的每个字节初始化为<code>0</code></li>
+<li>与函数<code>malloc</code>的区别只在于<code>calloc</code>会返回地址之前把申请的空间的每个字节初始化为<code>0</code>，如下图</li>
+</ul>
+<p><img src="image/image_1.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538282200.png" alt="" loading="lazy"></p>
+<p><img src="image/image_2.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538286855.png" alt="" loading="lazy"></p>
+<ul>
+<li>使用<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+  int* p = (int*)calloc(3, sizeof(int)); // 申请3个int大小的堆区内存空间
+  if (p == NULL)
+  {
+    perror(&quot;main&quot;);
+  }
+  for (int i = 0; i &lt; 3; i++)
+  {
+    *(p + i) = i;
+  }
+  free(p);
+  p = NULL;
+  return 0;
+}
+
+</code></pre>
+</li>
+</ul>
+<h4 id="523-realloc">5.2.3 <a href="http://www.cplusplus.com/reference/cstdlib/realloc/?kw=realloc">realloc</a></h4>
+<pre><code class="language-C">// 原型
+void* realloc (void* ptr, size_t size);
+// 参数：ptr -- 指向由malloc calloc realloc创建的动态内存块
+//      size -- 内存块新的大小 单位byte
+// 返回值：调整之后的内存块地址
+
+// 功能：调正ptr指向的内存块大小
+</code></pre>
+<ul>
+<li>
+<p>realloc函数调整内存空间时存在3种情况</p>
+<ul>
+<li>情况1：原有空间后面有够大的空间 — 直接在原有空间后面再开辟一块指定大小的空间</li>
+<li>情况2：原有空间后面的空间不够大 — 在动态内存中寻找足够大的空间，并开辟，把原有空间的数据拷贝到新空间中，并将原堆区空间释放</li>
+<li>情况3：在堆区空间并没有找到足够大的空间用来调整原动态空间的大小，此时函数返回<code>NULL</code><br>
+<img src="image/image_3.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538293787.png" alt="" loading="lazy"><br>
+<strong>所以</strong>：<code>realloc</code>函数返回的<code>void*</code>空指针值，可能还是被调整的动态空间的指针，也可能是新的动态空间的地址，也可能是<code>NULL</code></li>
+</ul>
+</li>
+<li>
+<p>使用1</p>
+<pre><code class="language-C">int* p = (int*)malloc(3 * sizeof(int)); // 申请3个int大小的堆区内存空间
+// 当内存发现不够用时，使用realloc函数调整动态内粗空间的大小
+p = realloc(p, 5 * sizeof(int)); // ×
+// 能否直接使用 p 来接受该函数的返回值呢？
+
+// 答案：不能
+// 如果调整空间大小失败，即在堆区并没有找到足够大的空闲空间
+// 在该函数返回NULL，如果使用p接受返回值，此时 p=NULL
+// 导致 p 不能找到原来内存空间，本来 p 指向的内存空间的数据丢失
+// 所以应该创建一个临时指针变量用来接受返回值，再判断是否为NULL
+// 如果为NULL，则调正空间失败，另作打算；如果不为NULL，再将临时指针变量复制给p
+// 以保证动态内存空间操作的一致性
+// 代码应如下：
+int* ptr = realloc(p, 5 * sizeof(int));
+if (ptr != NULL)
+{
+  p = ptr;
+}
+
+</code></pre>
+</li>
+<li>
+<p>使用2</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+  int* p = (int*)realloc(NULL, 3 * sizeof(int));
+  // ptr=NULL 直接在堆区开辟12字节空间
+  // 等价于
+  // int* p = (int*)malloc(3 * sizeof(int));
+  return 0;
+}
+
+</code></pre>
+</li>
+</ul>
+<h4 id="524-free">5.2.4 <a href="http://www.cplusplus.com/reference/cstdlib/free/?kw=free">free</a></h4>
+<pre><code class="language-C">// 原型
+void free (void* ptr);
+// 参数：需要释放的空间的地址
+
+// 功能：动态内存的释放和回收
+
+</code></pre>
+<ul>
+<li>如果参数<code>ptr</code>指向的空间不是动态开辟的，<code>free</code>函数的行为是未定义的</li>
+<li>如果参数<code>ptr</code>是<code>NULL</code>指针，则函数什么也不做</li>
+</ul>
+<blockquote>
+<p>在使用<code>free</code>释放动态内存空间之后，需要再将指向动态内存的指针置为<code>NULL</code>。原因如下：第一点，如果指针变量仍然指向那块内存空间，但是那块内存空间已经释放，对该指针变量操作必然会引发异常；第二点，置为<code>NULL</code>之后可以避免多次释放动态内存空间，因为当<code>free</code>函数的参数为<code>NULL</code>时，什么也不做；第三点，<code>free</code>函数释放内存空间，并不会将指针变量置为<code>NULL</code>，况且传递的是指针变量，也不是指针变量的地址。</p>
+</blockquote>
+<h2 id="53-常见的动态内存错误">5.3 常见的动态内存错误</h2>
+<h4 id="531-对null指针的解引用操作">5.3.1 对NULL指针的解引用操作</h4>
+<pre><code class="language-C">int main()
+{
+  int* p = (int*)malloc(4); // 开辟4byte动态空间 如果开辟动态内存失败
+  *p = 20;                  // 则对 p 解引用操作 会引发异常
+  free(p);
+  return 0;
+}
+</code></pre>
+<h4 id="532-对动态开辟空间的越界访问">5.3.2 对动态开辟空间的越界访问</h4>
+<pre><code class="language-C">int main()
+{
+  int* p = (int*)malloc(4); // 开辟4byte动态空间
+  if (p == NULL)
+  {
+    perror(&quot;test&quot;);
+  }
+  *(p + 1) = 20; // p+1 已经在访问开辟的动态空间之后的内存 造成越界访问
+  free(p);
+  return 0;
+}
+
+</code></pre>
+<h4 id="533-对非动态开辟内存使用free释放">5.3.3 对非动态开辟内存使用free释放</h4>
+<pre><code class="language-C">int main()
+{
+  int a = 7; // a在栈区开辟空间 并不是动态内存
+  int* p = &amp;a;
+  free(p);
+  return 0;
+}
+
+</code></pre>
+<h4 id="534-使用free释放一块动态开辟内存的一部分">5.3.4 使用free释放一块动态开辟内存的一部分</h4>
+<pre><code class="language-C">int main()
+{
+  int* p = (int*)malloc(8);
+  if (p == NULL)
+  {
+    perror(&quot;test&quot;);
+  }
+  p++;
+  free(p); // 此时p已经不再指向开辟内存空间的首地址
+  return 0;
+}
+</code></pre>
+<h4 id="535-对同一块动态内存多次释放">5.3.5 对同一块动态内存多次释放</h4>
+<pre><code class="language-C">int main()
+{
+  int* p = (int*)malloc(100);
+  if (p == NULL)
+  {
+    perror(&quot;test&quot;);
+  }
+  *p = 100;
+
+  free(p); // 第一次释放
+  free(p); // 第二次释放
+  return 0;
+}
+
+// free(p) 释放之后 将p置为NULL 可以避免多次释放
+
+</code></pre>
+<h4 id="536-动态开辟内存忘记释放内存泄漏">5.3.6 动态开辟内存忘记释放（内存泄漏）</h4>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void test()
+{
+  int* p = (int*)malloc(sizeof(int));
+  if (p==NULL)
+  {
+    perror(&quot;test&quot;);
+  }
+  *p = 100;
+}
+
+
+int main()
+{
+  test();
+  //while (1); // 模拟服务器程序（程序上线持续运行）
+  return 0;
+}
+</code></pre>
+<h2 id="54-经典笔试题">5.4 经典笔试题</h2>
+<blockquote>
+<p>指出代码段中存在的问题并修正。</p>
+</blockquote>
+<h4 id="541-练习1">5.4.1 练习1</h4>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void GetMemory(char* p)
+{
+  p = (char*)malloc(100);
+}
+
+void Test(void)
+{
+  char* str = NULL;
+  GetMemory(str);
+  strcpy(str, &quot;hello world!&quot;);
+  printf(str);
+}
+
+int main()
+{
+  Test();
+  return 0;
+}
+
+</code></pre>
+<blockquote>
+<p>存在问题：① 第12行 <code>GetMemory(str);</code> 传参是值传递，<code>GetMemory</code>函数内的 <code>p</code> 只是<code>str</code>的一份临时拷贝，并不会影响<code>Test</code>函数内<code>str</code>变量的值，所以 <code>GetMemory(str);</code> 执行之后，<code>str</code>值依然是<code>NULL</code>，<code>strcpy(str, &quot;hello world!&quot;);</code> 向空指针拷贝字符串则会引发异常。② 第六行<code>p = (char*)malloc(100);</code> 向堆区申请一块内存空间，但是并没有释放该空间，造成内存泄漏。</p>
+</blockquote>
+<ul>
+<li>修改如下：
+<ul>
+<li>
+<p>方法一</p>
+<pre><code class="language-C">void GetMemory(char** p)
+{
+  *p = (char*)malloc(100); // 修改str变量的值
+}
+
+void Test(void)
+{
+  char* str = NULL;
+  GetMemory(&amp;str); // 将str的地址传递给GetMemory函数
+  strcpy(str, &quot;hello world!&quot;);
+  printf(str);
+  free(str); // 释放向堆区申请的内存空间
+  str = NULL;
+}
+
+int main()
+{
+  Test();
+  return 0;
+}
+
+</code></pre>
+</li>
+<li>
+<p>方法二</p>
+<pre><code class="language-C">char* GetMemory(char* p)
+{
+  p = (char*)malloc(100);
+  return p; // 将向堆区申请的空间地址返回
+}
+
+void Test(void)
+{
+  char* str = NULL;
+  str = GetMemory(str); // str为GetMemory函数内向堆区申请的地址空间
+  strcpy(str, &quot;hello world!&quot;);
+  printf(str);
+  free(str); // 释放向堆区申请的内存空间
+  str = NULL;
+}
+
+int main()
+{
+  Test();
+  return 0;
+}
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="542-练习2">5.4.2 练习2</h4>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+char* GetMemory()
+{
+  char p[] = &quot;hello world&quot;;
+  return p;
+}
+
+void Test(void)
+{
+  char* str = NULL;
+  str = GetMemory();
+  printf(str);
+}
+
+int main()
+{
+  Test();
+  return 0;
+}
+
+</code></pre>
+<blockquote>
+<p>存在问题：<code>GetMemory</code> 函数内在栈区开辟一块内存空间，用来存放字符串<code>&quot;hello world&quot;</code>，并将字符串地址赋值给变量<code>p</code> ，但是函数返回之后，在堆区开辟的内存空间释放，尽管通过<code>p</code>将那块空间地址返回给<code>str</code>变量，但那块空间已被操作系统接管，不属于该程序，则造成非法访问。返回栈空间地址的问题。</p>
+</blockquote>
+<h4 id="543-练习3">5.4.3 练习3</h4>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void GetMemory(char** p, int num)
+{
+  *p = (char*)malloc(num);
+}
+
+void Test(void)
+{
+  char* str = NULL;
+  GetMemory(&amp;str, 100);
+  strcpy(str, &quot;hello&quot;);
+  printf(str);
+}
+
+int main()
+{
+  Test();
+  return 0;
+}
+
+</code></pre>
+<blockquote>
+<p>存在问题：在<code>GetMemory</code>函数中<code>*p = (char*)malloc(num);</code>向堆区申请的内存空间使用之后并没有释放，造成内存泄漏。</p>
+</blockquote>
+<ul>
+<li>修改如下<pre><code class="language-C">void GetMemory(char** p, int num)
+{
+  *p = (char*)malloc(num);
+}
+
+void Test(void)
+{
+  char* str = NULL;
+  GetMemory(&amp;str, 100);
+  strcpy(str, &quot;hello&quot;);
+  printf(str);
+  free(str);
+  str = NULL;
+}
+
+int main()
+{
+  Test();
+  return 0;
+}
+</code></pre>
+</li>
+</ul>
+<h4 id="544-练习4">5.4.4 练习4</h4>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void Test(void)
+{
+  char* str = (char*)malloc(100);
+  strcpy(str, &quot;hello&quot;);
+  free(str);
+  if (str != NULL)
+  {
+    strcpy(str, &quot;world&quot;);
+    printf(str);
+  }
+}
+
+int main()
+{
+  Test();
+  return 0;
+}
+
+</code></pre>
+<blockquote>
+<p>存在问题：第8行<code>free(str);</code>将<code>char* str = (char*)malloc(100);</code>向堆区申请的内存空间释放，归还给操作系统，所以之后不能再访问<code>str</code>指向的内存空间。但是<code>free(str);</code>并不会将<code>str</code>置为<code>NULL</code>，所以<code>if</code>语句中的条件判断为真，对<code>str</code>进行操作，造成异常。</p>
+</blockquote>
+<ul>
+<li>修改如下<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+void Test(void)
+{
+  char* str = (char*)malloc(100);
+  strcpy(str, &quot;hello&quot;);
+  free(str);
+  str = NULL; // 将str置为NULL if语句判断为假 则不会对str再进行操作
+  if (str != NULL)
+  {
+    strcpy(str, &quot;world&quot;);
+    printf(str);
+  }
+}
+
+int main()
+{
+  Test();
+  return 0;
+}
+</code></pre>
+</li>
+</ul>
+<h2 id="55-柔性数组或伸缩性数组成员">5.5 柔性数组（或伸缩性数组成员）</h2>
+<blockquote>
+<p>C99中，结构体中的最后一个元素允许是未知大小的数组，称为<strong>柔性数组成员</strong>。</p>
+</blockquote>
+<p>例如：(有些编译器可能只支持写法1和写法2中的一种写法)</p>
+<ul>
+<li>
+<p>写法1</p>
+<pre><code class="language-C">struct fa
+{
+  int i;
+  int a[0]; // 柔性数组成员
+};
+</code></pre>
+</li>
+<li>
+<p>写法2</p>
+<pre><code class="language-C">struct fa
+{
+  int i;
+  int a[]; // 柔性数组成员
+};
+</code></pre>
+</li>
+</ul>
+<h4 id="551-柔性数组的特点">5.5.1 柔性数组的特点</h4>
+<ul>
+<li>
+<p>结构体中柔性数组成员前面必须有至少一个其他成员</p>
+</li>
+<li>
+<p><code>sizeof</code>返回的这种结构大小不包括柔性数组的内存</p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+struct S
+{
+  int n;
+  int a[]; // 柔性数组
+};
+
+int main()
+{
+  printf(&quot;%d\n&quot;, sizeof(struct S)); // 4
+  return 0;
+}
+
+// 输出结果 
+// 4
+// 结构体S的大小仅仅是结构体成员n的大小 而不包括a[]
+</code></pre>
+</li>
+<li></li>
+<li>
+<p>包含柔性数组成员的结构用<code>malloc()</code>函数进行内存的动态分配，并且分配的内存应该大于结构体的大小，以适应柔性数组的预期大小</p>
+</li>
+</ul>
+<h4 id="552-使用实例">5.5.2 使用实例</h4>
+<pre><code class="language-C">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+struct S
+{
+  int n;
+  int arr[0]; // 柔性数组成员
+};
+
+int main()
+{
+  // 期望arr是4个整形的数组
+  struct S* ps = (struct S*)malloc(sizeof(struct S) + sizeof(int) * 4);
+  if (ps==NULL)
+  {
+    perror(&quot;空间开辟失败&quot;);
+  }
+  ps-&gt;n = 4; // 存放数组arr的容量大小
+  for (int i = 0; i &lt; 4; i++)
+  {
+    ps-&gt;arr[i] = i;
+  }
+  // 增加数组容量 8个整形的数组
+  struct S* ptr = (struct S*)realloc(ps, sizeof(struct S) + sizeof(int) * 8);
+  if (ptr == NULL)
+  {
+    perror(&quot;增容失败&quot;);
+  }
+  ps = ptr;
+  // 使用
+  ps-&gt;n = 8;
+  for (int i = 4; i &lt; 8; i++)
+  {
+    ps-&gt;arr[i] = i;
+  }
+  // 打印数组数据
+  for (int i = 0; i &lt; 8; i++)
+  {
+    printf(&quot;%d &quot;, ps-&gt;arr[i]);
+  }
+
+  // 释放内存空间
+  free(ps);
+  ps = NULL;
+  return 0;
+}
+</code></pre>
+<h4 id="553-使用指针模拟柔性数组">5.5.3 使用指针模拟柔性数组</h4>
+<pre><code class="language-C">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+struct S
+{
+  int n;
+  int* pa; // 数组指针
+};
+
+int main()
+{
+  // 结构体开辟空间
+  struct S* ps = (struct S*)malloc(sizeof(struct S));
+  if (ps == NULL)
+  {
+    return 1;
+  }
+  // 为结构体中数组开辟空间，pa指向数组地址(堆区开辟的内存空间地址)
+  ps-&gt;pa = (int*)malloc(sizeof(int) * 3);
+  if (ps-&gt;pa == NULL)
+  {
+    return 1;
+  }
+  // 使用
+  // coding...
+  // 增加数组容量 存放6个整形
+  int* ptr = (int*)malloc(sizeof(int) * 6);
+  if (ptr == NULL)
+  {
+    return 1;
+  }
+  ps-&gt;pa = ptr;
+  // 使用
+  // coding...
+  // 释放内存
+  free(ps-&gt;pa); // 释放数组内存
+  ps-&gt;pa = NULL;
+  free(ps); // 释放结构体内存
+  ps = NULL;
+  return 0;
+}
+</code></pre>
+<h4 id="554-柔性数组的优势">5.5.4 柔性数组的优势</h4>
+<blockquote>
+<p>使用指针模拟同样可以实现柔性数组相同的功能，那柔性数组有什么优势呢？</p>
+</blockquote>
+<ol>
+<li>方便内存释放 — 使用柔性数组，给结构体分配内存，一次申请，一次释放。</li>
+<li>有利于访问速度 — 柔性数组，堆区申请的内存空间是连续的，有益于提高访问速度，且减少内存碎片。（影响不大）</li>
+</ol>
+<p>其他：</p>
+<p><a href="https://coolshell.cn/articles/11377.html">C语言结构体里的成员数组和指针 | 酷 壳 - CoolShell</a></p>
+
+          <div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#5-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86">5. 动态内存管理</a>
+<ul>
+<li><a href="#51-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%98%E5%9C%A8%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D">5.1 为什么存在动态内存分配？</a></li>
+<li><a href="#52-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%87%BD%E6%95%B0">5.2 动态内存函数</a><br>
+*
+<ul>
+<li><a href="#521-malloc">5.2.1 malloc</a></li>
+<li><a href="#522-calloc">5.2.2 calloc</a></li>
+<li><a href="#523-realloc">5.2.3 realloc</a></li>
+<li><a href="#524-free">5.2.4 free</a></li>
+</ul>
+</li>
+<li><a href="#53-%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E9%94%99%E8%AF%AF">5.3 常见的动态内存错误</a><br>
+*
+<ul>
+<li><a href="#531-%E5%AF%B9null%E6%8C%87%E9%92%88%E7%9A%84%E8%A7%A3%E5%BC%95%E7%94%A8%E6%93%8D%E4%BD%9C">5.3.1 对NULL指针的解引用操作</a></li>
+<li><a href="#532-%E5%AF%B9%E5%8A%A8%E6%80%81%E5%BC%80%E8%BE%9F%E7%A9%BA%E9%97%B4%E7%9A%84%E8%B6%8A%E7%95%8C%E8%AE%BF%E9%97%AE">5.3.2 对动态开辟空间的越界访问</a></li>
+<li><a href="#533-%E5%AF%B9%E9%9D%9E%E5%8A%A8%E6%80%81%E5%BC%80%E8%BE%9F%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8free%E9%87%8A%E6%94%BE">5.3.3 对非动态开辟内存使用free释放</a></li>
+<li><a href="#534-%E4%BD%BF%E7%94%A8free%E9%87%8A%E6%94%BE%E4%B8%80%E5%9D%97%E5%8A%A8%E6%80%81%E5%BC%80%E8%BE%9F%E5%86%85%E5%AD%98%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86">5.3.4 使用free释放一块动态开辟内存的一部分</a></li>
+<li><a href="#535-%E5%AF%B9%E5%90%8C%E4%B8%80%E5%9D%97%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%A4%9A%E6%AC%A1%E9%87%8A%E6%94%BE">5.3.5 对同一块动态内存多次释放</a></li>
+<li><a href="#536-%E5%8A%A8%E6%80%81%E5%BC%80%E8%BE%9F%E5%86%85%E5%AD%98%E5%BF%98%E8%AE%B0%E9%87%8A%E6%94%BE%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F">5.3.6 动态开辟内存忘记释放（内存泄漏）</a></li>
+</ul>
+</li>
+<li><a href="#54-%E7%BB%8F%E5%85%B8%E7%AC%94%E8%AF%95%E9%A2%98">5.4 经典笔试题</a><br>
+*
+<ul>
+<li><a href="#541-%E7%BB%83%E4%B9%A01">5.4.1 练习1</a></li>
+<li><a href="#542-%E7%BB%83%E4%B9%A02">5.4.2 练习2</a></li>
+<li><a href="#543-%E7%BB%83%E4%B9%A03">5.4.3 练习3</a></li>
+<li><a href="#544-%E7%BB%83%E4%B9%A04">5.4.4 练习4</a></li>
+</ul>
+</li>
+<li><a href="#55-%E6%9F%94%E6%80%A7%E6%95%B0%E7%BB%84%E6%88%96%E4%BC%B8%E7%BC%A9%E6%80%A7%E6%95%B0%E7%BB%84%E6%88%90%E5%91%98">5.5 柔性数组（或伸缩性数组成员）</a><br>
+*
+<ul>
+<li><a href="#551-%E6%9F%94%E6%80%A7%E6%95%B0%E7%BB%84%E7%9A%84%E7%89%B9%E7%82%B9">5.5.1 柔性数组的特点</a></li>
+<li><a href="#552-%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B">5.5.2 使用实例</a></li>
+<li><a href="#553-%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88%E6%A8%A1%E6%8B%9F%E6%9F%94%E6%80%A7%E6%95%B0%E7%BB%84">5.5.3 使用指针模拟柔性数组</a></li>
+<li><a href="#554-%E6%9F%94%E6%80%A7%E6%95%B0%E7%BB%84%E7%9A%84%E4%BC%98%E5%8A%BF">5.5.4 柔性数组的优势</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+          
+          <hr />
+          <p class="next-post">下一篇：
+            <a href="https://listen2022.github.io/ptlOCjxZ8/">
+              <span class="post-title">
+                12. C语言进阶--自定义类型&rarr;
+              </span>
+            </a>
+          </p>
+          
+          <div class="comment" style="text-align: center;">
+            
+
+            
+            
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '3f95c9079ef35c0e7742',
+    clientSecret: '43f525cf5aa44ca3dd1cb661a5406e508d2cb58c',
+    repo: 'listen2022.github.io',
+    owner: 'listen2022',
+    admin: ['listen2022'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+</script>
+
+            
+            
+            
+            
+          </div>
+        </div>
+      </div>
+  </article>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            
+            
+            <li class="list-inline-item">
+              <a href="https://github.com/listen2022" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            
+              
+            
+              
+            
+              
+            
+            <li class="list-inline-item">
+              <a href="https://www.zhihu.com/people/turbo-studio" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-zhihu fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            
+              
+            
+              
+            
+              
+            
+              
+              <!-- <li class="list-inline-item">
+              <a href="https://listen2022.github.io/atom.xml" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+              </li> -->
+          </ul>
+          <p class="copyright text-muted">Copyright &copy;<span>listen</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo">Powered by Gridea</a></p>
+        </div>
+      </div>
+    </div>
+   </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://listen2022.github.io/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.jsdelivr.net/gh/Alanrk/clean-cdn@1.0/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://listen2022.github.io/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  
+  <script src="https://listen2022.github.io/media/scripts/tocScript.js"></script>
+</body>
+
+</html>

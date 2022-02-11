@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta name="referrer" content="never">
+<meta name="keywords" content="">
+<meta name="description" content="欢迎访问[listen]的个人博客">
+<meta name="author" content="kveln">
+<title>15. C语言进阶--程序的编译（预处理）+链接 | listen</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link
+  href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+  rel='stylesheet' type='text/css'>
+<link rel="alternate" type="application/rss+xml" title="15. C语言进阶--程序的编译（预处理）+链接 | listen » Feed"
+  href="https://listen2022.github.io/atom.xml">
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/androidstudio.min.css">
+<link href="https://listen2022.github.io/styles/main.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/850552586/ericamcdn@0.1/css/live2d.css">
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+  <meta property="og:description" content="15. C语言进阶--程序的编译（预处理）+链接" />
+  <meta property="og:url" content="https://listen2022.github.io/b4DcKowpE/" />
+  <meta property="og:locale" content="zh-CN" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="listen" />
+  <!-- <script src="../assets/styles/scripts/tocScript.js"></script> -->
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://listen2022.github.io">listen</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://listen2022.github.io">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://support.qq.com/products/378935" target="_blank">反馈</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1644538697126"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  <!-- Page Header -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://listen2022.github.io">listen</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://listen2022.github.io">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://support.qq.com/products/378935" target="_blank">反馈</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1644538697126"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="masthead" style="background-image: url('https://listen2022.github.io/media/images/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        
+          <!-- 没Title为其他页面Header -->
+          
+            <!-- 没Title并且有headerType为Post：文章Header -->
+            <div class="post-heading">
+              <span class="tags">
+                
+              </span>
+              <h1>15. C语言进阶--程序的编译（预处理）+链接</h1>
+              <span class="meta">
+                Posted on
+                2022-02-11，17 min read
+              </span>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+  <!-- Post Content -->
+  <article id="post-content-article">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto post-content-container">
+          
+          <h1 id="7-程序的编译预处理链接">7. 程序的编译（预处理）+链接</h1>
+<h2 id="71-程序的翻译和执行环境">7.1 程序的翻译和执行环境</h2>
+<blockquote>
+<p>在ANSI C的实现中，存在翻译和执行两个环境。翻译环境，将源代码转换为可执行文件；执行环境执行可执行文件。</p>
+</blockquote>
+<h2 id="72-编译链接">7.2 编译+链接</h2>
+<h4 id="721-翻译环境">7.2.1 翻译环境</h4>
+<blockquote>
+<p>翻译包括编译和链接两个步骤。C语言的编译又包括预处理、编译和汇编。依次用到预处理器(preprocessor)、编译器(compiler)、汇编器(assembler)、链接器(linker)。</p>
+</blockquote>
+<p><img src="image/image.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538625151.png" alt="" loading="lazy"></p>
+<p><img src="image/image_1.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538632259.png" alt="" loading="lazy"></p>
+<h4 id="722-编译和链接步骤">7.2.2 编译和链接步骤</h4>
+<blockquote>
+<p>gcc编译器为例。</p>
+</blockquote>
+<ul>
+<li>
+<p>预编译（预处理）： — 文本操作</p>
+<ol>
+<li>完成头文件的包含  <code>#include</code></li>
+<li>宏的替换 <code>#define</code></li>
+<li>注释删除</li>
+</ol>
+<pre><code class="language-Bash">gcc -E test.c -o test.i # 对test.c预处理 并将结果报错到 test.i 文件中
+</code></pre>
+<p><img src="image/image_2.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538638854.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>编译： — 将C代码转化为汇编代码</p>
+<ol>
+<li>语法分词</li>
+<li>词法分析</li>
+<li>语义分析</li>
+<li>符号汇总</li>
+</ol>
+<pre><code class="language-Bash">gcc test.i -S # 汇编 生成test.s 文件
+</code></pre>
+<p><img src="image/image_3.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538645242.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>汇编： — 把汇编代码转化为机器指令（二进制可执行文件）</p>
+<ul>
+<li>生成符号表</li>
+</ul>
+<pre><code class="language-Bash">gcc test.s -c # 生成 test.o 或 test.obj 目标文件
+              # 文件格式为 elf (可以使用readelf工具打开)
+</code></pre>
+<p><img src="image/image_4.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538652184.png" alt="" loading="lazy"></p>
+<pre><code class="language-Bash">objdump -h test.o # 查看 test.o 文件结构
+    # .text   代码段(存放函数的二进制机器指令)
+    # .data   数据段(存已初始化的局部/全局静态变量、未初始化的全局静态变量)
+    # .bss    bss段(声明未初始化变量所占大小)
+    # .rodata 只读数据段(存放 &quot; &quot; 引住的只读字符串)
+    # .comment注释信息段
+    # .node.GUN-stack :堆栈提示段
+
+</code></pre>
+<p><img src="image/image_5.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538658552.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>链接： — 把多个目标文件和链接库进行链接</p>
+<ol>
+<li>合成段表</li>
+<li>符号表的合并和重定位（不同的对象文件之间保存了彼此之间的引用，所以需要在链接期间需要整合这些定位）</li>
+</ol>
+<pre><code class="language-Bash"># 生成 test.out 文件 elf格式
+# 链接阶段发现被调用的函数未定义
+</code></pre>
+<p><img src="image/image_6.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538664984.png" alt="" loading="lazy"></p>
+<pre><code class="language-Bash"># 查看文件结构
+readelf -h a.out
+objdump -h a.out
+
+</code></pre>
+<p><img src="image/image_7.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538671724.png" alt="" loading="lazy"><br>
+<img src="image/image_8.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538676283.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="723-运行环境">7.2.3 运行环境</h4>
+<ul>
+<li><strong>程序的执行过程</strong>
+<ol>
+<li><strong>加载器</strong>(loader)将程序载入内存。
+<ul>
+<li>有操作系统的环境中：一般由操作系统完成程序载入内存操作。</li>
+<li>独立的环境（裸机）中：程序手工载入内存，或通过可执行代码置入只读内存中。</li>
+</ul>
+</li>
+<li>程序运行。调用<code>main</code>函数。</li>
+<li>开始执行程序代码。程序使用运行时堆栈（stack），存储函数的局部变量和返回地址。程序同时也可以使用静态（static）内存，存储与静态内存中的变量在程序的整个执行过程一直存在。</li>
+<li>终止程序。终止main函数，或异常结束。</li>
+</ol>
+</li>
+<li><strong>《程序员的自我修养》</strong></li>
+</ul>
+<h2 id="73-预处理">7.3 预处理</h2>
+<h4 id="731-预处理器">7.3.1 预处理器</h4>
+<blockquote>
+<p><strong>C 预处理器</strong>不是编译器的组成部分，而是编译过程中一个单独的步骤。C 预处理器只是一个文本替换工具，会指示编译器在实际编译之前完成所需的预处理。 C 预处理器（C Preprocessor）简写为 CPP。预处理器命令以<code>#</code>开头，从第一列开始。</p>
+</blockquote>
+<ul>
+<li>重要的预处理指令
+<table>
+<thead>
+<tr>
+<th><strong>指令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>#define</code></td>
+<td>定义宏</td>
+</tr>
+<tr>
+<td><code>#include</code></td>
+<td>包含一个源代码文件</td>
+</tr>
+<tr>
+<td><code>#undef</code></td>
+<td>取消已定义的宏</td>
+</tr>
+<tr>
+<td><code>#ifdef</code></td>
+<td>如果宏已经定义，则返回真</td>
+</tr>
+<tr>
+<td><code>#ifndef</code></td>
+<td>如果宏没有定义，则返回真</td>
+</tr>
+<tr>
+<td><code>#if</code></td>
+<td>如果给定条件为真，则编译下面代码</td>
+</tr>
+<tr>
+<td><code>#else</code></td>
+<td>#if 的替代方案</td>
+</tr>
+<tr>
+<td><code>#elif</code></td>
+<td>如果前面的 #if 给定条件不为真，当前条件为真，则编译下面代码</td>
+</tr>
+<tr>
+<td><code>#endif</code></td>
+<td>结束一个 #if……#else 条件编译块</td>
+</tr>
+<tr>
+<td><code>#error</code></td>
+<td>当遇到标准错误时，输出错误消息</td>
+</tr>
+<tr>
+<td><code>#pragma</code></td>
+<td>使用标准化方法，向编译器发布特殊的命令到编译器中</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="732-宏">7.3.2 宏</h4>
+<ul>
+<li><strong>定义宏</strong></li>
+</ul>
+<blockquote>
+<p>预处理过程中替换。目的是提高代码的可读性。</p>
+</blockquote>
+<pre><code class="language-C">// 使用示例
+#define MAX 1024
+// 定义宏 告诉C预处理器 将源文件中所有的MAX替换成1024
+
+
+#undef MAX
+// 取消已定义宏
+
+
+#ifdef MAX // 判断是否定义
+  #undef MAX // 判断为真的操作...
+#endif // 结束判断
+// #ifdef 和 #endif是一对 上面代码表示 如果定义了MAX 则取消MAX的定义
+
+#ifndef MAX // 判断是否没有定义
+  #define MAX 1024 // 判断为真的操作...
+#endif // 结束判断
+// 上面代码表示 如果没有定义MAX 则定义MAX为1024
+
+// 特殊的
+#ifdef DEBUG
+   /* Your debugging statements here */
+#endi
+// 该指令告诉 CPP 如果定义了 DEBUG 则执行处理语句 
+// 在编译时 如果向 gcc 编译器传递了 -DDEBUG 开关量 这个指令就非常有用 
+// 它定义了 DEBUG 您可以在编译期间随时开启或关闭调试 
+</code></pre>
+<blockquote>
+<p><code>#define</code> 定义的标识符是否需要在最后加上<code>;</code> 即：<code>#define MAX 1024;</code></p>
+</blockquote>
+<pre><code class="language-C">// 答案：不需要
+// #define定义的标识符完全替换
+// 比如：
+#define MAX 1024
+int main()
+{
+  printf(&quot;%d\n&quot;, MAX); // 程序正常运行 打印1024
+  return 0;
+}
+
+// 而如果有分号 ; 
+#define MAX 1024;
+int main()
+{
+  printf(&quot;%d\n&quot;, MAX);
+  // 替换之后 printf语句为
+  // printf(&quot;%d\n&quot;, 1024;);
+  // 显然程序异常
+  return 0;
+}
+
+</code></pre>
+<ul>
+<li>
+<p><strong>预定义宏</strong></p>
+<blockquote>
+<p>C语言中的标识符分为预定义标识符和用户标识符。用户标识符即通常使用的变量名，而预定义标识符在C语言中有特定的含义。</p>
+</blockquote>
+<pre><code class="language-C">__FILE__ // 进行编译的源文件
+__LINE__ // 文件当前的行号
+__DATE__ // 文件被编译的日期
+__TIME__ // 文件被编译的时间
+__STDC__ // 如果编译器遵循ANSI C，则其值为1，否则未定义
+__func__ // 当前运行的函数 有些编译器中是 __FUNCTION__
+
+// 预定义标识符可用于书写日志
+</code></pre>
+<ul>
+<li>
+<p><strong>实例</strong></p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+int main()
+{
+  printf(&quot;%s\n&quot;, __FILE__);
+  printf(&quot;%d\n&quot;, __LINE__);
+  printf(&quot;%s\n&quot;, __DATE__);
+  printf(&quot;%s\n&quot;, __TIME__);
+  //printf(&quot;%s\n&quot;, __STDC__); // VS中未定义
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_9.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538686057.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>参数化的宏</strong></p>
+<blockquote>
+<p>可以使用参数化的宏模拟函数。在使用带有参数的宏之前，必须使用 <code>#define</code> 指令定义。参数列表是括在圆括号内，且必须紧跟在宏名称的后边。宏名称和左圆括号之间不允许有空格。</p>
+</blockquote>
+<pre><code class="language-C">// 例
+// 函数求和
+int Add(int x, int y)
+{
+  return x + y;
+}
+
+// 宏求和
+#define ADD(X, Y) ((X)+(Y))
+
+</code></pre>
+<blockquote>
+<p>宏是完全替换的。</p>
+</blockquote>
+<pre><code class="language-C">// 例
+#include &lt;stdio.h&gt;
+#define MUL(x, y) x * y
+
+int main()
+{
+  printf(&quot;%d\n&quot;, MUL(5, 4)); // 20
+  printf(&quot;%d\n&quot;, MUL(2 + 3, 4)); // 14
+}
+// MUL(5,4) 与 MUL(2+3,4) 的结果并不相同 因为宏是完全替换的
+// MUL(5,4) 相当于 5*4
+// MUL(2+3,4) 相当于 2+3*4
+
+// 所以修改MUL宏如下
+#define MUL(x,y) ((x) * (y))
+// 通过给参数添加适当的小括号 提高优先级 从而避免这种问题
+</code></pre>
+<blockquote>
+<p>带副作用的参数。</p>
+</blockquote>
+<pre><code class="language-C">// 何为副作用
+// 例如：
+a = b++; 
+// 将b的复制给a 之后b又自增 则称该语句具有副作用
+</code></pre>
+<pre><code class="language-C">// 例（带副作用的参数）
+#define MAX(a, b) ((a)&gt;(b)?(a):(b))
+
+int main()
+{
+  int a = 3;
+  int b = 4;
+  printf(&quot;%d\n&quot;, MAX(a++, b++)); // 5
+  printf(&quot;%d\n&quot;, a); // 4
+  printf(&quot;%d\n&quot;, b); // 6
+  return 0;
+}
+// MAX宏 返回a、b中较大值
+// 本来只a、b只分别自增一次
+// 而通过宏替换 使得b自增了两次
+// 如果之后再使用a、b变量 则出现错误的结果
+</code></pre>
+</li>
+<li>
+<p><strong><code>#define</code></strong>** 替换规则**</p>
+<ol>
+<li>调用宏时，首先对参数进行检查，确定参数是否包含任何由 <code>#define</code> 定义的符号，如果有则先替换参数。</li>
+<li>替换后再将程序放到原位置。对于宏，参数名被值替换。</li>
+<li>最后，再对结果文件进行扫描，确定文件中没有任何由 <code>#define</code> 定义的符号。如果有，重复上述操作。</li>
+</ol>
+</li>
+<li>
+<p><strong>宏和函数对比</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><code>**#define**</code><strong>定义宏</strong></th>
+<th><strong>函数</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>代码长度</strong></td>
+<td>每次使用，宏代码都会插入程序中。如果宏较大，则程序会增长。</td>
+<td>每次调用函数，去函数的地址处，执行函数。</td>
+</tr>
+<tr>
+<td><strong>执行速度</strong></td>
+<td>较快。</td>
+<td>函数调用和函数返回会有额外的开销（内联函数除外）。</td>
+</tr>
+<tr>
+<td><strong>参数</strong></td>
+<td>完全替换。</td>
+<td>实参赋值给形参。</td>
+</tr>
+<tr>
+<td><strong>参数类型</strong></td>
+<td>宏的参数与类型无关。</td>
+<td>函数参数与类型有关，对于不同类型的参数需要不同的函数。</td>
+</tr>
+<tr>
+<td><strong>调试</strong></td>
+<td>宏在预编译时完成替换，而调试是在程序编译完成后运行时的，所以宏不便于调试。</td>
+<td>可逐语句调试。</td>
+</tr>
+<tr>
+<td><strong>递归</strong></td>
+<td>不支持。</td>
+<td>支持。</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>补充</strong></p>
+<ul>
+<li>通常定义宏时，习惯上将标识符全大写；</li>
+<li>宏参数和 <code>#define</code> 定义中可以出现其他 <code>#define</code> 定义的变量；</li>
+<li>宏中不能出现递归；</li>
+<li>CPP搜索 <code>#define</code> 定义的符号时，字符串常量的内容并不会被搜索；</li>
+<li>使用宏时应避免使用自增、自减操作，因为宏是替换，而不像函数将实参赋值给形参，所以也就无法预测自增、自减操作的执行次数（即宏的带副作用的参数）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="733-预处理器运算符">7.3.3 预处理器运算符</h4>
+<blockquote>
+<p>C语言提供3个运算符 <code>\</code> 、 <code>#</code> 、 <code>##</code> 辅助创建宏。显然，这些运算符只能在创建宏时使用。</p>
+</blockquote>
+<ul>
+<li>
+<p>宏延续运算符<code>\</code></p>
+<blockquote>
+<p>一个宏通常写在一个单行上。但是如果宏太长，一个单行容纳不下，则使用宏延续运算符<code>\</code>。</p>
+</blockquote>
+<pre><code class="language-C">// 例
+#include &lt;stdio.h&gt;
+
+#define print(a) \
+  printf(#a)
+
+int main()
+{
+  print(1);
+  return 0;
+}
+// 输出：
+// 1
+</code></pre>
+</li>
+<li>
+<p>字符串常量化运算符<code>#</code></p>
+<blockquote>
+<p>在宏定义中，当需要把一个宏的参数转换为字符串常量时，则使用字符串常量化运算符<code>#</code>。在宏中使用的该运算符有一个特定的参数或参数列表。</p>
+</blockquote>
+<pre><code class="language-C">// C语言中的字符串
+printf(&quot;hello&quot; &quot; &quot; &quot;world&quot;); // hello world
+// 并不会产生错误 而是将三个字符串常量拼接并输出
+
+
+// 例
+#include &lt;stdio.h&gt;
+#define print(a) printf(&quot;输出：&quot;#a&quot;\n&quot;)
+
+int main()
+{
+  print(hello c!); // 输出：hello c!
+  // 相当于
+  // printf(&quot;输出：&quot;&quot;hello c!&quot;\n&quot;);
+  // 相当于
+  // printf(&quot;输出：hello c!\n&quot;);
+  return 0;
+}
+// print中 可以任意传参
+// print 可将要打印的数据 有输出提示 并自动换行
+</code></pre>
+</li>
+<li>
+<p>标记粘贴运算符<code>##</code></p>
+<blockquote>
+<p>宏定义内的标记粘贴运算符（<code>##</code>）会合并两个参数。它允许在宏定义中两个独立的标记被合并为一个标记。</p>
+</blockquote>
+<pre><code class="language-C">// 例
+#include &lt;stdio.h&gt;
+#define i(n) printf(&quot;i&quot;#n&quot;=%d\n&quot;, i##n)
+
+int main()
+{
+  int i1 = 8;
+  int i2 = 1024;
+  int i3 = i1 * i2;
+  i(1);
+  // 相当于
+  // printf(&quot;i&quot;&quot;1&quot;&quot;=%d\n&quot;, i1);
+  // i##n 使 i和n 拼接后标识符i1 
+  // 注意：在该标识符出现之前 i1必须是已定义的 否则报错
+  i(2);
+  i(3);
+  return 0;
+}
+// 输出结果
+// i1=8
+// i2=1024
+// i3=8192
+
+</code></pre>
+</li>
+<li>
+<p><code>defined()</code>运算符</p>
+<blockquote>
+<p>用在常量表达式中的，用来确定一个标识符是否已经使用 <code>#define</code> 定义过。如果指定的标识符已定义，则值为真（非零）。如果指定的标识符未定义，则值为假（零）。</p>
+</blockquote>
+<pre><code class="language-C">// 例
+#if !defined(MAX)
+  #define MAX 1024
+#endif
+// #if和#endif是一对
+// 该段代码表示 如果没有定义MAX 则定义MAX为1024
+// 预处理指令 #elif、 #else 等使用同理
+</code></pre>
+</li>
+</ul>
+<h4 id="734-头文件">7.3.4 头文件</h4>
+<blockquote>
+<p>头文件是扩展名为 <code>.h</code> 的文件，包含了 C 函数声明和宏定义，被多个源文件中引用共享。有两种类型的头文件：程序员编写的用户头文件和编译器自带的系统头文件。使用头文件需要使用预处理指令<code>#include</code>。引用头文件相当于复制头文件中的内容。建议把所有的常量、宏、系统全局变量和函数原型写在头文件中，在需要的时候随时引用这些头文件。</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>语法</strong></p>
+<blockquote>
+<p>使用<code>#include</code>可以引用系统头文件和用户头文件。</p>
+</blockquote>
+<pre><code class="language-C">// 形式1：用于引用系统头文件 在系统目录的标准列表中搜索名为 file.h 的文件
+#include &lt;file.h&gt;
+
+// 形式2：用于引用用户头文件 在包含当前文件的目录中搜索名为 file.h 的文件
+#include &quot;file.h&quot;
+
+</code></pre>
+</li>
+<li>
+<p><strong>区别</strong></p>
+<blockquote>
+<p><code>#include &lt;file.h&gt;</code> 和 <code>#include &quot;file.h&quot;</code> 的查找策略不同。</p>
+</blockquote>
+<ul>
+<li><code>#include &lt;file.h&gt;</code> 在类库目录中查找 <code>linux</code>系统在目录 <code>/user/include</code> 中 <code>windows</code>系统在<code>vs</code>安装目录中</li>
+<li><code>#include &quot;file.h&quot;</code> 先在项目目录下查找 <code>file.h</code> 头文件，如果没有找到，再去类库目录下查找</li>
+</ul>
+<blockquote>
+<p>显然，应该根据不同的使用场景选择使用哪种包含方式。包含系统头文件使用 <code>#include &lt;&gt;</code> 显然查找更快，也可以避免用户头文件和系统头文件重名的情况。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>多次引用</strong></p>
+<blockquote>
+<p>如果一个头文件被引用两次，编译器会处理两次头文件的内容。所以在源文件中就会有两份头文件，尽管程序有时可能正常运行，但这显然是没有必要的。C语言中可以通过条件编译语句和 <code>#pragma</code> 两种方法解决这种问题。</p>
+</blockquote>
+<ul>
+<li>
+<p>条件编译语句</p>
+<pre><code class="language-C">#ifndef HEADER_FILE
+#define HEADER_FILE
+
+the entire header file
+
+#endif
+
+// 这种结构即包装器#ifndef
+// 当再次引用头文件时 因为 HEADER_FILE 已定义  条件为假 
+// 预处理器会跳过文件的整个内容 编译器会忽略它 
+</code></pre>
+</li>
+<li>
+<p><code>#pragma</code></p>
+<pre><code class="language-C">#pragma once // 文件开头写入
+
+// 即 相同的文件(物理上)只能被包含一次
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>**对比：**条件编译语句由C标准提供支持，依赖于宏名字不能冲突，不仅可以保证同一个文件不会被包含多次，也能保证内容完全相同的两个文件不会被同时包含；<code>#pragma once</code> 由编译器提供支持，不会出现宏名碰撞引发的奇怪问题，如果某个头文件有多份拷贝，该方法不能保证他们不被重复包含。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>有条件引用</strong></p>
+<blockquote>
+<p>从多个不同的头文件中选择一个引用到程序中。比如需要指定在不同的操作系统上使用的配置参数，可以通过一系列条件实现，即有条件引用。</p>
+</blockquote>
+<pre><code class="language-C">#if SYSTEM_1
+   # include &quot;system_1.h&quot;
+#elif SYSTEM_2
+   # include &quot;system_2.h&quot;
+#elif SYSTEM_3
+   ...
+#endif
+</code></pre>
+</li>
+<li>
+<p><strong>补充</strong></p>
+<ul>
+<li>
+<p>使用宏定义头文件的名称。</p>
+<pre><code class="language-C">#define test &quot;test.h&quot;
+#include &quot;test.h&quot;
+
+// 注：只能使用宏定义用户头文件 而不能使用定义系统头文件
+</code></pre>
+</li>
+<li>
+<p>头文件中一般写：（好的编程习惯）</p>
+<ul>
+<li>头文件的包含</li>
+<li>类型的定义</li>
+<li>函数的声明</li>
+</ul>
+<blockquote>
+<p>变量声明和定义一般写在 <code>.c</code> 文件中。如果多次包含一个有变量定义的头文件，将产生异常。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="734-命令行定义">7.3.4 命令行定义</h4>
+<blockquote>
+<p>许多C编译器提供在命令行中定义符号，用于启动编译过程。</p>
+</blockquote>
+<ul>
+<li>代码</li>
+</ul>
+<pre><code class="language-C">// 例
+#include &lt;stdio.h&gt;
+
+int main()
+{
+  int arr[ARR_SIZE];
+  int i = 0;
+  for(i = 0; i &lt; ARR_SIZE; i++)
+  {
+    arr[i] = i;
+  }
+  for(i = 0; i &lt; ARR_SIZE; i++)
+  {
+    printf(&quot;%d &quot;, arr[i]);
+  }
+  printf(&quot;\n&quot;);
+  return 0;
+}
+// 代码中并没有ARR_SIZE的值，而是在程序编译时指定
+
+</code></pre>
+<ul>
+<li>编译<pre><code class="language-Bash">gcc -D ARR_SIZE=10 test.c # 指定ARR_SIZE为10 进行编译
+gcc -D ARR_SIZE=100 test.c # 指定ARR_SIZE为100 进行编译
+
+</code></pre>
+</li>
+</ul>
+<p><img src="image/image_10.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538694070.png" alt="" loading="lazy"></p>
+<ul>
+<li>《C语言深度解剖》</li>
+</ul>
+<h4 id="735-习题1">7.3.5 习题1</h4>
+<blockquote>
+<p>写一个宏，可以将一个整数的二进制位的奇数位和偶数位交换。</p>
+</blockquote>
+<pre><code class="language-C">// 函数实现如下：
+#include &lt;stdio.h&gt;
+int swap(int x)
+{
+  int ret = ((x &amp; 0x55555555) &lt;&lt; 1) + ((x &amp; 0xaaaaaaaa) &gt;&gt; 1);
+  return ret;
+}
+
+int main()
+{
+  printf(&quot;%d\n&quot;, swap(10));
+  return 0;
+}
+// 解析：
+// 获取奇数位 按位与 01010101010101010101010101010101 = 0x55555555(十六进制)
+// 获取偶数位 按位与 10101010101010101010101010101010 = 0xaaaaaaaa(十六进制)
+// 将奇数位右移 偶数位左移 并相加 得数的二进制位的奇数位和偶数位交换的结果
+
+// 宏实现如下：
+#define SWAP(X) ((X &amp; 0x55555555) &lt;&lt; 1) + ((X &amp; 0xaaaaaaaa) &gt;&gt; 1)
+#include &lt;stdio.h&gt;
+
+int main()
+{
+  printf(&quot;%d\n&quot;, SWAP(10));
+  return 0;
+}
+
+</code></pre>
+<h4 id="736-习题2">7.3.6 习题2</h4>
+<blockquote>
+<p><code>offsetof</code>宏的实现。结构成员相对于结构开头的字节偏移量。</p>
+</blockquote>
+<ul>
+<li>
+<p><code>offsetof</code> 描述</p>
+<pre><code class="language-C">// 头文件 &lt;stddef.h&gt; 中
+offsetof (type,member)
+
+// 参数：
+//     type -- 类型
+//     member -- 成员
+// 返回值：
+//     size_t 类型 成员偏移量
+</code></pre>
+</li>
+<li>
+<p><code>offsetof</code> 使用</p>
+<pre><code class="language-C">#include &lt;stddef.h&gt;
+#include &lt;stdio.h&gt;
+
+struct S
+{
+  char c;
+  short s;
+  int i;
+  float f;
+  double d;
+};
+
+int main()
+{
+  printf(&quot;%d\n&quot;, offsetof(struct S, c)); // 0
+  printf(&quot;%d\n&quot;, offsetof(struct S, s)); // 2
+  printf(&quot;%d\n&quot;, offsetof(struct S, i)); // 4
+  printf(&quot;%d\n&quot;, offsetof(struct S, f)); // 8
+  printf(&quot;%d\n&quot;, offsetof(struct S, d)); // 16
+  return 0;
+}
+</code></pre>
+</li>
+<li>
+<p>模拟实现<code>offsetof</code></p>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#define OFFSETOF(type, member) (int)(&amp;(((type *)0)-&gt;member))
+
+struct S
+{
+  char c;
+  short s;
+  int i;
+  float f;
+  double d;
+};
+
+int main()
+{
+  printf(&quot;%d\n&quot;, OFFSETOF(struct S, c)); // 0
+  printf(&quot;%d\n&quot;, OFFSETOF(struct S, s)); // 2
+  printf(&quot;%d\n&quot;, OFFSETOF(struct S, i)); // 4
+  printf(&quot;%d\n&quot;, OFFSETOF(struct S, f)); // 8
+  printf(&quot;%d\n&quot;, OFFSETOF(struct S, d)); // 16
+  return 0;
+}
+</code></pre>
+</li>
+<li>
+<p>补充</p>
+<blockquote>
+<p>C语言库中提供的 <code>offsetof</code> 宏，采用全小写，以伪装成函数。</p>
+</blockquote>
+</li>
+</ul>
+
+          <div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#7-%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E9%A2%84%E5%A4%84%E7%90%86%E9%93%BE%E6%8E%A5">7. 程序的编译（预处理）+链接</a>
+<ul>
+<li><a href="#71-%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BF%BB%E8%AF%91%E5%92%8C%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83">7.1 程序的翻译和执行环境</a></li>
+<li><a href="#72-%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5">7.2 编译+链接</a><br>
+*
+<ul>
+<li><a href="#721-%E7%BF%BB%E8%AF%91%E7%8E%AF%E5%A2%83">7.2.1 翻译环境</a></li>
+<li><a href="#722-%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5%E6%AD%A5%E9%AA%A4">7.2.2 编译和链接步骤</a></li>
+<li><a href="#723-%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83">7.2.3 运行环境</a></li>
+</ul>
+</li>
+<li><a href="#73-%E9%A2%84%E5%A4%84%E7%90%86">7.3 预处理</a><br>
+*
+<ul>
+<li><a href="#731-%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8">7.3.1 预处理器</a></li>
+<li><a href="#732-%E5%AE%8F">7.3.2 宏</a></li>
+<li><a href="#733-%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E7%AC%A6">7.3.3 预处理器运算符</a></li>
+<li><a href="#734-%E5%A4%B4%E6%96%87%E4%BB%B6">7.3.4 头文件</a></li>
+<li><a href="#734-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9A%E4%B9%89">7.3.4 命令行定义</a></li>
+<li><a href="#735-%E4%B9%A0%E9%A2%981">7.3.5 习题1</a></li>
+<li><a href="#736-%E4%B9%A0%E9%A2%982">7.3.6 习题2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+          
+          <hr />
+          <p class="next-post">下一篇：
+            <a href="https://listen2022.github.io/v02XPzbqx/">
+              <span class="post-title">
+                14. C语言进阶--文件操作&rarr;
+              </span>
+            </a>
+          </p>
+          
+          <div class="comment" style="text-align: center;">
+            
+
+            
+            
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '3f95c9079ef35c0e7742',
+    clientSecret: '43f525cf5aa44ca3dd1cb661a5406e508d2cb58c',
+    repo: 'listen2022.github.io',
+    owner: 'listen2022',
+    admin: ['listen2022'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+</script>
+
+            
+            
+            
+            
+          </div>
+        </div>
+      </div>
+  </article>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            
+            
+            <li class="list-inline-item">
+              <a href="https://github.com/listen2022" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            
+              
+            
+              
+            
+              
+            
+            <li class="list-inline-item">
+              <a href="https://www.zhihu.com/people/turbo-studio" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-zhihu fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            
+              
+            
+              
+            
+              
+            
+              
+              <!-- <li class="list-inline-item">
+              <a href="https://listen2022.github.io/atom.xml" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+              </li> -->
+          </ul>
+          <p class="copyright text-muted">Copyright &copy;<span>listen</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo">Powered by Gridea</a></p>
+        </div>
+      </div>
+    </div>
+   </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://listen2022.github.io/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.jsdelivr.net/gh/Alanrk/clean-cdn@1.0/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://listen2022.github.io/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  
+  <script src="https://listen2022.github.io/media/scripts/tocScript.js"></script>
+</body>
+
+</html>

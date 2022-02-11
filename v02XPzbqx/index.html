@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta name="referrer" content="never">
+<meta name="keywords" content="">
+<meta name="description" content="欢迎访问[listen]的个人博客">
+<meta name="author" content="kveln">
+<title>14. C语言进阶--文件操作 | listen</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link
+  href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+  rel='stylesheet' type='text/css'>
+<link rel="alternate" type="application/rss+xml" title="14. C语言进阶--文件操作 | listen » Feed"
+  href="https://listen2022.github.io/atom.xml">
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/androidstudio.min.css">
+<link href="https://listen2022.github.io/styles/main.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/850552586/ericamcdn@0.1/css/live2d.css">
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+  <meta property="og:description" content="14. C语言进阶--文件操作" />
+  <meta property="og:url" content="https://listen2022.github.io/v02XPzbqx/" />
+  <meta property="og:locale" content="zh-CN" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="listen" />
+  <!-- <script src="../assets/styles/scripts/tocScript.js"></script> -->
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://listen2022.github.io">listen</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://listen2022.github.io">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://support.qq.com/products/378935" target="_blank">反馈</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1644538697126"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  <!-- Page Header -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://listen2022.github.io">listen</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://listen2022.github.io">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="https://support.qq.com/products/378935" target="_blank">反馈</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1644538697126"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="masthead" style="background-image: url('https://listen2022.github.io/media/images/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        
+          <!-- 没Title为其他页面Header -->
+          
+            <!-- 没Title并且有headerType为Post：文章Header -->
+            <div class="post-heading">
+              <span class="tags">
+                
+              </span>
+              <h1>14. C语言进阶--文件操作</h1>
+              <span class="meta">
+                Posted on
+                2022-02-11，20 min read
+              </span>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+  <!-- Post Content -->
+  <article id="post-content-article">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto post-content-container">
+          
+          <h1 id="6-文件操作">6. 文件操作</h1>
+<h2 id="61-为什么使用文件">6.1 为什么使用文件</h2>
+<blockquote>
+<p>在程序中，整形、浮点型、数组、结构体等，随着程序的终止，数据的生命也随之结束。那如何将数据保存呢？C语言中，通过<code>printf</code>函数可以将数据输出到控制台。同样，C语言也提供了一些列函数可以将数据输出到文件中，即将数据存放在硬盘上，做到数据的持久化。此外，还可以将数据存储在数据库中。</p>
+</blockquote>
+<h2 id="62-什么是文件">6.2 什么是文件</h2>
+<blockquote>
+<p><strong>文件</strong>：一组相关数据的有序集合。在程序设计中，按照文件功能可将文件划分为程序文件和数据文件。</p>
+</blockquote>
+<h4 id="621-程序文件">6.2.1 程序文件</h4>
+<blockquote>
+<p>源程序文件(后缀名<code>.c</code>)，目标文件(windows环境后缀名为<code>.obj</code>)，可执行程序(windows环境后缀名为<code>.exe</code>)。</p>
+</blockquote>
+<h4 id="622-数据文件">6.2.2 数据文件</h4>
+<blockquote>
+<p>程序运行时，读取或写入数据的文件。</p>
+</blockquote>
+<h2 id="63-文件的打开和关闭">6.3 文件的打开和关闭</h2>
+<h4 id="631-文件指针">6.3.1 文件指针</h4>
+<blockquote>
+<p>每个被使用的文件都在内存中开辟了一个相应的文件信息区，用来存放文件的相关信息（如文件名，文件状态、位置等）。这些信息保存在一个结构体变量中。该结构体类型由系统声明，名为<code>**FILE**</code>。通过调用<code>fopen</code>函数，系统创建<code>FILE</code>结构体变量，且可以返回一个<code>FILE</code>指针。</p>
+</blockquote>
+<pre><code class="language-C">// 创建一个 FILE* 指针变量
+FILE* pf;
+
+// pf是要给FILE结构体指针，指向一个FILE结构体变量，该变量中包含文件的相关信息
+// 所以通过pf可以找到这些信息，并通过这些信息操作该文件
+</code></pre>
+<h4 id="632-文件打开和关闭">6.3.2 文件打开和关闭</h4>
+<blockquote>
+<p>操作文件的流程为：打开文件 → 操作文件 → 关闭文件。ANSIC规定使用<code>fopen</code>函数打开文件，<code>fclose</code>关闭文件。</p>
+</blockquote>
+<pre><code class="language-C">// fopen函数原型
+FILE * fopen ( const char * filename, const char * mode );
+// 参数：filename 文件名 (相对路径或绝对路径)
+//      mode 打开模式
+// 返回值：FILE指针 用来操作打开的文件
+
+// fclose函数原型
+int fclose ( FILE * stream );
+// 参数：FILE指针
+// 返回值：0 -- 成功关闭文件
+//       EOF -- 关闭文件失败
+</code></pre>
+<p><strong>mode</strong>(文件的打开模式)</p>
+<table>
+<thead>
+<tr>
+<th><strong>模式</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code></td>
+<td>打开一个已有的文本文件，允许读取文件。</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>打开一个文本文件，允许写入文件。如果文件不存在，则会创建一个新文件。在这里，您的程序会从文件的开头写入内容。如果文件存在，则该会被截断为零长度，重新写入。</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>打开一个文本文件，以追加模式写入文件。如果文件不存在，则会创建一个新文件。在这里，您的程序会在已有的文件内容中追加内容。</td>
+</tr>
+<tr>
+<td><code>r+</code></td>
+<td>打开一个文本文件，允许读写文件。</td>
+</tr>
+<tr>
+<td><code>w+</code></td>
+<td>打开一个文本文件，允许读写文件。如果文件已存在，则文件会被截断为零长度，如果文件不存在，则会创建一个新文件。</td>
+</tr>
+<tr>
+<td><code>a+</code></td>
+<td>打开一个文本文件，允许读写文件。如果文件不存在，则会创建一个新文件。读取会从文件的开头开始，写入则只能是追加模</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>补充：如果处理二进制文件，应使用 <code>&quot;rb&quot;</code>, <code>&quot;wb&quot;</code>, <code>&quot;ab&quot;</code>, <code>&quot;rb+&quot;</code>, <code>&quot;r+b&quot;</code>, <code>&quot;wb+&quot;</code>, <code>&quot;w+b&quot;</code>, <code>&quot;ab+&quot;</code>, <code>&quot;a+b&quot;</code>, 替代表格中的打开模式。</p>
+</blockquote>
+<h2 id="64-文件的顺序读写">6.4 文件的顺序读写</h2>
+<table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>函数名</strong></th>
+<th><strong>适用于</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字符输入函数</td>
+<td><code>fgetc</code></td>
+<td>所有输入流</td>
+</tr>
+<tr>
+<td>字符输出函数</td>
+<td><code>fputc</code></td>
+<td>所有输出流</td>
+</tr>
+<tr>
+<td>文本输入函数</td>
+<td><code>fgets</code></td>
+<td>所有输入流</td>
+</tr>
+<tr>
+<td>文本输出函数</td>
+<td><code>fputs</code></td>
+<td>所有输出流</td>
+</tr>
+<tr>
+<td>格式化输入函数</td>
+<td><code>fscanf</code></td>
+<td>所有输入流</td>
+</tr>
+<tr>
+<td>格式化输出函数</td>
+<td><code>fprintf</code></td>
+<td>所有输出流</td>
+</tr>
+<tr>
+<td>二进制输入</td>
+<td><code>fread</code></td>
+<td>文件</td>
+</tr>
+<tr>
+<td>二进制输出</td>
+<td><code>fwrite</code></td>
+<td>文件</td>
+</tr>
+</tbody>
+</table>
+<h4 id="641-流">6.4.1 流</h4>
+<blockquote>
+<p><strong>流</strong>是与磁盘或其它外围设备关联的数据的源或目的地，是一个抽象的概念。I/O设备是流的源头和目的地，将数据的输入和输出看作是数据的流入和流出。在Unix/Linux中，文本流和二进制流是相同的，但在Windows中，稍有差异。</p>
+</blockquote>
+<ul>
+<li>文本流：由文本行组成的序列，每一行包含0个或多个字符，并以<code>\n</code>结尾。在某些环境中， 可能需要将文本流转换为其它表示形式（例如把<code>\n</code>映射成回车符<code>\r</code>和换行符<code>\r</code>），或从其它表示形式转换为文本流。</li>
+<li>二进制流：由未经处理的字节构成的序列，这些字节记录着内部数据， 并具有下列性质：如果在同一系统中写入二进制流，然后再读取该二进制流，则读出和写入 的内容完全相同。</li>
+</ul>
+<blockquote>
+<p>在操作系统中，为了统一对各种硬件的操作，简化接口，不同的硬件设备都被映射成一个文件。对这些文件的操作，等同于对磁盘上普通文件的操作。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>文件</strong></th>
+<th><strong>硬件设备</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stdin</code></td>
+<td>标准输入设备（键盘）；<code>scanf()</code>、<code>getchar()</code> 等函数从 <code>stdin</code> 获取输入。</td>
+</tr>
+<tr>
+<td><code>stdout</code></td>
+<td>标准输出设备（显示器）；<code>printf()</code>、<code>putchar()</code> 等函数向 <code>stdio</code> 输出数据。</td>
+</tr>
+<tr>
+<td><code>stderr</code></td>
+<td>标准错误输出设备（显示器）；<code>perror()</code> 等函数向 <code>stderr</code> 输出数据。</td>
+</tr>
+<tr>
+<td><code>stdprn</code></td>
+<td>标准打印设备（打印机）。</td>
+</tr>
+<tr>
+<td><code>stdaux</code></td>
+<td>标准辅助输入输出设备（异步串行口）。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>程序开始执行时，默认会打开 <code>stdin</code>、<code>stdout</code>和<code>stderr</code>三个文件，所以我们使用 <code>scanf()</code>、<code>printf()</code> 等函数时就不需要再使用 <code>fopen()</code> 显式打开这些文件。</p>
+</blockquote>
+<blockquote>
+<p>打开一个流，将把该流与一个文件或设备连接起来，关闭流将断开这种连接，打开一个文件将返回一个指向<code>FILE</code>结构体类型的指针，该指针记录了控制该流的所有必要信息。</p>
+</blockquote>
+<h4 id="642-eof">6.4.2 EOF</h4>
+<blockquote>
+<p><code>EOF</code>是C语言中定义在<code>stdio.h</code>头文件中的常量。是文本文件结束的标志。</p>
+</blockquote>
+<pre><code class="language-C">#define EOF (-1)
+
+</code></pre>
+<h4 id="643-fgetc和fputc">6.4.3 fgetc和fputc</h4>
+<ul>
+<li><strong>函数原型</strong></li>
+</ul>
+<pre><code class="language-C">// 函数原型
+// fgetc
+int fgetc ( FILE * stream );
+// 功能：从流中获取字符
+// 参数：输入流的FILE*指针
+// 返回值：获取成功 -- 返回读取到的字符，并转换为整形，即字符对应的ASCII码值
+//        获取失败 -- 返回EOF，即-1 并设置错误指示ferror
+
+
+// fputc
+int fputc ( int character, FILE * stream );
+// 功能：向流中写入一个字符
+// 参数：character -- 需要写入字符的ASCII码值
+//      stream    -- 输出流
+// 返回值：写入成功 -- 返回写入的字符，并转换为整形，即字符对应的ASCII码值
+//        写入失败 -- 返回EOF，即-1 并设置错误指示ferror
+</code></pre>
+<ul>
+<li><strong>实例</strong></li>
+</ul>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+
+int main()
+{
+  FILE* pf = fopen(&quot;test.txt&quot;, &quot;w&quot;);
+  if (pf == NULL)
+  {
+    perror(&quot;fopen&quot;);
+    return 1;
+  }
+  for (int i = '0'; i &lt; '9'; i++)
+  {
+    fputc(i, pf);
+  }
+  fclose(pf);
+  pf = NULL;
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538416976.png" alt="" loading="lazy"></p>
+<h4 id="644-fgets和fputs">6.4.4 fgets和fputs</h4>
+<ul>
+<li><strong>函数原型</strong></li>
+</ul>
+<pre><code class="language-C">// 函数原型
+// fgets
+char * fgets ( char * str, int num, FILE * stream );
+// 功能：从流中获取字符串
+// 参数：str -- 将获取的字符拷贝到字符数组str中
+//      num -- 拷贝到str中的最大字符数（包括 null 终止字符）也就是说最多从流中获取num-1个字符
+//      stream -- 输出流
+// 返回值：获取成功 -- 返回str
+//        获取失败 -- 返回EOF 
+
+
+// fputs
+int fputs ( const char * str, FILE * stream );
+// 功能：向流中写入字符串
+// 参数： str -- C字符串
+//       FILE -- 输入流
+// 返回值：写入成功 -- 返回非负数
+//        写入失败 -- 返回EOF
+</code></pre>
+<ul>
+<li><strong>实例</strong></li>
+</ul>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+
+
+int main()
+{
+  FILE* pf = fopen(&quot;test.txt&quot;, &quot;r&quot;);
+  if (pf == NULL)
+  {
+    perror(&quot;fopen&quot;);
+    return 1;
+  }
+  char arr[8] = { 0 };
+  fgets(arr, 5, pf);
+  printf(&quot;%s\n&quot;, arr);
+  fclose(pf);
+  pf = NULL;
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image_1.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538425967.png" alt="" loading="lazy"></p>
+<h4 id="645-fscanf和fprintf">6.4.5 fscanf和fprintf</h4>
+<ul>
+<li><strong>函数原型</strong></li>
+</ul>
+<pre><code class="language-C">// 函数原型
+// fscanf
+int fscanf ( FILE * stream, const char * format, ... );
+// 功能：从流中获取格式化数据，遇到第一个空格和换行符时，会停止读取
+// 使用方法类似于scanf 只不过第一个参数是输入流
+// 返回值是获取的字符个数
+
+// fprintf
+int fprintf ( FILE * stream, const char * format, ... );
+// 功能：向流中写入格式化数据
+// 使用方法类似于printf 只不过第一个参数是输出流
+// 返回值是获取的字符个数
+</code></pre>
+<ul>
+<li><strong>实例</strong></li>
+</ul>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+
+struct S
+{
+  char c;
+  int i;
+  float f;
+} s = {'a', 0, 0.0f};
+
+int main()
+{
+  FILE* pf = fopen(&quot;test.txt&quot;, &quot;a&quot;);
+  if (pf == NULL)
+  {
+    perror(&quot;fopen&quot;);
+    return 1;
+  }
+  fprintf(pf, &quot;%c %d %f&quot;, s.c, s.i, s.f);
+  fclose(pf);
+  pf = NULL;
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image_2.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538432591.png" alt="" loading="lazy"></p>
+<h4 id="646-fread和fwrite">6.4.6 fread和fwrite</h4>
+<ul>
+<li><strong>函数原型</strong></li>
+</ul>
+<pre><code class="language-C">// 函数原型
+// fread
+size_t fread ( void * ptr, size_t size, size_t count, FILE * stream );
+// 功能：从流中读取数据块
+// 参数：ptr -- 至少是size×count字节的内存块的指针 并转换为空指针类型
+//      size -- 读取每个元素的大小 单位 byte
+//      count -- 读取元素个数 
+//      stream -- 输入流
+// 返回值：成功读取元素个数
+
+
+// fwrite
+size_t fwrite ( const void * ptr, size_t size, size_t count, FILE * stream );
+// 功能：从流中读取数据块
+// 参数：ptr -- 被写入的元素数组的指针 并转换为空指针类型
+//      size -- 读取每个元素的大小 单位 byte
+//      count -- 读取元素个数 
+//      stream -- 输出流
+// 返回值：成功读取元素个数
+
+</code></pre>
+<ul>
+<li>
+<p><strong>实例</strong>1</p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+
+
+struct S
+{
+  char c;
+  int i;
+  float f;
+} s = { 'a', 1, 3.14 };
+
+int main()
+{
+  FILE* pf = fopen(&quot;test.txt&quot;, &quot;w+&quot;);
+  if (pf == NULL)
+  {
+    perror(&quot;fopen&quot;);
+    return 1;
+  }
+  fwrite(&amp;s, sizeof(struct S), 1, pf);
+  fclose(pf);
+  pf = NULL;
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image_3.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538440048.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p><strong>实例2</strong></p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+
+
+struct S
+{
+  char c;
+  int i;
+  float f;
+} s;
+
+int main()
+{
+  FILE* pf = fopen(&quot;test.txt&quot;, &quot;r&quot;);
+  if (pf == NULL)
+  {
+    perror(&quot;fopen&quot;);
+    return 1;
+  }
+  fread(&amp;s, sizeof(struct S), 1, pf);
+  printf(&quot;%c %d %f\n&quot;, s.c, s.i, s.f);
+  fclose(pf);
+  pf = NULL;
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_4.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538447635.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="657-函数对比">6.5.7 函数对比</h4>
+<ul>
+<li><code>scanf</code> — 针对标准输入流的格式化输入（通常空白字符截至） — <code>stdin</code></li>
+<li><code>fscanf</code> — 针对所有输入流的格式化输入</li>
+<li><code>sscanf</code> — 从字符串中读取格式化数据</li>
+<li><code>printf</code> — 针对标准输出流的格式化输出 — <code>stdout</code></li>
+<li><code>fprintf</code> — 针对所有输出流的格式化输出</li>
+<li><code>sprintf</code> — 将格式化数据转换为从字符串</li>
+</ul>
+<h4 id="658-scanf">6.5.8 <a href="http://cplusplus.com/reference/cstdio/scanf/?kw=scanf">scanf</a></h4>
+<pre><code class="language-C">// 函数原型 int scanf ( const char * format, ... );
+// 参数：
+//   format -- C字符串 包含一个或多个空格字符、非空格字符 和 format 说明符
+//     format 说明符格式 -- [=%[*][width][modifiers]type=]
+//                        * -- 可选 表示数据从流 stream 中读取 但被忽视 即它不存储在对应的参数中
+//                    width -- 当前读取操作中读取的最大字符数
+//                modifiers -- 长度格式符为l和h l-&gt;长整型数据(如%ld)和双精度浮点数(如%lf; ；h-&gt;短整型数据
+//                     type -- 一个字符 指定要被读取的数据类型以及数据读取方式
+// 返回值：
+//   如果成功 返回成功匹配和赋值的个数
+//   如果到达文件末尾或发生读错误 返回 EOF
+// 另外：
+// scanf读出的数据使用变量地址接收 而不是变量名
+</code></pre>
+<ul>
+<li>scanf类型说明符</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>合格的输入</th>
+<th>参数的类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%a、%A</td>
+<td>读入一个浮点值(仅 C99 有效)</td>
+<td>float *</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>单个字符；如果指定了一个不为 1 的宽度 width，函数会读取 width 个字符，并通过参数传递，把它们存储在数组中连续位置，在末尾不会追加空字符</td>
+<td>char *</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>十进制整数</td>
+<td>int *</td>
+</tr>
+<tr>
+<td>%e、%E、%f、%F、%g、%G</td>
+<td>浮点数</td>
+<td>float *</td>
+</tr>
+<tr>
+<td>%i</td>
+<td>十进制、八进制、十六进制整数</td>
+<td>int *</td>
+</tr>
+<tr>
+<td>%o</td>
+<td>八进制整数</td>
+<td>int *</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>字符串 直到空格字符 空格字符：是空白、换行和制表符</td>
+<td>char *</td>
+</tr>
+<tr>
+<td>%u</td>
+<td>无符号的十进制整数。</td>
+<td>unsigned int *</td>
+</tr>
+<tr>
+<td>%x、%X</td>
+<td>十六进制整数</td>
+<td>int *</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>指针</td>
+<td></td>
+</tr>
+<tr>
+<td>%[]</td>
+<td>扫描字符集合</td>
+<td></td>
+</tr>
+<tr>
+<td>%%</td>
+<td>读 % 符号</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>scanf用来从标准输入读取字符串，通常遇到空白字符结束。可以在<code>format</code>参数中使用<code>%[ ]</code> ，作用是读取一个字符集合，<code>[ ]</code>中输入字符集合，支持正则表达式。比如：<code>&quot;%[a-z]</code> 读取 <code>a</code> 到 <code>z</code> 的字符集合；<code>&quot;%[^\n]&quot;</code> 读取非换行符的字符集合。</p>
+</blockquote>
+<pre><code class="language-C">// 通常 使用scanf只能读一个单词 如下
+int main()
+{
+  char s[100];
+  scanf(&quot;%s&quot;, s);
+  return 0;
+}
+// 输入：hello world
+// 输出：hello
+
+
+// 使用scanf读取一行字符串 代码如下
+
+int main()
+{
+  char s[100];
+  scanf(&quot;%[^\n]&quot;, s);
+  return 0;
+}
+// 输入：hello world
+// 输出：hello world
+</code></pre>
+<blockquote>
+<p><code>fscanf</code> 同理。此外，可以还可以使用 <code>gets</code> 从标准输入获取一行字符串。</p>
+</blockquote>
+<ul>
+<li><a href="http://c.biancheng.net/cpp/html/34.html">关于</a><a href="http://c.biancheng.net/cpp/html/34.html"><code>scanf</code></a><a href="http://c.biancheng.net/cpp/html/34.html">更多</a></li>
+</ul>
+<h2 id="65-文件的随机读写">6.5 文件的随机读写</h2>
+<h4 id="651-fseek">6.5.1 fseek</h4>
+<blockquote>
+<p>设置流<code>stream</code>的文件位置为从<code>origin</code> 开始的偏移<code>offset</code></p>
+</blockquote>
+<ul>
+<li>
+<p><strong>函数原型</strong></p>
+<pre><code class="language-C">int fseek ( FILE * stream, long int offset, int origin );
+// 参数：stream -- 流
+//      offset -- 相对 origin 的偏移量 
+//                正数-&gt;向右偏移 
+//                负数-&gt;向左偏移
+//      origin -- 添加偏移 offset 的位置 可取的值如下
+//                SEEK_SET 文件开头
+//                SEEK_CUR 当前位置
+//                SEEK_END 文件末尾
+// 返回值：成功 -- 返回0
+//        失败 -- 返回非0
+</code></pre>
+</li>
+<li>
+<p><strong>实例</strong></p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+
+int main()
+{
+  FILE* pf = fopen(&quot;test.txt&quot;, &quot;w&quot;);
+  if (pf == NULL)
+  {
+    perror(&quot;fopen&quot;);
+    return 1;
+  }
+  fputs(&quot;I like C.\n&quot;, pf);
+  fseek(pf, -4, SEEK_END);
+  fputs(&quot;golang.\n&quot;, pf);
+  fclose(pf);
+  pf = NULL;
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image_5.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538454939.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="652-ftell">6.5.2 ftell</h4>
+<blockquote>
+<p>获取流中当前文件位置</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>函数原型</strong></p>
+<pre><code class="language-C">long int ftell ( FILE * stream );
+// 参数：stream -- 流
+// 返回值：成功 -- 当前位置值
+//        失败 -- -1L 全局变量 errno 被设置为一个正值 
+</code></pre>
+</li>
+<li>
+<p><strong>实例</strong></p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+
+int main()
+{
+  FILE* pf = fopen(&quot;test.txt&quot;, &quot;w&quot;);
+  if (pf == NULL)
+  {
+    perror(&quot;fopen&quot;);
+    return 1;
+  }
+  fputs(&quot;I like C.\n&quot;, pf);
+  printf(&quot;%d\n&quot;, ftell(pf));
+  fseek(pf, -4, SEEK_END);
+  printf(&quot;%d\n&quot;, ftell(pf));
+  fputs(&quot;golang.\n&quot;, pf);
+  printf(&quot;%d\n&quot;, ftell(pf));
+  fclose(pf);
+  pf = NULL;
+  return 0;
+}
+</code></pre>
+<p><img src="image/image_6.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538461836.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="653-rewind">6.5.3 rewind</h4>
+<blockquote>
+<p>设置流的文件位置为流的开头</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>函数原型</strong></p>
+<pre><code class="language-C">void rewind ( FILE * stream );
+
+</code></pre>
+</li>
+<li>
+<p><strong>实例</strong></p>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+
+
+int main()
+{
+  FILE* pf = fopen(&quot;test.txt&quot;, &quot;w&quot;);
+  if (pf == NULL)
+  {
+    perror(&quot;fopen&quot;);
+    return 1;
+  }
+  fputs(&quot;I like C.\n&quot;, pf);
+  rewind(pf);
+  fputs(&quot;I like golang.\n&quot;, pf);
+  fclose(pf);
+  pf = NULL;
+  return 0;
+}
+
+</code></pre>
+<p><img src="image/image_7.png" alt="" loading="lazy"><br>
+<img src="https://listen2022.github.io/post-images/1644538468670.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h2 id="66-文本文件和二进制文件">6.6 文本文件和二进制文件</h2>
+<blockquote>
+<p>广义的二进制文件即指文件，由文件在外部设备的存放形式为二进制而得名。狭义上，文件分为二进制文件和文本文件。</p>
+</blockquote>
+<h4 id="661-文本文件">6.6.1 文本文件</h4>
+<blockquote>
+<p><strong>文本文件</strong>是以ASCII码方式(也称文本方式)存储的文件，更确切地说，英文、数字等字符存储的是ASCII码，而汉字存储的是机内码。文本文件中除了存储文件有效字符信息（包括能用ASCII码字符表示的回车、换行等信息）外，不能存储其他任何信息。可以用任何文字处理程序阅读的简单文本文件。文本文件是指一种容器，而纯文本是指一种内容。文本文件可以包含纯文本。文本文件存在计算机系统中，通常在文本文件最后一行放置文件结束标志。文本文件的编码基于字符定长，译码相对要容易一些。</p>
+</blockquote>
+<h4 id="662-二进制文件">6.6.2 二进制文件</h4>
+<blockquote>
+<p><strong>二进制文件</strong>指包含在 ASCII及扩展 ASCII 字符中编写的数据或程序指令的文件是除文本文件以外的文件。二进制文件编码是变长的，灵活利用率要高，而译码要难一些，不同的二进制文件译码方式是不同的。这些文件含有特殊的格式及计算机代码。</p>
+</blockquote>
+<h4 id="663-更多">6.6.3 更多</h4>
+<p><a href="https://www.jianshu.com/p/af0b4f8b030e">https://www.jianshu.com/p/af0b4f8b030e</a></p>
+<h4 id="664-例如">6.6.4 例如</h4>
+<blockquote>
+<p>例如整形<code>1</code>的存储，以二进制形式存储时，只要将<code>1</code>转换为二进制<code>00000000000000000000000000000001</code>，共<code>4</code>字节。以<code>ASCII</code>码形式存储，即文本形式存储，先将整形<code>1</code>当作字符<code>'1'</code>转换为<code>ASCII</code>码值<code>49</code>，再将49转换为二进制<code>00110001</code>，公共1字节。虽然<code>1</code>以二进制存储占用的字节数大于以<code>ASCII</code>存储占用的字节数，但是当数值大于一定值后，使用二进制存储是明显节省空间的。另外，<code>ASCII</code>形式，需要的转换的次数多于二进制形式，所以效率不如二进制形式存储...</p>
+</blockquote>
+<h2 id="67-文件读取结束的判定">6.7 文件读取结束的判定</h2>
+<h4 id="671-feof">6.7.1 feof</h4>
+<blockquote>
+<p>测试给定流 stream 的文件结束标识符。在文件读取过程中，不能使用<code>feof</code>函数的返回值来判断文件是否结束，因为<code>fgetc</code>（或者<code>fgets</code>）函数返回 <code>EOF</code> 并不一定就表示文件结束，读取文件出错时也会返回 <code>EOF</code>。因此，<code>feof</code>应用于当文件读取结束后，判断是读取失败结束，还是遇到文件尾结束。</p>
+</blockquote>
+<ul>
+<li>
+<p>函数原型</p>
+<pre><code class="language-C">int feof(FILE *stream)
+// 设置了与流关联的文件结束标识符时 返回一个非零值
+</code></pre>
+<blockquote>
+<p>此外，当文件内部的位置指针指向文件结束时，并不会立即设置FILE结构中的文件结束标识符，只有再执行一次读文件操作，才会设置结束标识符，然后调用feof()函数才会返回为真。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="672-ferror">6.7.2 ferror</h4>
+<blockquote>
+<p>测试给定流 stream 的错误标识符。</p>
+</blockquote>
+<ul>
+<li>函数原型<pre><code class="language-C">int ferror(FILE *stream)
+// 设置了与流关联的错误标识符，该函数返回一个非零值
+</code></pre>
+</li>
+</ul>
+<h4 id="674-fclear">6.7.4 fclear</h4>
+<blockquote>
+<p>清除给定流 stream 的文件结束和错误标识符</p>
+</blockquote>
+<ul>
+<li>函数原型<pre><code class="language-C">void clearerr(FILE *stream)
+// 这不会失败 且不会设置外部变量 errno 
+// 但是如果它检测到它的参数不是一个有效的流 则返回 -1
+// 并设置 errno 为 EBADF
+</code></pre>
+</li>
+</ul>
+<h4 id="673-判断文件读取结束">6.7.3 判断文件读取结束</h4>
+<ul>
+<li><code>fgetc</code> — 读取结束，返回<code>EOF</code>；正常读取，返回读取到的字符的ASCII码值</li>
+<li><code>fgets</code> — 读取结束，返回<code>NULL</code>；正常读取，返回存放字符串内存空间的起始地址</li>
+<li><code>fread</code> — 读取结束，读取到的完整元素的个数小于指定元素的个数，则是最后一次读取；正常读取，返回实际读取到的完整元素的个数</li>
+</ul>
+<h2 id="68-文件缓冲区">6.8 文件缓冲区</h2>
+<blockquote>
+<p>C语言打开文件时，先将文件内容载入缓冲区（缓存），并返回一个指向<code>FILE</code>结构体的指针，接下来对文件的操作，都映射成对缓冲区的操作，只有当强制刷新缓冲区、关闭文件或程序运行结束时，才将缓冲区中的内容更新到文件。ANSIC标准采用“<strong>缓冲文件系统</strong>”处理数据文件，缓冲文件系统指系统自动地在内存中为程序中每一个正在使用的文件开辟一块“<strong>文件缓冲区</strong>”。从内存向磁盘输出数据会先送到内存中的缓冲区，装满缓冲区后才一起送到磁盘上。如果从磁盘向计算机读入数据，则从磁盘文件中读取数据输入到内存缓冲区（充满缓冲区），然后再从缓冲区将数据送到程序数据区（程序变量等）。缓冲区的大小根据C编译系统决定。缓冲区的存在，一定程度上减少程序与磁盘进行的I/O操作次数，提高程序运行效率。</p>
+</blockquote>
+<h4 id="681-实例">6.8.1 <strong>实例</strong></h4>
+<pre><code class="language-C">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+#include &lt;Windows.h&gt;
+
+int main()
+{
+  FILE* pf = fopen(&quot;test.txt&quot;, &quot;w&quot;);
+  fputs(&quot;hello&quot;, pf); // 写入数据
+
+  printf(&quot;睡眠中...\n&quot;);
+  Sleep(10000); // 睡眠10s 查看test.txt文件内容 并没有数据
+
+  printf(&quot;刷新缓冲区\n&quot;);
+  fflush(pf); // 刷新缓冲区，将缓冲区中的代码写入文件（磁盘）
+
+  printf(&quot;睡眠中...\n&quot;);
+  Sleep(10000); // 睡眠10s 查看test.txt文件内容 已经有数据
+
+  fclose(pf);
+  // 注：关闭文件 退出程序 也会自动刷新缓冲区
+  pf = NULL;
+  return 0;
+}
+
+</code></pre>
+<h4 id="682-fflush">6.8.2 <code>fflush</code></h4>
+<blockquote>
+<p>刷新缓冲区。</p>
+</blockquote>
+<ul>
+<li><strong>函数原型</strong><pre><code class="language-C">int fflush(FILE *stream)
+
+// 参数：stream -- FILE对象指针 FILE对象指定一个缓冲流
+// 返回值：如果成功该函数返回零值
+//        如果发生错误 返回 EOF 且设置错误标识符（即 feof）
+
+</code></pre>
+</li>
+</ul>
+
+          <div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#6-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C">6. 文件操作</a>
+<ul>
+<li><a href="#61-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6">6.1 为什么使用文件</a></li>
+<li><a href="#62-%E4%BB%80%E4%B9%88%E6%98%AF%E6%96%87%E4%BB%B6">6.2 什么是文件</a><br>
+*
+<ul>
+<li><a href="#621-%E7%A8%8B%E5%BA%8F%E6%96%87%E4%BB%B6">6.2.1 程序文件</a></li>
+<li><a href="#622-%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6">6.2.2 数据文件</a></li>
+</ul>
+</li>
+<li><a href="#63-%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%93%E5%BC%80%E5%92%8C%E5%85%B3%E9%97%AD">6.3 文件的打开和关闭</a><br>
+*
+<ul>
+<li><a href="#631-%E6%96%87%E4%BB%B6%E6%8C%87%E9%92%88">6.3.1 文件指针</a></li>
+<li><a href="#632-%E6%96%87%E4%BB%B6%E6%89%93%E5%BC%80%E5%92%8C%E5%85%B3%E9%97%AD">6.3.2 文件打开和关闭</a></li>
+</ul>
+</li>
+<li><a href="#64-%E6%96%87%E4%BB%B6%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%AF%BB%E5%86%99">6.4 文件的顺序读写</a><br>
+*
+<ul>
+<li><a href="#641-%E6%B5%81">6.4.1 流</a></li>
+<li><a href="#642-eof">6.4.2 EOF</a></li>
+<li><a href="#643-fgetc%E5%92%8Cfputc">6.4.3 fgetc和fputc</a></li>
+<li><a href="#644-fgets%E5%92%8Cfputs">6.4.4 fgets和fputs</a></li>
+<li><a href="#645-fscanf%E5%92%8Cfprintf">6.4.5 fscanf和fprintf</a></li>
+<li><a href="#646-fread%E5%92%8Cfwrite">6.4.6 fread和fwrite</a></li>
+<li><a href="#657-%E5%87%BD%E6%95%B0%E5%AF%B9%E6%AF%94">6.5.7 函数对比</a></li>
+<li><a href="#658-scanf">6.5.8 scanf</a></li>
+</ul>
+</li>
+<li><a href="#65-%E6%96%87%E4%BB%B6%E7%9A%84%E9%9A%8F%E6%9C%BA%E8%AF%BB%E5%86%99">6.5 文件的随机读写</a><br>
+*
+<ul>
+<li><a href="#651-fseek">6.5.1 fseek</a></li>
+<li><a href="#652-ftell">6.5.2 ftell</a></li>
+<li><a href="#653-rewind">6.5.3 rewind</a></li>
+</ul>
+</li>
+<li><a href="#66-%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6">6.6 文本文件和二进制文件</a><br>
+*
+<ul>
+<li><a href="#661-%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6">6.6.1 文本文件</a></li>
+<li><a href="#662-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6">6.6.2 二进制文件</a></li>
+<li><a href="#663-%E6%9B%B4%E5%A4%9A">6.6.3 更多</a></li>
+<li><a href="#664-%E4%BE%8B%E5%A6%82">6.6.4 例如</a></li>
+</ul>
+</li>
+<li><a href="#67-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E7%BB%93%E6%9D%9F%E7%9A%84%E5%88%A4%E5%AE%9A">6.7 文件读取结束的判定</a><br>
+*
+<ul>
+<li><a href="#671-feof">6.7.1 feof</a></li>
+<li><a href="#672-ferror">6.7.2 ferror</a></li>
+<li><a href="#674-fclear">6.7.4 fclear</a></li>
+<li><a href="#673-%E5%88%A4%E6%96%AD%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E7%BB%93%E6%9D%9F">6.7.3 判断文件读取结束</a></li>
+</ul>
+</li>
+<li><a href="#68-%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA">6.8 文件缓冲区</a><br>
+*
+<ul>
+<li><a href="#681-%E5%AE%9E%E4%BE%8B">6.8.1 <strong>实例</strong></a></li>
+<li><a href="#682-fflush">6.8.2 <code>fflush</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+          
+          <hr />
+          <p class="next-post">下一篇：
+            <a href="https://listen2022.github.io/0_zKc0dVj/">
+              <span class="post-title">
+                13. C语言进阶--动态内存管理&rarr;
+              </span>
+            </a>
+          </p>
+          
+          <div class="comment" style="text-align: center;">
+            
+
+            
+            
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '3f95c9079ef35c0e7742',
+    clientSecret: '43f525cf5aa44ca3dd1cb661a5406e508d2cb58c',
+    repo: 'listen2022.github.io',
+    owner: 'listen2022',
+    admin: ['listen2022'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+</script>
+
+            
+            
+            
+            
+          </div>
+        </div>
+      </div>
+  </article>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            
+            
+            <li class="list-inline-item">
+              <a href="https://github.com/listen2022" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            
+              
+            
+              
+            
+              
+            
+            <li class="list-inline-item">
+              <a href="https://www.zhihu.com/people/turbo-studio" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-zhihu fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            
+              
+            
+              
+            
+              
+            
+              
+              <!-- <li class="list-inline-item">
+              <a href="https://listen2022.github.io/atom.xml" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+              </li> -->
+          </ul>
+          <p class="copyright text-muted">Copyright &copy;<span>listen</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo">Powered by Gridea</a></p>
+        </div>
+      </div>
+    </div>
+   </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://listen2022.github.io/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.jsdelivr.net/gh/Alanrk/clean-cdn@1.0/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://listen2022.github.io/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  
+  <script src="https://listen2022.github.io/media/scripts/tocScript.js"></script>
+</body>
+
+</html>
